@@ -224,8 +224,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 outf=open("run_"+objname+".csh",'w')
 
-print("gfortran -o ../WISE-steep-MCMC-PJDFC WISE-steep-MCMC-PJDFC.f ../nedlib.a")
-outf.write("gfortran -o ../WISE-steep-MCMC-PJDFC WISE-steep-MCMC-PJDFC.f ../nedlib.a\n")
+print("gfortran -o WISE-steep-MCMC-PJDFC WISE-steep-MCMC-PJDFC.f Nedlib.a")
+outf.write("gfortran -o WISE-steep-MCMC-PJDFC WISE-steep-MCMC-PJDFC.f Nedlib.a\n")
 
 #objname=os.popen("pwd").readline().rstrip().split('/')[-1]
 

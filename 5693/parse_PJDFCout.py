@@ -35,9 +35,9 @@ if sys.version[0] != '3':
 
 #cp, not mv, so that there is a record of the actual outputs
     
-os.system("/bin/cp ./fort.21 PJDFC.out")
+os.system("/bin/cp fort.21 PJDFC.out")
 #fort.22 is the postscript format of the SED
-os.system("/bin/cp ./fort.22 SED_data_2.out")
+os.system("/bin/cp fort.22 SED_data.out")
 
 
 #^*^ parse and plot SED_data.out here 
@@ -222,7 +222,7 @@ plt.close()
 #    print("PJDFC parser output files already exist; using those")
 #else:
 
-os.system("echo 'PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC") 
+os.system("echo 'PJDFC.out' | ./read-WISE-rc-MCMC-PJDFC") 
 
 os.system("/bin/cp fort.2 Dhist.dat")
 os.system("/bin/cp fort.32 Dhist_fine.dat")

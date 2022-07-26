@@ -1,9 +1,12 @@
-#python3 parser of the output from WISE-steep-MCMC-PJDFC
-#run this in the directory made for the object
+"""
+python3 parser of the output from WISE-steep-MCMC-PJDFC
+To be run this in the directory made for the object.
+Modified by JCJ in Summer 2022
+"""
 
 def jd2ymd(jd):
     """
-        Returns a date corresponding to the given Julian day number.
+    Returns a date corresponding to the given Julian day number.
     """
     jd2 = float(jd) + 0.5
     dfrac, dint = modf(jd2)
@@ -166,7 +169,7 @@ for line in cshlines.readlines():
 
 
 color=["#000000","#ff0000","#0000ff","#dd00dd","#ee7700","#00ee77","#999999","#cccc55","#55cccc","#cc55cc"]
-lstyle=["solid","dashed","dotted","dotted"]
+lstyle=["solid","dashed","dotted"]
 
     
 plt.figure(figsize=[6,4])
@@ -175,9 +178,8 @@ ax=plt.gca()
 lowy=1e99
 highy=0
 for i in range(len(esed)):
-    #print(len(esed))
-    #print(len(datelabel))
-    plt.plot(wave,esed[i],color=color[i%10],ls=lstyle[i%3])#,label=datelabel[i])    
+
+    plt.plot(wave,esed[i],color=color[i%10],ls=lstyle[i%3],label=datelabel[i])    
 
     if min(esed[i])<lowy:
         lowy=min(esed[i])

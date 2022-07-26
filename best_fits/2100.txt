@@ -1,0 +1,17 @@
+Input mcmc file: entering I=1..NMC=       48600  loop
+ patch & total weights:   308526.000       308526.000    
+ SPRBIT_SET called
+ SPRCNPX_SET called
+ out of 1..NMC loop
+dia=   1.8355+/-   0.3388 median   1.8600+  15.0-  19.8%
+p_V =    0.1481 +/-   0.0657 median   0.1351 +/-  36.1%
+theta1=  23.1887+/-  35.2414 median  10.3756+ 137.5- 145.4%
+Period [h] =    4.66+ 91.2 -61.9%
+sqrt(kappa*rho*C)=  2058.5+133.4-147.1%
+crater fraction= 0.416+0.345-0.289
+p_IR/p_V= 1.244+21.2-23.6%
+ pole peak at =   7.50000048      -54.3409119    
+ mean pole at =   47.5769119      -41.8191910      |<p>|=  0.480607212    
+Moment eigenvalue= 0.729929 at RA,Dec=   35.9  -42.6
+Moment eigenvalue= 0.220194 at RA,Dec=  302.5   13.6
+Moment eigenvalue= 0.049872 at RA,Dec=  164.0   46.4
