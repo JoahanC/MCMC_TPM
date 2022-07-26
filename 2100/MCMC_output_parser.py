@@ -719,9 +719,7 @@ def determine_p_V_ratio(line):
 def display_MCMC_results():
     with open("best_fit.txt", 'r') as file:
         line_1 = file.readline().split()
-        print(line_1)
         line_1[4] = "I=1 ... MNC ="
-        
         output_1 = f"{line_1[0]} {line_1[1]} {line_1[2]} {line_1[3]}"
         output_1 += f" {line_1[4]} {line_1[5]} {line_1[6]}s"
         line_2 = file.readline().split()
@@ -799,11 +797,10 @@ os.system("/bin/cp fort.2 Dhist.dat")
 os.system("/bin/cp fort.32 Dhist_fine.dat")
 os.system("/bin/cp fort.3 DvsPeriod.dat")
 os.system("/bin/cp fort.4 DvsAlb.dat")
-
+display_MCMC_results()
 
 best_fit, best_fit_plotters, epoch_condition, wavelengths = retrieve_MCMC_data()
 diameters, chis, gammas = retrieve_output_data()
-display_MCMC_results()
 generate_SED_plot(best_fit_plotters[0], best_fit_plotters[1], 
                   best_fit_plotters[2], best_fit_plotters[3], 
                   best_fit_plotters[4], best_fit_plotters[5])

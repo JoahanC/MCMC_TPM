@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import modf, floor
 
+from sympy import frac
+
 
 def julian_days_utc_converter(jd):
     """
@@ -36,9 +38,6 @@ def julian_days_utc_converter(jd):
     return year, month, day + decimal_day
 
 
-
-
-
 def retrieve_output_data():
     
     output_file = open("PJDFC.out")
@@ -51,8 +50,7 @@ def retrieve_output_data():
     for line in output_file.readlines():
         datum = line.strip().split()
         if len(datum) < 10:
-            # Capture odd cases where col 6 was runing into col 5. 
-            # Only a handful, so just skip 
+            #capture odd cases where col 6 was runing into col 5.  Only a handful, so just skip 
             continue
     
         diameters.append(np.e ** float(datum[5]))
@@ -81,8 +79,7 @@ def retrieve_MCMC_data():
     best_fit["pv_median"] = np.e ** (float(datum_minor[3]))
     best_fit["period"] = np.e ** (float(datum_minor[4]))
     best_fit["gamma"] = np.e ** (float(datum_minor[5]))
-    # Period * Thermal Inertia * Gamma * Diameter * Crater Frac * Color
-    best_fit["pjdfc"] = (float(datum_minor[6])) 
+    best_fit["pjdfc"] = (float(datum_minor[6])) #period * thermal inertia Gamma * diameter * crater frac * color
     x = float(datum_minor[7])
     best_fit["crater_frac"] = np.e ** (x) / (1 + np.e ** x)
     best_fit["ir_albedo_ratio"] = np.e ** (float(datum_minor[8]))
@@ -180,7 +177,7 @@ def retrieve_MCMC_data():
 
     datelabels = []
     cshfile = os.popen("ls run*.csh").readline().rstrip()
-    print("\n*** Using " + cshfile + " to get MJDs. Make sure this is right *** \n")
+    print("\n*** Using "+cshfile+" to get MJDs. Make sure this is right*** \n")
     cshlines = open(cshfile)
     for line in cshlines.readlines():
         epoch_data = line.rstrip().split(',')
@@ -211,6 +208,7 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
     """
 
     print("Generating best fit plot for SED.")
+    
     colors = ["#000000", "#ff0000", "#0000ff", "#dd00dd", "#ee7700", 
         "#00ee77", "#999999", "#cccc55", "#55cccc", "#cc55cc"]
     linestyles = ["solid","dashed","dotted"]
@@ -228,8 +226,7 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
             y_low = min(esed[i])
         if max(esed[i]) > y_high:
             y_high = max(esed[i])
-        #for j in range(len(wavelengths)):
-        #    print(wavelengths[j], esed[i][j])
+
         # Plot flux for each wavelength
         plt.plot(wavelengths, esed[i], 
                 color=colors[i % 10], 
@@ -522,27 +519,14 @@ def generate_gamma_vs_chi_plots(gammas, chis):
     plt.close()
 
 
-def regex_loop(line, value, index, start_key, stop_key):
-    while True:
-        if value == start_key:
-            value = ""
-        if line[index] == stop_key:
-            value = value.strip()
-            break
-        value += line[index]
-        index += 1
-    return value, index
-
 def determine_mean_median_vals(line, median_sigma_type):
     """
     Returns the mean, median, and error values in a given format.
 
     Arguments: line (str) -- The line containing all values
     """
-    
     index = 0
     mean = ""
-    
     while True:
         if mean == "dia=" or mean == "p_V =" or mean == "theta1=" :
             mean = ""
@@ -551,30 +535,74 @@ def determine_mean_median_vals(line, median_sigma_type):
             break
         mean += line[index]
         index += 1
-    
-    mean_sigma, index = regex_loop(line, "", index, "+/-", 'm')
-    median, index = regex_loop(line, "", index, "median", '+')
+    mean_sigma = ""
+    while True:
+        if mean_sigma == "+/-":
+            mean_sigma = ""
+        if line[index] == "m":
+            mean_sigma = mean_sigma.strip()
+            break
+        mean_sigma += line[index]
+        index += 1
+    median = ""
+    while True:
+        if median == "median":
+            median = ""
+        if line[index] == "+":
+            median = median.strip()
+            break
+        median += line[index]
+        index += 1
     
     if median_sigma_type == "multi":
-        
-        median_pos_sigma, index = regex_loop(line, "", index, '+', '-')
-        median_neg_sigma, index = regex_loop(line, "", index, '-', '%')
+        median_pos_sigma = ""
+        median_neg_sigma = ""
+        while True:
+            if median_pos_sigma == "+":
+                median_pos_sigma = ""
+            if line[index] == '-':
+                median_pos_sigma = median_pos_sigma.strip()
+                break
+            median_pos_sigma += line[index]
+            index += 1
+        while True:
+            if median_neg_sigma == "-":
+                median_neg_sigma = ""
+            if line[index] == '%':
+                median_neg_sigma = median_neg_sigma.strip()
+                break
+            median_neg_sigma += line[index]
+            index += 1
         outputs = [mean, mean_sigma, median, median_pos_sigma, median_neg_sigma]
-        
         return outputs
     
     if median_sigma_type == "single":
-        
-        median_sigma, index = regex_loop(line, "", index, "+/-", '%')
+        median_sigma = ""
+        while True:
+            if median_sigma == "+/-":
+                median_sigma = ""
+            if line[index] == '%':
+                median_sigma = median_sigma.strip()
+                break
+            median_sigma += line[index]
+            index += 1
         outputs = [mean, mean_sigma, median, median_sigma]
-        
         return mean, mean_sigma, median, median_sigma
 
 
 def determine_period(line):
+    period = ""
     period_pos_sigma = ""
     period_neg_sigma = ""
-    period, index = regex_loop(line, "", 0, "Period [h] =", '+')
+    index = 0
+    while True:
+        if period == "Period [h] =":
+            period = ""
+        if line[index] == '+':
+            period = period.strip()
+            break
+        period += line[index]
+        index += 1
     while True:
         if period_pos_sigma.strip() == "0.0   0.0%":
             outputs = [period, "0.0", "0.0"]
@@ -586,16 +614,46 @@ def determine_period(line):
             break
         period_pos_sigma += line[index]
         index += 1
-    period_neg_sigma, index = regex_loop(line, "", index, '-', '%')
-
-    outputs = [period, period_pos_sigma, period_neg_sigma]
-    return outputs
+    while True:
+        if period_neg_sigma == "-":
+            period_neg_sigma = ""
+        if line[index] == '%':
+            period_neg_sigma = period_neg_sigma.strip()
+            outputs = [period, period_pos_sigma, period_neg_sigma]
+            return outputs
+        period_neg_sigma += line[index]
+        index += 1
 
     
 def determine_square_vals(line):
-    value, index = regex_loop(line, "", 0, "sqrt(kappa*rho*C)=", '+')
-    value_pos_sigma, index = regex_loop(line, "", index, '+', '-')
-    value_neg_sigma, index = regex_loop(line, "", index, '-', '%')
+    value = ""
+    value_pos_sigma = ""
+    value_neg_sigma = ""
+    index = 0
+    while True:
+        if value == "sqrt(kappa*rho*C)=":
+            value = ""
+        if line[index] == '+':
+            value = value.strip()
+            break
+        value += line[index]
+        index += 1
+    while True:
+        if value_pos_sigma == '+':
+            value_pos_sigma = ""
+        if line[index] == '-':
+            value_pos_sigma = value_pos_sigma.strip()
+            break
+        value_pos_sigma += line[index]
+        index += 1
+    while True:
+        if value_neg_sigma == "-":
+            value_neg_sigma = ""
+        if line[index] == '%':
+            value_neg_sigma = value_neg_sigma.strip()
+            break
+        value_neg_sigma += line[index]
+        index += 1
     outputs = [value, value_pos_sigma, value_neg_sigma]
     return outputs
 
@@ -610,7 +668,14 @@ def determine_crater_fraction(line):
             break
         fraction += line[index]
         index += 1
-    fraction_pos_sigma, index = regex_loop(line, "", index, '+', '-')
+    while True:
+        if fraction_pos_sigma == '+':
+            fraction_pos_sigma = ""
+        if line[index] == '-':
+            fraction_pos_sigma = fraction_pos_sigma.strip()
+            break
+        fraction_pos_sigma += line[index]
+        index += 1
     while index < len(line):
         if fraction_neg_sigma == '-':
             fraction_neg_sigma = ""
@@ -631,8 +696,22 @@ def determine_p_V_ratio(line):
             break
         ratio += line[index]
         index += 1
-    ratio_pos_sigma, index = regex_loop(line, "", index, '+', '-')
-    ratio_neg_sigma, index = regex_loop(line, "", index, '-', '%')
+    while True:
+        if ratio_pos_sigma == '+':
+            ratio_pos_sigma = ""
+        if line[index] == '-':
+            ratio_pos_sigma = ratio_pos_sigma.strip()
+            break
+        ratio_pos_sigma += line[index]
+        index += 1
+    while True:
+        if ratio_neg_sigma == '-':
+            ratio_neg_sigma = ""
+        if line[index] == '%':
+            ratio_neg_sigma = ratio_neg_sigma.strip()
+            break
+        ratio_neg_sigma += line[index]
+        index += 1
     outputs = [ratio, ratio_pos_sigma, ratio_neg_sigma]
     return outputs
 
@@ -642,7 +721,7 @@ def display_MCMC_results():
         line_1 = file.readline().split()
         line_1[4] = "I=1 ... MNC ="
         output_1 = f"{line_1[0]} {line_1[1]} {line_1[2]} {line_1[3]}"
-        output_1 += f" {line_1[4]} {line_1[5]} {line_1[6]}"
+        output_1 += f" {line_1[4]} {line_1[5]} {line_1[6]}s"
         line_2 = file.readline().split()
         output_2 = f"Patch & Total Weights: {line_2[4]} & {line_2[5]}"
         print(output_2)
@@ -655,19 +734,19 @@ def display_MCMC_results():
         
         line_6 = file.readline()
         diameter_vals = determine_mean_median_vals(line_6, "multi")
-        output_6 = f"Diameter (Mean): {diameter_vals[0]} +/-{diameter_vals[1]}"
+        output_6 = f"Diameter (Mean): {diameter_vals[0]} +/- {diameter_vals[1]}"
         print(output_6)
         output_7 = f"Diameter (Median): {diameter_vals[2]} +{diameter_vals[3]}%/-{diameter_vals[4]}%"
         print(output_7)
         line_8 = file.readline()
         p_V_vals = determine_mean_median_vals(line_8, "single")
-        output_8 = f"p_V (Mean): {p_V_vals[0]} +/-{p_V_vals[1]}"
+        output_8 = f"p_V (Mean): {p_V_vals[0]} +/- {p_V_vals[1]}"
         print(output_8)
-        output_9 = f"p_V (Median): {p_V_vals[2]} +/-{p_V_vals[3]}%"
+        output_9 = f"p_V (Median): {p_V_vals[2]} +/- {p_V_vals[3]}%"
         print(output_9)
         line_10 = file.readline()
         theta_vals = determine_mean_median_vals(line_10, "multi")
-        output_10 = f"Theta_1 (Mean): {theta_vals[0]} +/-{theta_vals[1]}"
+        output_10 = f"Theta_1 (Mean): {theta_vals[0]} +/- {theta_vals[1]}"
         print(output_10)
         output_11 = f"Theta_1 (Median): {theta_vals[2]} +{theta_vals[3]}%/-{theta_vals[4]}%"
         print(output_11)
@@ -679,7 +758,7 @@ def display_MCMC_results():
 
         line_13 = file.readline()
         sqrt_vals = determine_square_vals(line_13)
-        output_13 = f"Sqrt(Kappa*Rho*C): {sqrt_vals[0]} +{sqrt_vals[1]}%/-{sqrt_vals[2]}%"
+        output_13 = f"Sqrt(Kappa*Rho*C): {sqrt_vals[0]} +{sqrt_vals[1]}%/{sqrt_vals[2]}%"
         print(output_13)
 
         line_14 = file.readline()
