@@ -1,0 +1,12 @@
+to run Gorski map routine:
+
+high res filename: big-WISE-rc-MCMC.map
+-1 for linear map, -2 for log
+
+<return> for max range, or if inputing make sure values have decimal points to be read correctly
+
+
+2 for output in celestial
+3 for ecliptic input
+1 for aitoff
+NX>800 for decent ps resolution

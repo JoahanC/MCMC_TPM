@@ -1,0 +1,14 @@
+	COMPLEX*16 FUNCTION QADD(A,B)
+C
+C	adds 2 quaternions
+C
+	REAL*4 A(4),B(4)
+	REAL*4 R(4)
+	COMPLEX*16 Q
+	EQUIVALENCE (Q,R)
+	DO I=1,4
+	  R(I) = A(I)+B(I)
+	ENDDO
+	QADD = Q
+	RETURN
+	END

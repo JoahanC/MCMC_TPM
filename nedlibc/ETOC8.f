@@ -1,0 +1,14 @@
+	SUBROUTINE ETOC8(E,C)
+	REAL*8 E(3),C(3),TEMP
+C
+C	E	INPUT	vector in ecliptic coordinates (J2000.0)
+C	C	OUTPUT	vector in celestial coordinates (J2000.0)
+C
+	REAL*8 COBL,SOBL
+	PARAMETER (COBL=0.917482058D0,SOBL=0.39777716D0)
+	C(1)=E(1)
+	TEMP=COBL*E(3)+SOBL*E(2)
+	C(2)=COBL*E(2)-SOBL*E(3)
+	C(3)=TEMP
+	RETURN
+	END
