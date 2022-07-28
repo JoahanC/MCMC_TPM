@@ -5,9 +5,9 @@ Must be run in the same directory with the run*.csh file
 """
 import os
 from anyio import current_effective_deadline
+from matplotlib.pyplot import table
 import numpy as np
-from astropy.table import Table
-from sklearn.metrics import mean_absolute_error
+from astropy.table import Table, Column
 
 
 def conv_num2mpcformat(n):
@@ -320,10 +320,10 @@ def read_csh_inputs(csh_file, triaxial=True):
         return csh_inputs
 
 
-def generate_MCMC_input_astropy_table(csh_file, triaxial=True):
+def generate_object_table():
     """
-    Generates an astropy table of the MCMC input file with the .csh
-    file input as a reference.
+    Generates an astropy table of all thermophysical property
+    outputs from existing objects in the directory.
 
     Arguments: csh_file (str) -- the name of the file housing the 
                direct MCMC inputs
@@ -331,217 +331,233 @@ def generate_MCMC_input_astropy_table(csh_file, triaxial=True):
     Returns: None -- Generates an .tbl file in the same directory
     """
 
-    csh_inputs = read_csh_inputs(csh_file, triaxial)
-    epochs = []
-    for key in csh_inputs:
-        if "epoch" in key:
-            epochs.append(csh_inputs[key])
+    files = list(os.popen('ls *.txt'))
+    object_files = []
+    object_names = []
+    for file in files:
+        object_names.append(file.replace(".txt", '').replace('\n', ''))
+        object_files.append(file[:len(file) - 1])
+    
+    diameter_mean = []
+    diameter_mean_sig = []
+    diameter_median = []
+    diameter_median_pos_sig = []
+    diameter_median_neg_sig = []
 
-    header_names = ["Epoch", "RA", "DEC", "MJD", "Dist"]
-    for i in range(4):
-        header_names.append(f"W{i + 1}_Flux")
-        header_names.append(f"W{i + 1}_Sigma")
-        header_names.append(f"W{i + 1}_Amp")
+    p_V_mean = []
+    p_V_mean_sig = []
+    p_V_median = []
+    p_V_median_sig = []
 
-    object_table = Table(rows=epochs, names=header_names)
-    unpacked_designation = csh_inputs["up_desig"]
-    object_table.write(f"{unpacked_designation}_MCMC_inputs.tbl", format="ipac", 
+    theta_mean = []
+    theta_mean_sig = []
+    theta_median = []
+    theta_median_pos_sig = []
+    theta_median_neg_sig = []
+
+    period = []
+    period_pos_sig = []
+    period_neg_sig = []
+
+    sqrt = []
+    sqrt_pos_sig = []
+    sqrt_neg_sig = []
+
+    crater_frac = []
+    crater_frac_pos_sig = []
+    crater_frac_neg_sig = []
+
+    ratio = []
+    ratio_pos_sig = []
+    ratio_neg_sig = []
+
+    pole_peak_ra = []
+    pole_peak_dec = []
+
+    mean_pole_ra = []
+    mean_pole_dec = []
+    mean_pole_val = []
+
+    eigenvector_1 = []
+    eigenvector_1_ra = []
+    eigenvector_1_dec = []
+
+    eigenvector_2 = []
+    eigenvector_2_ra = []
+    eigenvector_2_dec = []
+
+    eigenvector_3 = []
+    eigenvector_3_ra = []
+    eigenvector_3_dec = []
+
+    for file in object_files:
+        object_file = open(file, 'r')
+        for i in range(5):
+            object_file.readline()
+        
+        diameter_vals = determine_mean_median_vals(object_file.readline(), "multi")
+        diameter_mean.append(diameter_vals[0])
+        diameter_mean_sig.append(diameter_vals[1])
+        diameter_median.append(diameter_vals[2])
+        diameter_median_pos_sig.append(diameter_vals[3])
+        diameter_median_neg_sig.append(diameter_vals[4])
+
+        p_V_vals = determine_mean_median_vals(object_file.readline(), "single")
+        p_V_mean.append(p_V_vals[0])
+        p_V_mean_sig.append(p_V_vals[1])
+        p_V_median.append(p_V_vals[2])
+        p_V_median_sig.append(p_V_vals[3])
+
+        theta_vals = determine_mean_median_vals(object_file.readline(), "multi")
+        theta_mean.append(theta_vals[0])
+        theta_mean_sig.append(theta_vals[1])
+        theta_median.append(theta_vals[2])
+        theta_median_pos_sig.append(theta_vals[3])
+        theta_median_neg_sig.append(theta_vals[4])
+
+        period_vals = determine_period(object_file.readline())
+        period.append(period_vals[0])
+        period_pos_sig.append(period_vals[1])
+        period_neg_sig.append(period_vals[2])
+
+        sqrt_vals = determine_square_vals(object_file.readline())
+        sqrt.append(sqrt_vals[0])
+        sqrt_pos_sig.append(sqrt_vals[1])
+        sqrt_neg_sig.append(sqrt_vals[2])
+
+        crater_vals = determine_crater_fraction(object_file.readline())
+        crater_frac.append(crater_vals[0])
+        crater_frac_pos_sig.append(crater_vals[1])
+        crater_frac_neg_sig.append(crater_vals[2])
+
+        ratio_vals = determine_p_V_ratio(object_file.readline())
+        ratio.append(ratio_vals[0])
+        ratio_pos_sig.append(ratio_vals[1])
+        ratio_neg_sig.append(ratio_vals[2])
+
+        pole_peak_line = object_file.readline().split()
+        pole_peak_ra.append(pole_peak_line[4])
+        pole_peak_dec.append(pole_peak_line[5])
+
+        mean_pole_line = object_file.readline().split()
+        mean_pole_ra.append(mean_pole_line[4])
+        mean_pole_dec.append(mean_pole_line[5])
+        mean_pole_val.append(mean_pole_line[7])
+
+        eigenvector_1_line = object_file.readline().split()
+        eigenvector_1.append(eigenvector_1_line[2])
+        eigenvector_1_ra.append(eigenvector_1_line[5])
+        eigenvector_1_dec.append(eigenvector_1_line[6])
+
+        eigenvector_2_line = object_file.readline().split()
+        eigenvector_2.append(eigenvector_2_line[2])
+        eigenvector_2_ra.append(eigenvector_2_line[5])
+        eigenvector_2_dec.append(eigenvector_2_line[6])
+
+        eigenvector_3_line = object_file.readline().split()
+        eigenvector_3.append(eigenvector_3_line[2])
+        eigenvector_3_ra.append(eigenvector_3_line[5])
+        eigenvector_3_dec.append(eigenvector_3_line[6])
+
+    object_table = Table()
+    object_table['name'] = object_names
+    object_table['diameter_mean'] = diameter_mean
+    object_table['diameter_mean_sig'] = diameter_mean_sig
+    object_table['diameter_median'] = diameter_median
+    object_table['diameter_median_pos_sig'] = diameter_median_pos_sig
+    object_table['diameter_median_neg_sig'] = diameter_median_neg_sig
+    object_table['p_V_mean'] = p_V_mean
+    object_table['p_V_mean_sig'] = p_V_mean_sig
+    object_table['p_V_median'] = p_V_median
+    object_table['p_V_median_sig'] = p_V_median_sig
+    object_table['theta_mean'] = theta_mean
+    object_table['theta_mean_sig'] = theta_mean_sig
+    object_table['theta_median'] = theta_median
+    object_table['theta_median_pos_sig'] = theta_median_pos_sig
+    object_table['theta_median_neg_sig'] = theta_median_neg_sig
+    object_table['period'] = period
+    object_table['period_pos_sig'] = period_pos_sig
+    object_table['period_neg_sig'] = period_neg_sig
+    object_table['kappa_rho_c'] = sqrt
+    object_table['kappa_rho_c_pos_sig'] = sqrt_pos_sig
+    object_table['kappa_rho_c_neg_sig'] = sqrt_neg_sig
+    object_table['crater_fraction'] = crater_frac
+    object_table['crater_fraction_pos_sig'] = crater_frac_pos_sig
+    object_table['crater_fraction_neg_sig'] = crater_frac_neg_sig
+    object_table['p_IRp_V'] = ratio
+    object_table['p_IRp_V_pos_sig'] = ratio_pos_sig
+    object_table['p_IRp_V_neg_sig'] = ratio_neg_sig
+    object_table['pole_peak_ra'] = pole_peak_ra
+    object_table['pole_peak_dec'] = pole_peak_dec
+    object_table['mean_pole'] = mean_pole_val
+    object_table['mean_pole_ra'] = mean_pole_ra
+    object_table['mean_pole_dec'] = mean_pole_dec
+    object_table['eigenvector_1'] = eigenvector_1
+    object_table['eigenvector_1_ra'] = eigenvector_1_ra
+    object_table['eigenvector_1_dec'] = eigenvector_1_dec
+    object_table['eigenvector_2'] = eigenvector_2
+    object_table['eigenvector_2_ra'] = eigenvector_2_ra
+    object_table['eigenvector_2_dec'] = eigenvector_2_dec
+    object_table['eigenvector_3'] = eigenvector_3
+    object_table['eigenvector_3_ra'] = eigenvector_3_ra
+    object_table['eigenvector_3_dec'] = eigenvector_3_dec
+    object_table.write(f"MCMC_outputs.tbl", format="ipac", 
                        overwrite=True)
 
 
-def generate_LaTeX_Obs_input_table():
+def generate_LaTeX_table():
 
-    input_files = os.popen("ls *MCMC_inputs.tbl").readlines()
-    if len(input_files) != 1:
-        print("")
-    table_file = input_files[0].replace('\n', '')
-    epochs = Table.read(table_file, format="ipac")
-
-    header = "    Epoch & RA & DEC & MJD & Source ID & "
-    subheader = "     & & & & & "
-
-    for i in range(4):
-        subheader += "Mag & Mag $\sigma$ & "
-        subheader += "Flux & Flux $\sigma$ & $\chi$ & "
-        header += f" & & & W{i + 1} & & "
-
-    print(header)
-    print(subheader)
-
-    with open("table.tex", 'w') as tex_file:
-        tex_file.write("\\begin{table}[H]\n")
-        tex_file.write(' ' * 4 + "\\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\n")
-        tex_file.write(' ' * 4 + "\\centering\n")
-        tex_file.write(' ' * 4 + header + "\\\ \n")
-        tex_file.write(' ' * 4 + subheader[:len(subheader) - 3] + "\\\ \n")
-        tex_file.write(' ' * 4 + "\\end{tabular}\n")
-        tex_file.write("\end{table}")
+    data_object = Table.read("MCMC_outputs.tbl", format='ipac')
     
-
-def generate_LaTeX_thermo_results_table():
-
-    files = os.popen("ls *.txt").readlines()
-    for i in range(len(files)):
-        files[i] = files[i][:len(files[i]) - 1]
-    values = {"diameters" : [], "p_V_vals" : [], "thetas" : [], "periods" : [], "sqrt_vals" : [],
-              "crater_vals" : [], "ratio_vals" : [], "pole_peak" : [], "mean_pole" : [],
-              "moment_eigenvector_1" : [], "moment_eigenvector_2" : [], "moment_eigenvector_3" : []}
-    for fit_file in files:
-        with open(fit_file, 'r') as file:
-            
-            file.readline()
-            file.readline()
-            file.readline()
-            file.readline()
-            file.readline()
-            line_6 = file.readline()
-            diameter_vals = determine_mean_median_vals(line_6, "multi")
-            for value in diameter_vals:
-                values["diameters"].append(value)
-            line_8 = file.readline()
-            p_V_vals = determine_mean_median_vals(line_8, "single")
-            for value in p_V_vals:
-                values["p_V_vals"].append(value)
-            line_10 = file.readline()
-            theta_vals = determine_mean_median_vals(line_10, "multi")
-            for value in theta_vals:
-                values["thetas"].append(value)
-            line_12 = file.readline()
-            period_vals = determine_period(line_12)
-            for value in period_vals:
-                values["periods"].append(value)
-            line_13 = file.readline()
-            sqrt_vals = determine_square_vals(line_13)
-            for value in sqrt_vals:
-                values["sqrt_vals"].append(value)
-            line_14 = file.readline()
-            crater_vals = determine_crater_fraction(line_14)
-            for value in crater_vals:
-                values["crater_vals"].append(value)
-            line_15 = file.readline()
-            ratio_vals = determine_p_V_ratio(line_15)
-            for value in ratio_vals:
-                values["ratio_vals"].append(value)
-            line_16 = file.readline().split()
-            values["pole_peak"].append(line_16[4])
-            values["pole_peak"].append(line_16[5])
-            line_17 = file.readline().split()
-            values["mean_pole"].append(line_17[4])
-            values["mean_pole"].append(line_17[5])
-            values["mean_pole"].append(line_17[7])
-            line_18 = file.readline().split()
-            values["moment_eigenvector_1"].append(line_18[2])
-            values["moment_eigenvector_1"].append(line_18[5])
-            values["moment_eigenvector_1"].append(line_18[6])
-            line_19 = file.readline().split()
-            values["moment_eigenvector_2"].append(line_19[2])
-            values["moment_eigenvector_2"].append(line_19[5])
-            values["moment_eigenvector_2"].append(line_19[6])
-            line_20 = file.readline().split()
-            values["moment_eigenvector_3"].append(line_20[2])
-            values["moment_eigenvector_3"].append(line_20[5])
-            values["moment_eigenvector_3"].append(line_20[6])
-
     initializer = " " * 4 + "\\begin{tabular}{"
     initializer_cols = ""
-    for i in range(len(files) + 1):
+    
+
+    for i in range(6):
         initializer_cols += "|c"
     initializer = initializer + initializer_cols[1:] + "}\n"
-    header = " " * 8 + "MPC Designation & "
 
-    objects = []
-    for file in files:
-        name = conv_num2mpcformat(int(file.replace(".txt", '')))
-        objects.append(name)
-    for object in objects:
-        header += f"{object} & "
+    tex_file = open("thermophysical_outputs.tex", 'w')
+    tex_file.write("\\documentclass[linenumbers]{aastex631}\n\n")
+    tex_file.write("\\begin{document}\n\n")
+    tex_file.write("\\begin{deluxetable*}{" + 'c'*6 + "}\n")
+    tex_file.write(' ' * 4 + "\\tablenum{1}\n")
+    tex_file.write(' ' * 4 + "\\tablecaption{Physical characteristics from thermophysical modeling of various objects}\n")
+    tex_file.write(' ' * 4 + "\\tablewidth{0pt}\n")
+    tex_file.write(' ' * 4 + "\\tablehead{\n")
+    col_names = ["Name", "Diameter", "Albedo", "Theta", "Period", "Crater Fraction"]
+    table_header = ' ' * 8
+    for name in col_names:
+        table_header += "\\colhead{" + name + "} & "
+    table_header = table_header[:len(table_header) - 2] + "\\\ \n" + ' ' * 8
+    col_types = ['', 'km', '', 'deg', 'hr', '']
+    for type in col_types:
+        table_header += "\\colhead{" + type + "} & "
+    tex_file.write(table_header[:len(table_header) - 2] + "\n")
+    tex_file.write(' ' * 4 + '}\n')
+    tex_file.write(' ' * 4 + "\decimalcolnumbers\n" + ' ' * 4 + "\startdata\n")
+    
 
-    with open("thermophysical_outputs.tex", 'w') as tex_file:
-        tex_file.write("\\begin{table}[H]\n")
-        tex_file.write(' ' * 4 + "\\centering\n")
-        tex_file.write(initializer)
-        tex_file.write(" " * 8 + "\hline\n")
-        tex_file.write(" " * 8 + "\hline\n")
-        tex_file.write(header[:len(header) - 2] + '\\\ \n')
-        tex_file.write(" " * 8 + "\hline\n")
+    for iter in range(len(data_object['name'])):
+        line = ' ' * 8
+        for idx, col in enumerate(data_object.colnames):
+            if idx == 0:
+                line += f"{data_object[col][iter]} & "
+            elif idx in [3, 8, 12, 15, 21]:
+                line += f"${data_object[col][iter]}^"
+            elif idx in [4, 9, 13, 16]:
+                line += "{+" + data_object[col][iter] + "\%}_"
+            elif idx in [22]:
+                line += "{+" + data_object[col][iter] + "}_"
+            if idx in [5, 9, 14, 17]:
+                line += "{-" + data_object[col][iter] + "\%}$ & "
+            elif idx == 23:
+                line += "{-" + data_object[col][iter] + "}$ \\\ \n"
+        tex_file.write(line)
+    tex_file.write(' ' * 4 + "\enddata\n")
+    tex_file.write("\end{deluxetable*}\n")
+    tex_file.write("\end{document}\n")
+    tex_file.close()
 
-        mean_diameters = " " * 8 + "Mean Diameter & "
-        median_diameters = " " * 8 + "Median Diameter & "
-        mean_p_V = " " * 8 + "Mean p$_V$ & "
-        median_p_V = " " * 8 + "Median p$_V$ & "
-        mean_thetas = " " * 8 + "Mean Theta & "
-        median_thetas = " " * 8 + "Median Theta & "
-        periods = " " * 8 + "Period & "
-        sqrt_vals = " " * 8 + "$\sqrt{\kappa\cdot\\rho\cdot C}$ & "
-        crater_fraction = " " * 8 + "Crater Fraction & "
-        p_IR_p_V = " " * 8 + "p$_{IR}$/p$_V$ & "
-        pole_peak_RA = " " * 8 + "Pole Peak RA & "
-        pole_peak_DEC = " " * 8 + "Pole Peak DEC & "
-        mean_pole_RA = " " * 8 + "Mean Pole RA & "
-        mean_pole_DEC = " " * 8 + "Mean Pole DEC & "
-        mean_vector = " " * 8 + "|<p>| & "
-        eigenvector_1_val = " " * 8 + "Eigenvector 1 & "
-        eigenvector_2_val = " " * 8 + "Eigenvector 2 & "
-        eigenvector_3_val = " " * 8 + "Eigenvector 3 & "
-        eigenvector_1_RA = " " * 8 + "Eigenvector 1 RA & "
-        eigenvector_2_RA = " " * 8 + "Eigenvector 2 RA & "
-        eigenvector_3_RA = " " * 8 + "Eigenvector 3 RA & "
-        eigenvector_1_DEC = " " * 8 + "Eigenvector 1 DEC & "
-        eigenvector_2_DEC = " " * 8 + "Eigenvector 2 DEC & "
-        eigenvector_3_DEC = " " * 8 + "Eigenvector 3 DEC & "
-        for i in range(0, len(objects)):
-            mean_diameters += f"${values['diameters'][i * 5]}^" + '{' f"+{values['diameters'][i * 5 + 1]}" + "}_{" + f"-{values['diameters'][i * 5 + 1]}" + "}$ & "
-            median_diameters += f"${values['diameters'][i * 5 + 2]}^" + '{' f"+{values['diameters'][i * 5 + 3]}\%" + "}_{" + f"-{values['diameters'][i * 5 + 4]}\%" + "}$ & "
-            mean_p_V += f"${values['p_V_vals'][i * 4]}^" + '{' f"+{values['p_V_vals'][i * 4 + 1]}\%" + "}_{" + f"-{values['p_V_vals'][i * 4 + 1]}\%" + "}$ & "
-            median_p_V += f"${values['p_V_vals'][i * 4 + 2]}^" + '{' f"+{values['p_V_vals'][i * 4 + 3]}\%" + "}_{" + f"-{values['p_V_vals'][i * 4 + 3]}\%" + "}$ & "
-            mean_thetas += f"${values['thetas'][i * 5]}^" + '{' f"+{values['thetas'][i * 5 + 1]}" + "}_{" + f"-{values['thetas'][i * 5 + 1]}" + "}$ & "
-            median_thetas += f"${values['thetas'][i * 5 + 2]}^" + '{' f"+{values['thetas'][i * 5 + 3]}\%" + "}_{" + f"-{values['thetas'][i * 5 + 4]}\%" + "}$ & "
-            periods += f"${values['periods'][i * 3]}^" + '{' f"+{values['periods'][i * 3 + 1]}" + "}_{" + f"-{values['periods'][i * 3 + 2]}" + "}$ & "
-            sqrt_vals += f"${values['sqrt_vals'][i * 3]}^" + '{' f"+{values['sqrt_vals'][i * 3 + 1]}" + "}_{" + f"-{values['sqrt_vals'][i * 3 + 2]}" + "}$ & "
-            crater_fraction += f"${values['crater_vals'][i * 3]}^" + '{' f"+{values['crater_vals'][i * 3 + 1]}" + "}_{" + f"-{values['crater_vals'][i * 3 + 2]}" + "}$ & "
-            p_IR_p_V += f"${values['ratio_vals'][i * 3]}^" + '{' f"+{values['ratio_vals'][i * 3 + 1]}" + "}_{" + f"-{values['ratio_vals'][i * 3 + 2]}" + "}$ & "
-            pole_peak_RA += f"${values['pole_peak'][i * 2]}$ & " 
-            pole_peak_DEC += f"${values['pole_peak'][i * 2 + 1]}$ & "
-            mean_pole_RA += f"${values['mean_pole'][i * 3]}$ & " 
-            mean_pole_DEC += f"${values['mean_pole'][i * 3 + 1]}$ & "
-            mean_vector += f"${values['mean_pole'][i * 3 + 2]}$ & "
-            eigenvector_1_val += f"${values['moment_eigenvector_1'][i * 3]}$ & "
-            eigenvector_2_val += f"${values['moment_eigenvector_2'][i * 3]}$ & "
-            eigenvector_3_val += f"${values['moment_eigenvector_3'][i * 3]}$ & "
-            eigenvector_1_RA += f"${values['moment_eigenvector_1'][i * 3 + 1]}$ & "
-            eigenvector_2_RA += f"${values['moment_eigenvector_2'][i * 3 + 1]}$ & "
-            eigenvector_3_RA += f"${values['moment_eigenvector_3'][i * 3 + 1]}$ & "
-            eigenvector_1_DEC += f"${values['moment_eigenvector_1'][i * 3 + 2]}$ & "
-            eigenvector_2_DEC += f"${values['moment_eigenvector_2'][i * 3 + 2]}$ & "
-            eigenvector_3_DEC += f"${values['moment_eigenvector_3'][i * 3 + 2]}$ & "
-        tex_file.write(mean_diameters[:len(mean_diameters) - 2] + '\\\ \n')
-        tex_file.write(median_diameters[:len(median_diameters) - 2] + '\\\ \n')
-        tex_file.write(mean_p_V[:len(mean_p_V) - 2] + '\\\ \n')
-        tex_file.write(median_p_V[:len(median_p_V) - 2] + '\\\ \n')
-        tex_file.write(mean_thetas[:len(mean_thetas) - 2] + '\\\ \n')
-        tex_file.write(median_thetas[:len(median_thetas) - 2] + '\\\ \n')
-        tex_file.write(periods[:len(periods) - 2] + '\\\ \n')
-        tex_file.write(sqrt_vals[:len(sqrt_vals) - 2] + '\\\ \n')
-        tex_file.write(pole_peak_RA[:len(pole_peak_RA) - 2] + '\\\ \n')
-        tex_file.write(pole_peak_DEC[:len(pole_peak_DEC) - 2] + '\\\ \n')
-        tex_file.write(mean_pole_RA[:len(mean_pole_RA) - 2] + '\\\ \n')
-        tex_file.write(mean_pole_DEC[:len(mean_pole_DEC) - 2] + '\\\ \n')
-        tex_file.write(eigenvector_1_val[:len(eigenvector_1_val) - 2] + '\\\ \n')
-        tex_file.write(eigenvector_1_RA[:len(eigenvector_1_RA) - 2] + '\\\ \n')
-        tex_file.write(eigenvector_1_DEC[:len(eigenvector_1_DEC) - 2] + '\\\ \n')
-        tex_file.write(eigenvector_2_val[:len(eigenvector_2_val) - 2] + '\\\ \n')
-        tex_file.write(eigenvector_2_RA[:len(eigenvector_2_RA) - 2] + '\\\ \n')
-        tex_file.write(eigenvector_2_DEC[:len(eigenvector_2_DEC) - 2] + '\\\ \n')
-        tex_file.write(eigenvector_3_val[:len(eigenvector_3_val) - 2] + '\\\ \n')
-        tex_file.write(eigenvector_3_RA[:len(eigenvector_3_RA) - 2] + '\\\ \n')
-        tex_file.write(eigenvector_3_DEC[:len(eigenvector_3_DEC) - 2] + '\\\ \n')
-        tex_file.write(' ' * 4 + "\\end{tabular}\n")
-        caption_line = ' ' * 4 + "\\caption{Thermophysical modeling results"
-        caption_line += " generated by the spherical MCMC model.}\n"
-        tex_file.write(caption_line)
-        tex_file.write("\end{table}")
-        
-
-#irsa_files, csh_file = call_input_files()
-#generate_MCMC_input_astropy_table(csh_file)
-generate_LaTeX_thermo_results_table()
+generate_object_table()
+generate_LaTeX_table()

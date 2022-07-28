@@ -8,8 +8,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import modf, floor
 
-from sympy import frac
-
 
 def julian_days_utc_converter(jd):
     """
@@ -453,10 +451,13 @@ def generate_diameter_vs_gamma_plot(diameters, gammas):
 
     Returns: None, generates two plots titled diameter_vs_gamma.png/pdf
     """
+
+    chis = retrieve_output_data()[1]
     print("Generating diameter vs gamma plots.")
     plt.figure(figsize=[6,6])
     ax = plt.gca()
-    plt.scatter(diameters, gammas, s=1, marker='o', color='k')
+    plt.scatter(diameters, gammas, s=1, c=chis, marker='o')#, color='k')
+    plt.colorbar()
     ax.set_xscale('log')
     ax.set_yscale('log')
     plt.xlabel("Diameter (km)")
@@ -716,22 +717,11 @@ def determine_p_V_ratio(line):
     return outputs
 
 
-def display_MCMC_results():
-    with open("best_fit.txt", 'r') as file:
-        line_1 = file.readline().split()
-        line_1[4] = "I=1 ... MNC ="
-        output_1 = f"{line_1[0]} {line_1[1]} {line_1[2]} {line_1[3]}"
-        output_1 += f" {line_1[4]} {line_1[5]} {line_1[6]}s"
-        line_2 = file.readline().split()
-        output_2 = f"Patch & Total Weights: {line_2[4]} & {line_2[5]}"
-        print(output_2)
-        line_3 = file.readline().strip()
-        print(line_3)
-        line_4 = file.readline().strip()
-        print(line_4)
-        file.readline()
-        print("Out of 1 ... NMC loop\n\n*** Properties ***\n")
-        
+def display_MCMC_results(mpc_name):
+    mpc_data = []
+    with open(f"../best_fits/{mpc_name}.txt", 'r') as file:
+        for i in range(5):
+            file.readline()
         line_6 = file.readline()
         diameter_vals = determine_mean_median_vals(line_6, "multi")
         output_6 = f"Diameter (Mean): {diameter_vals[0]} +/- {diameter_vals[1]}"
@@ -791,13 +781,15 @@ def display_MCMC_results():
         print(output_20)
 
 
+#mpc_name = sys.argv[1]
+
 print("Echoing relevant files\n")
-os.system("echo 'PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC -> best_fit.txt") 
+#os.system(f"echo 'PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC -> ../best_fits/{mpc_name}.txt") 
 os.system("/bin/cp fort.2 Dhist.dat")
 os.system("/bin/cp fort.32 Dhist_fine.dat")
 os.system("/bin/cp fort.3 DvsPeriod.dat")
 os.system("/bin/cp fort.4 DvsAlb.dat")
-display_MCMC_results()
+#display_MCMC_results(mpc_name)
 
 best_fit, best_fit_plotters, epoch_condition, wavelengths = retrieve_MCMC_data()
 diameters, chis, gammas = retrieve_output_data()
