@@ -3,8 +3,8 @@ This file takes the inputs for Ned's MCMC model and converts them into
 an astropy and LaTeX table format for use in publications.
 Must be run in the same directory with the run*.csh file 
 """
+import sys
 import os
-from anyio import current_effective_deadline
 from matplotlib.pyplot import table
 import numpy as np
 from astropy.table import Table, Column
@@ -331,12 +331,15 @@ def generate_object_table():
     Returns: None -- Generates an .tbl file in the same directory
     """
 
-    files = list(os.popen('ls *.txt'))
+    
+    #files = list(os.popen('ls *.txt'))
+    files = ["1990.txt", "2002.txt", "2100.txt", "02212.txt", "5693.txt", "7735.txt", "23606.txt", "85713.txt", "G1819.txt"]
+    
     object_files = []
     object_names = []
     for file in files:
         object_names.append(file.replace(".txt", '').replace('\n', ''))
-        object_files.append(file[:len(file) - 1])
+        object_files.append(file[:len(file)])
     
     diameter_mean = []
     diameter_mean_sig = []
@@ -508,18 +511,73 @@ def generate_object_table():
 def generate_LaTeX_table():
 
     data_object = Table.read("MCMC_outputs.tbl", format='ipac')
+
+    tex_file = open("thermophysical_table.tex", 'w')    
     
-    initializer = " " * 4 + "\\begin{tabular}{"
-    initializer_cols = ""
+    tex_file.write("\\begin{deluxetable*}{" + 'c'*6 + "}\n")
+    tex_file.write(' ' * 4 + "\\tablenum{1}\n")
+    tex_file.write(' ' * 4 + "\\tablecaption{Physical characteristics from thermophysical modeling of various objects}\n")
+    tex_file.write(' ' * 4 + "\\tablewidth{0pt}\n")
+    tex_file.write(' ' * 4 + "\\tablehead{\n")
+    col_names = ["Name", "Diameter", "Albedo", "Theta", "Period", "Crater Fraction"]
+    table_header = ' ' * 8
+    for name in col_names:
+        table_header += "\\colhead{" + name + "} & "
+    table_header = table_header[:len(table_header) - 2] + "\\\ \n" + ' ' * 8
+    col_types = ['', 'km', '', 'deg', 'hr', '']
+    for type in col_types:
+        table_header += "\\colhead{" + type + "} & "
+    tex_file.write(table_header[:len(table_header) - 2] + "\n")
+    tex_file.write(' ' * 4 + '}\n')
+    tex_file.write(' ' * 4 + "\decimalcolnumbers\n" + ' ' * 4 + "\startdata\n")
     
 
-    for i in range(6):
-        initializer_cols += "|c"
-    initializer = initializer + initializer_cols[1:] + "}\n"
+    for iter in range(len(data_object['name'])):
+        line = ' ' * 8
+        for idx, col in enumerate(data_object.colnames):
+            if idx == 0:
+                line += f"{data_object[col][iter]} & "
+            elif idx in [3, 8, 12, 15, 21]:
+                line += f"${data_object[col][iter]}^"
+            elif idx in [4, 9, 13, 16]:
+                line += "{+" + data_object[col][iter] + "\%}_"
+            elif idx in [22]:
+                line += "{+" + data_object[col][iter] + "}_"
+            if idx in [5, 9, 14, 17]:
+                line += "{-" + data_object[col][iter] + "\%}$ & "
+            elif idx == 23:
+                line += "{-" + data_object[col][iter] + "}$ \\\ \n"
+        tex_file.write(line)
+    tex_file.write(' ' * 4 + "\enddata\n")
+    tex_file.write("\end{deluxetable*}\n")
+    tex_file.close()
 
+
+def generate_MCMC_results():
+    data_object = Table.read("MCMC_outputs.tbl", format='ipac')
     tex_file = open("thermophysical_outputs.tex", 'w')
+    tex_file.write("\makeatletter\n")
+    tex_file.write("\declare@file@substitution{revtex4-1.cls}{revtex4-2.cls}\n")
+    tex_file.write("\makeatother\n")
     tex_file.write("\\documentclass[linenumbers]{aastex631}\n\n")
+    tex_file.write("\\usepackage{float}\n\n")
+
+    tex_file.write("\\shorttitle{MCMC Thermophysical Modeling Results}\n")
+    tex_file.write("\\shortauthors{Castaneda Jaimes, Macias}\n")
     tex_file.write("\\begin{document}\n\n")
+    tex_file.write("\\title{MCMC Thermophysical Modeling Results \\footnote{Summer 2022}}\n")
+    tex_file.write("\\author{Joahan Castaneda Jaimes}\n")
+
+    tex_file.write("\\begin{abstract}\n")
+    tex_file.write("test\n")
+    tex_file.write("\\end{abstract}\n")
+    
+    tex_file.write("\\section{Introduction}\n")
+
+    tex_file.write("All the results from the spherical MCMC thermophysical application can be found in this file.\n")
+    tex_file.write("Included is a series of tables with major physical characteristics and a series of plots for each\n")
+    tex_file.write("object modeled.")
+
     tex_file.write("\\begin{deluxetable*}{" + 'c'*6 + "}\n")
     tex_file.write(' ' * 4 + "\\tablenum{1}\n")
     tex_file.write(' ' * 4 + "\\tablecaption{Physical characteristics from thermophysical modeling of various objects}\n")
@@ -561,3 +619,5 @@ def generate_LaTeX_table():
 
 generate_object_table()
 generate_LaTeX_table()
+generate_MCMC_results()
+#os.popen("pdflatex thermophysical_outputs.tex")
