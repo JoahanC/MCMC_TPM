@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7.26) (preloaded format=pdflatex 2022.7.27)  27 JUL 2022 20:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.27)  28 JUL 2022 01:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./thermophysical_outputs.tex
-(thermophysical_outputs.tex
-LaTeX2e <2022-06-01> patch level 5
-L3 programming layer <2022-07-15>
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/aastex\aastex631.cls
+**thermophysical_outputs.tex
+(./thermophysical_outputs.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-02-24>
+(/usr/local/texlive/2022/texmf-dist/tex/latex/aastex/aastex631.cls
 Document Class: aastex631 2020/12/20 Version 6.3.1d/AAS markup document class
 Class aastex Info: 
  
@@ -20,7 +20,7 @@ gridlines, draft watermark,
  
   on input line 106.
 \bibbaselineskip=\skip47
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/revtex\revtex4-2.cls
+(/usr/local/texlive/2022/texmf-dist/tex/latex/revtex/revtex4-2.cls
 Document Class: revtex4-2 2020/10/03 4.2e (https://journals.aps.org/revtex/ for
  documentation)
  Copyright (c) 2019 American Physical Society.
@@ -39,26 +39,26 @@ note on input line 481.
 Class revtex4-2 Info: Repairing broken LateX \@sect on input line 803.
 \intertabularlinepenalty=\count185
 \@tbpen=\count186
-\@arstrutbox@hline=\box51
+\@arstrutbox@hline=\box50
 Class revtex4-2 Info: Repairing broken LaTeX \@xbitor on input line 1834.
 Class revtex4-2 Info: Making \typeout \long on input line 2099.
 ltxfront[2020/10/03 4.2e frontmatter package (AO,DPC,MD)]
 \c@affil=\count187
 \c@collab=\count188
-\absbox=\box52
+\absbox=\box51
 ltxgrid[2020/10/03 4.2e page grid package (portions licensed from W. E. Baxter 
 web at superscript.com)]
 \c@linecount=\count189
 \output@latex=\toks16
-\box@size@1=\box53
-\box@size@2=\box54
-\@protection@box=\box55
+\box@size@1=\box52
+\box@size@2=\box53
+\@protection@box=\box54
 \@topmark@saved=\toks17
-\footins@saved=\box56
-\footins@recovered=\box57
-\column@recovered=\box58
-\pagesofar=\box59
-\footsofar=\box60
+\footins@saved=\box55
+\footins@recovered=\box56
+\column@recovered=\box57
+\pagesofar=\box58
+\footsofar=\box59
 \pagegrid@col=\count190
 Class revtex4-2 Info: Overriding \@vspace, \@vspacer, \@no@pgbk, \@newline, and
  \\  on input line 5665.
@@ -71,16 +71,16 @@ Class revtex4-2 Info: Overriding \@vspace, \@vspacer, \@no@pgbk, \@newline, and
 \abovecaptionskip=\skip48
 \belowcaptionskip=\skip49
 \c@figure=\count197
-\fbox@1=\box61
+\fbox@1=\box60
 \c@table=\count198
-\fbox@2=\box62
+\fbox@2=\box61
 \c@video=\count199
-\fbox@4=\box63
+\fbox@4=\box62
 \@bibdataout=\write3
-\widetext@top=\box64
-\widetext@bot=\box65
+\widetext@top=\box63
+\widetext@bot=\box64
 Class revtex4-2 Info: Selecting society aps on input line 7658.
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/revtex\aps4-2.rtx
+(/usr/local/texlive/2022/texmf-dist/tex/latex/revtex/aps4-2.rtx
 File: aps4-2 2020/10/03 4.2e (https://journals.aps.org/revtex/ for documentatio
 n)
 Class revtex4-2 Info: RevTeX society APS selected on input line 40.
@@ -88,20 +88,19 @@ Class revtex4-2 Info: RevTeX society APS selected on input line 40.
 Class revtex4-2 Info: Selecting journal pra on input line 7660.
 Class revtex4-2 Info: APS journal PRA selected on input line 7661.
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/revtex\aps10pt4-2.rtx
+(/usr/local/texlive/2022/texmf-dist/tex/latex/revtex/aps10pt4-2.rtx
 File: aps10pt4-2 2020/10/03 4.2e (https://journals.aps.org/revtex/ for document
 ation)
 Class revtex4-2 Info: RevTeX pointsize 10pt selected on input line 39.
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/textcase\textcase.sty
-Package: textcase 2022/07/10 v1.03 Text only upper/lower case changing (DPC)
-Package textcase Info: Defining Legacy names on input line 20.
+(/usr/local/texlive/2022/texmf-dist/tex/latex/textcase/textcase.sty
+Package: textcase 2019/09/14 v1.00 Text only upper/lower case changing (DPC)
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip50
 \bibsep=\skip51
@@ -110,45 +109,45 @@ LaTeX Info: Redefining \cite on input line 694.
 )
 Class revtex4-2 Info: Repairing natbib's \BibitemShut on input line 7665.
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/revtex\revsymb4-2.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/revtex/revsymb4-2.sty
 Package: revsymb4-2 2020/10/03 4.2e (https://journals.aps.org/revtex/ for docum
 entation)
 LaTeX Info: Redefining \REV@mathfrak on input line 128.
-)) (C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/base\latexsym.sty
+))
+(/usr/local/texlive/2022/texmf-dist/tex/latex/base/latexsym.sty
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
 \symlasy=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 (Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks18
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
-Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
-fg
+(/usr/local/texlive/2022/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+(/usr/local/texlive/2022/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen138
 \Gin@req@width=\dimen139
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \@emptytoks=\toks19
 \symAMSa=\mathgroup5
@@ -158,7 +157,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 LaTeX Info: Redefining \frak on input line 111.
 LaTeX Info: Redefining \Bbb on input line 113.
-)) (C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/epsf\epsf.sty
+))
+(/usr/local/texlive/2022/texmf-dist/tex/generic/epsf/epsf.sty
 This is `epsf.tex' v2.7.4 <14 February 2011>
 \epsffilein=\read2
 \epsfframemargin=\dimen140
@@ -178,7 +178,7 @@ This is `epsf.tex' v2.7.4 <14 February 2011>
 \keys@width=\skip52
 \c@lastfootnote=\count272
 \tempsectnum=\count273
-\ackbox=\box66
+\ackbox=\box65
 \c@remember@figure@num=\count274
 \c@remember@table@num=\count275
 \bibskip=\skip53
@@ -197,7 +197,7 @@ This is `epsf.tex' v2.7.4 <14 February 2011>
 \DT@p@ftn=\toks20
 \pt@column=\count278
 \pt@ncol=\count279
- (C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \LTleft=\skip60
 \LTright=\skip61
@@ -205,280 +205,262 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \LTpost=\skip63
 \LTchunksize=\count280
 \LTcapwidth=\dimen152
-\LT@head=\box67
-\LT@firsthead=\box68
-\LT@foot=\box69
-\LT@lastfoot=\box70
-\LT@gbox=\box71
+\LT@head=\box66
+\LT@firsthead=\box67
+\LT@foot=\box68
+\LT@lastfoot=\box69
+\LT@gbox=\box70
 \LT@cols=\count281
 \LT@rows=\count282
 \c@LT@tables=\count283
 \c@LT@chunks=\count284
 \LT@p@ftn=\toks21
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
-Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+(/usr/local/texlive/2022/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 227.
-
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex-dev/graphics\mathcolor.
-ltx)
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
-Package xcolor Info: Model `RGB' extended on input line 1369.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1356.
+Package xcolor Info: Model `RGB' extended on input line 1368.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
-Package: hyperref 2022-06-20 v7.00s Hypertext links for LaTeX
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2022-02-21 v7.00n Hypertext links for LaTeX
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds
-.sty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.s
-ty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/kvsetkeys\kvsetkeys.s
-ty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefine
-keys.sty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.s
-ty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/pdfescape/pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-) (C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\letltxmacro
-.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
-Package: nameref 2022-05-17 v2.50 Cross-referencing by name of section
-
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
-Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-)
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettit
-lestring.sty
-Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
-Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
-))
-\c@section@level=\count285
+(/usr/local/texlive/2022/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
 \@linkdim=\dimen153
-\Hy@linkcounter=\count286
-\Hy@pagecounter=\count287
- (C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
-File: pd1enc.def 2022-06-20 v7.00s Hyperref: PDFDocEncoding definition (HO)
+\Hy@linkcounter=\count285
+\Hy@pagecounter=\count286
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2022-02-21 v7.00n Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-) (C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\etexcmds.sty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count288
- (C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
-File: puenc.def 2022-06-20 v7.00s Hyperref: PDF Unicode definition (HO)
+\Hy@SavedSpaceFactor=\count287
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2022-02-21 v7.00n Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `bookmarks' set `true' on input line 4045.
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 4045.
-Package hyperref Info: Option `colorlinks' set `true' on input line 4045.
-Package hyperref Info: Option `final' set `true' on input line 4045.
-Package hyperref Info: Hyper figures OFF on input line 4162.
-Package hyperref Info: Link nesting OFF on input line 4167.
-Package hyperref Info: Hyper index ON on input line 4170.
-Package hyperref Info: Plain pages OFF on input line 4177.
-Package hyperref Info: Backreferencing OFF on input line 4182.
+Package hyperref Info: Option `bookmarks' set `true' on input line 4018.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 4018.
+Package hyperref Info: Option `colorlinks' set `true' on input line 4018.
+Package hyperref Info: Option `final' set `true' on input line 4018.
+Package hyperref Info: Hyper figures OFF on input line 4137.
+Package hyperref Info: Link nesting OFF on input line 4142.
+Package hyperref Info: Hyper index ON on input line 4145.
+Package hyperref Info: Plain pages OFF on input line 4152.
+Package hyperref Info: Backreferencing OFF on input line 4157.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4408.
-LaTeX Info: Redefining \href on input line 4657.
-\c@Hy@tempcnt=\count289
-LaTeX Info: Redefining \url on input line 4746.
+Package hyperref Info: Bookmarks ON on input line 4390.
+LaTeX Info: Redefining \href on input line 4660.
+\c@Hy@tempcnt=\count288
+LaTeX Info: Redefining \url on input line 4749.
 \XeTeXLinkMargin=\dimen154
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc
-.sty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count290
+\Fld@menulength=\count289
 \Field@Width=\dimen155
 \Fld@charsize=\dimen156
-Package hyperref Info: Hyper figures OFF on input line 6024.
-Package hyperref Info: Link nesting OFF on input line 6029.
-Package hyperref Info: Hyper index ON on input line 6032.
-Package hyperref Info: backreferencing OFF on input line 6039.
-Package hyperref Info: Link coloring ON on input line 6042.
-Package hyperref Info: Link coloring with OCG OFF on input line 6049.
-Package hyperref Info: PDF/A mode OFF on input line 6054.
+Package hyperref Info: Hyper figures OFF on input line 6027.
+Package hyperref Info: Link nesting OFF on input line 6032.
+Package hyperref Info: Hyper index ON on input line 6035.
+Package hyperref Info: backreferencing OFF on input line 6042.
+Package hyperref Info: Link coloring ON on input line 6045.
+Package hyperref Info: Link coloring with OCG OFF on input line 6052.
+Package hyperref Info: PDF/A mode OFF on input line 6057.
+LaTeX Info: Redefining \ref on input line 6097.
+LaTeX Info: Redefining \pageref on input line 6101.
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count291
-\c@Item=\count292
-\c@Hfootnote=\count293
+\Hy@abspage=\count290
+\c@Item=\count291
+\c@Hfootnote=\count292
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
-File: hpdftex.def 2022-06-20 v7.00s Hyperref driver for pdfTeX
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend-ltx.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2022-02-21 v7.00n Hyperref driver for pdfTeX
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
-\Fld@listcount=\count294
-\c@bookmark@seq@number=\count295
+\Fld@listcount=\count293
+\c@bookmark@seq@number=\count294
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
-echeck.sty
-Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquec
-ounter.sty
+(/usr/local/texlive/2022/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
-85.
+86.
 )
 \Hy@SectionHShift=\skip64
-)
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/tools/array.sty
 Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \col@sep=\dimen157
-\ar@mcellbox=\box72
+\ar@mcellbox=\box71
 \extrarowheight=\dimen158
 \NC@list=\toks22
 \extratabsurround=\skip65
 \backup@length=\skip66
-\ar@cellbox=\box73
+\ar@cellbox=\box72
 )
-\colcount=\count296
-\firstcolcount=\count297
-\secondcolcount=\count298
-\thirdcolcount=\count299
-\columncount=\count300
-\howmanyDs=\count301
-\firsthowmanyDs=\count302
-\secondhowmanyDs=\count303
-\PartsOfTable=\count304
-\columnoneandtwo=\count305
-\colnumsused=\count306
-\loopnum=\count307
-\totalcolumncount=\count308
-\totalcolumns=\count309
-\firsttablebox=\box74
-\secondtablebox=\box75
-\thirdtablebox=\box76
-\longtablebox=\box77
-\splitbox=\box78
+\colcount=\count295
+\firstcolcount=\count296
+\secondcolcount=\count297
+\thirdcolcount=\count298
+\columncount=\count299
+\howmanyDs=\count300
+\firsthowmanyDs=\count301
+\secondhowmanyDs=\count302
+\PartsOfTable=\count303
+\columnoneandtwo=\count304
+\colnumsused=\count305
+\loopnum=\count306
+\totalcolumncount=\count307
+\totalcolumns=\count308
+\firsttablebox=\box73
+\secondtablebox=\box74
+\thirdtablebox=\box75
+\longtablebox=\box76
+\splitbox=\box77
 \movetabledown=\dimen159
 \maxtablewidth=\dimen160
 \savetabskip=\dimen161
-\tempcounter=\count310
-\colheadcount=\count311
-\rotatetablebox=\box79
-\colorcount=\count312
-\editnum=\count313
-\refchangenumber=\count314
-\listchangenum=\count315
+\tempcounter=\count309
+\colheadcount=\count310
+\rotatetablebox=\box78
+\colorcount=\count311
+\editnum=\count312
+\refchangenumber=\count313
+\listchangenum=\count314
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/ulem\ulem.sty
-\UL@box=\box80
-\UL@hyphenbox=\box81
+(/usr/local/texlive/2022/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box79
+\UL@hyphenbox=\box80
 \UL@skip=\skip67
 \UL@hook=\toks23
 \UL@height=\dimen162
-\UL@pe=\count316
+\UL@pe=\count315
 \UL@pixel=\dimen163
-\ULC@box=\box82
+\ULC@box=\box81
 Package: ulem 2019/11/18
 \ULdepth=\dimen164
 )
-\entriesinthiscollab=\count317
-\allentries=\count318
-\AuthorCollaborationLimit=\count319
-\largestAffilNum=\count320
-\totalentries=\count321
-\docollabnum=\count322
-\tempauthornumber=\count323
-\countauthors=\count324
-\testnum=\count325
-\tempauthorminusone=\count326
-\affilnum=\count327
-\c@affilcount=\count328
-\numauthors=\count329
-\collabnum=\count330
-\collabnamebox=\box83
-\widetext@top=\box84
-\widetext@bot=\box85
+\entriesinthiscollab=\count316
+\allentries=\count317
+\AuthorCollaborationLimit=\count318
+\largestAffilNum=\count319
+\totalentries=\count320
+\docollabnum=\count321
+\tempauthornumber=\count322
+\countauthors=\count323
+\testnum=\count324
+\tempauthorminusone=\count325
+\affilnum=\count326
+\c@affilcount=\count327
+\numauthors=\count328
+\collabnum=\count329
+\collabnamebox=\box82
+\widetext@top=\box83
+\widetext@bot=\box84
 \currwidth=\dimen165
-\interactbox=\box86
+\interactbox=\box85
 \movetableright=\dimen166
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/lineno\lineno.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count331
+\linenopenalty=\count330
 \output=\toks24
-\linenoprevgraf=\count332
+\linenoprevgraf=\count331
 \linenumbersep=\dimen167
 \linenumberwidth=\dimen168
-\c@linenumber=\count333
-\c@pagewiselinenumber=\count334
-\c@LN@truepage=\count335
-\c@internallinenumber=\count336
-\c@internallinenumbers=\count337
+\c@linenumber=\count332
+\c@pagewiselinenumber=\count333
+\c@LN@truepage=\count334
+\c@internallinenumber=\count335
+\c@internallinenumbers=\count336
 \quotelinenumbersep=\dimen169
 \bframerule=\dimen170
 \bframesep=\dimen171
-\bframebox=\box87
+\bframebox=\box86
 LaTeX Info: Redefining \\ on input line 3056.
 ))
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+(/usr/local/texlive/2022/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count338
+\c@float@type=\count337
 \float@exts=\toks25
-\float@box=\box88
+\float@box=\box87
 \@float@everytoks=\toks26
-\@floatcapt=\box89
+\@floatcapt=\box88
 )
 Class revtex4-2 Info: Unrecognized array package. Please update this document c
 lass! (Proceeding with fingers crossed.) on input line 10.
@@ -491,13 +473,12 @@ Class revtex4-2 Info: Patching unrecognized longtable package. (Proceeding with
 Class revtex4-2 Info: cite was not loaded (OK!) on input line 10.
 Class revtex4-2 Info: mcite was not loaded (OK!) on input line 10.
 Class revtex4-2 Info: multicol was not loaded (OK!) on input line 10.
-
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
-tex.def
-File: l3backend-pdftex.def 2022-07-01 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count339
-\l__pdf_internal_box=\box90
-) (thermophysical_outputs.aux)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count338
+\l__pdf_internal_box=\box89
+)
+(./thermophysical_outputs.aux)
 \openout1 = `thermophysical_outputs.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
@@ -519,33 +500,46 @@ LaTeX Font Info:    ... okay on input line 10.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
-ii
+(/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count340
+\scratchcounter=\count339
 \scratchdimen=\dimen172
-\scratchbox=\box91
-\nofMPsegments=\count341
-\nofMParguments=\count342
+\scratchbox=\box90
+\nofMPsegments=\count340
+\nofMParguments=\count341
 \everyMPshowfont=\toks27
-\MPscratchCnt=\count343
+\MPscratchCnt=\count342
 \MPscratchDim=\dimen173
-\MPnumerator=\count344
-\makeMPintoPDFobject=\count345
+\MPnumerator=\count343
+\makeMPintoPDFobject=\count344
 \everyMPtoPDFconversion=\toks28
-)
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
-ase.sty
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
-fg
-File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+(/usr/local/texlive/2022/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
 ))
 Package hyperref Info: Link coloring ON on input line 10.
- (thermophysical_outputs.out) (thermophysical_outputs.out)
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count345
+)
+LaTeX Info: Redefining \ref on input line 10.
+LaTeX Info: Redefining \pageref on input line 10.
+LaTeX Info: Redefining \nameref on input line 10.
+ (./thermophysical_outputs.out) (./thermophysical_outputs.out)
 \@outlinefile=\write4
 \openout4 = `thermophysical_outputs.out'.
 
@@ -559,61 +553,469 @@ Class revtex4-2 Warning: Assuming \noaffiliation for authors.
 
 LaTeX Font Info:    Trying to load font information for U+lasy on input line 17
 .
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/base\ulasy.fd
+(/usr/local/texlive/2022/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
 LaTeX Font Info:    Trying to load font information for U+msa on input line 17.
 
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+(/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 17.
 
 
-(C:\Users\joaha\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+(/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Overfull \hbox (14.75804pt too wide) in paragraph at lines 17--17
 [][]| $[]$ [][][]| 
  []
 
-[1{C:/Users/joaha/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
-pdfTeX warning (ext4): destination with the same identifier (name{table.0}) has
- been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.41 \end{document}
-                   ] (thermophysical_outputs.aux)
-Package rerunfilecheck Info: File `thermophysical_outputs.out' has not changed.
+<../2002/bestfit_SED.pdf, id=45, 433.62pt x 289.08pt>
+File: ../2002/bestfit_SED.pdf Graphic file (type pdf)
+<use ../2002/bestfit_SED.pdf>
+Package pdftex.def Info: ../2002/bestfit_SED.pdf  used on input line 45.
+(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+[1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<../2002/diameter_histogram.pdf, id=63, 433.62pt x 433.62pt>
+File: ../2002/diameter_histogram.pdf Graphic file (type pdf)
+<use ../2002/diameter_histogram.pdf>
+Package pdftex.def Info: ../2002/diameter_histogram.pdf  used on input line 49.
 
-(rerunfilecheck)             Checksum: 9814C2D956916ADB9290ECA4E25C967A;103.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+
+[2 <../2002/bestfit_SED.pdf>]
+<../2002/diameter_vs_albedo.pdf, id=108, 433.62pt x 433.62pt>
+File: ../2002/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../2002/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../2002/diameter_vs_albedo.pdf  used on input line 53.
+
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [3 <../2002/diameter_histogram.pdf>]
+<../2002/diameter_vs_chi.pdf, id=147, 433.62pt x 433.62pt>
+File: ../2002/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../2002/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../2002/diameter_vs_chi.pdf  used on input line 57.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [4 <../2002/diameter_vs_albedo.pdf>]
+<../2002/diameter_vs_gamma.pdf, id=191, 433.62pt x 433.62pt>
+File: ../2002/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../2002/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../2002/diameter_vs_gamma.pdf  used on input line 61.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [5 <../2002/diameter_vs_chi.pdf>]
+<../2002/gamma_vs_chi.pdf, id=226, 433.62pt x 433.62pt>
+File: ../2002/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../2002/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../2002/gamma_vs_chi.pdf  used on input line 65.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [6 <../2002/diameter_vs_gamma.pdf>]
+<../2212/bestfit_SED.pdf, id=254, 433.62pt x 289.08pt>
+File: ../2212/bestfit_SED.pdf Graphic file (type pdf)
+<use ../2212/bestfit_SED.pdf>
+Package pdftex.def Info: ../2212/bestfit_SED.pdf  used on input line 70.
+(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+ [7 <../2002/gamma_vs_chi.pdf>]
+<../2212/diameter_histogram.pdf, id=300, 433.62pt x 433.62pt>
+File: ../2212/diameter_histogram.pdf Graphic file (type pdf)
+<use ../2212/diameter_histogram.pdf>
+Package pdftex.def Info: ../2212/diameter_histogram.pdf  used on input line 74.
+
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [8 <../2212/bestfit_SED.pdf>]
+<../2212/diameter_vs_albedo.pdf, id=343, 433.62pt x 433.62pt>
+File: ../2212/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../2212/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../2212/diameter_vs_albedo.pdf  used on input line 78.
+
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+
+[9 <../2212/diameter_histogram.pdf>]
+<../2212/diameter_vs_chi.pdf, id=382, 433.62pt x 433.62pt>
+File: ../2212/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../2212/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../2212/diameter_vs_chi.pdf  used on input line 82.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [10 <../2212/diameter_vs_albedo.pdf>]
+<../2212/diameter_vs_gamma.pdf, id=426, 433.62pt x 433.62pt>
+File: ../2212/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../2212/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../2212/diameter_vs_gamma.pdf  used on input line 86.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+
+[11 <../2212/diameter_vs_chi.pdf>]
+<../2212/diameter_vs_period.pdf, id=457, 433.62pt x 433.62pt>
+File: ../2212/diameter_vs_period.pdf Graphic file (type pdf)
+<use ../2212/diameter_vs_period.pdf>
+Package pdftex.def Info: ../2212/diameter_vs_period.pdf  used on input line 90.
+
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [12 <../2212/diameter_vs_gamma.pdf>]
+<../2212/gamma_vs_chi.pdf, id=486, 433.62pt x 433.62pt>
+File: ../2212/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../2212/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../2212/gamma_vs_chi.pdf  used on input line 94.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+
+[13 <../2212/diameter_vs_period.pdf>]
+<../G1989/bestfit_SED.pdf, id=530, 433.62pt x 289.08pt>
+File: ../G1989/bestfit_SED.pdf Graphic file (type pdf)
+<use ../G1989/bestfit_SED.pdf>
+Package pdftex.def Info: ../G1989/bestfit_SED.pdf  used on input line 99.
+(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+ [14 <../2212/gamma_vs_chi.pdf>]
+<../G1989/diameter_histogram.pdf, id=573, 433.62pt x 433.62pt>
+File: ../G1989/diameter_histogram.pdf Graphic file (type pdf)
+<use ../G1989/diameter_histogram.pdf>
+Package pdftex.def Info: ../G1989/diameter_histogram.pdf  used on input line 10
+3.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [15 <../G1989/bestfit_SED.pdf>]
+<../G1989/diameter_vs_albedo.pdf, id=615, 433.62pt x 433.62pt>
+File: ../G1989/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../G1989/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../G1989/diameter_vs_albedo.pdf  used on input line 10
+7.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [16 <../G1989/diameter_histogram.pdf>]
+<../G1989/diameter_vs_chi.pdf, id=655, 433.62pt x 433.62pt>
+File: ../G1989/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../G1989/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../G1989/diameter_vs_chi.pdf  used on input line 111.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [17 <../G1989/diameter_vs_albedo.pdf>]
+<../G1989/diameter_vs_gamma.pdf, id=702, 433.62pt x 433.62pt>
+File: ../G1989/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../G1989/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../G1989/diameter_vs_gamma.pdf  used on input line 115
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [18 <../G1989/diameter_vs_chi.pdf>]
+<../G1989/diameter_vs_period.pdf, id=738, 433.62pt x 433.62pt>
+File: ../G1989/diameter_vs_period.pdf Graphic file (type pdf)
+<use ../G1989/diameter_vs_period.pdf>
+Package pdftex.def Info: ../G1989/diameter_vs_period.pdf  used on input line 11
+9.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [19 <../G1989/diameter_vs_gamma.pdf>]
+<../G1989/gamma_vs_chi.pdf, id=774, 433.62pt x 433.62pt>
+File: ../G1989/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../G1989/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../G1989/gamma_vs_chi.pdf  used on input line 123.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [20 <../G1989/diameter_vs_period.pdf>]
+<../23606/bestfit_SED.pdf, id=820, 433.62pt x 289.08pt>
+File: ../23606/bestfit_SED.pdf Graphic file (type pdf)
+<use ../23606/bestfit_SED.pdf>
+Package pdftex.def Info: ../23606/bestfit_SED.pdf  used on input line 128.
+(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+ [21 <../G1989/gamma_vs_chi.pdf>]
+<../23606/diameter_histogram.pdf, id=863, 433.62pt x 433.62pt>
+File: ../23606/diameter_histogram.pdf Graphic file (type pdf)
+<use ../23606/diameter_histogram.pdf>
+Package pdftex.def Info: ../23606/diameter_histogram.pdf  used on input line 13
+2.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [22 <../23606/bestfit_SED.pdf>]
+<../23606/diameter_vs_albedo.pdf, id=907, 433.62pt x 433.62pt>
+File: ../23606/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../23606/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../23606/diameter_vs_albedo.pdf  used on input line 13
+6.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [23 <../23606/diameter_histogram.pdf>]
+<../23606/diameter_vs_chi.pdf, id=948, 433.62pt x 433.62pt>
+File: ../23606/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../23606/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../23606/diameter_vs_chi.pdf  used on input line 140.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [24 <../23606/diameter_vs_albedo.pdf>]
+<../23606/diameter_vs_gamma.pdf, id=992, 433.62pt x 433.62pt>
+File: ../23606/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../23606/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../23606/diameter_vs_gamma.pdf  used on input line 144
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [25 <../23606/diameter_vs_chi.pdf>]
+<../23606/diameter_vs_period.pdf, id=1024, 433.62pt x 433.62pt>
+File: ../23606/diameter_vs_period.pdf Graphic file (type pdf)
+<use ../23606/diameter_vs_period.pdf>
+Package pdftex.def Info: ../23606/diameter_vs_period.pdf  used on input line 14
+8.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+
+[26 <../23606/diameter_vs_gamma.pdf>]
+<../23606/gamma_vs_chi.pdf, id=1054, 433.62pt x 433.62pt>
+File: ../23606/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../23606/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../23606/gamma_vs_chi.pdf  used on input line 152.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [27 <../23606/diameter_vs_period.pdf>]
+<../2100/bestfit_SED.pdf, id=1097, 433.62pt x 289.08pt>
+File: ../2100/bestfit_SED.pdf Graphic file (type pdf)
+<use ../2100/bestfit_SED.pdf>
+Package pdftex.def Info: ../2100/bestfit_SED.pdf  used on input line 157.
+(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+
+[28 <../23606/gamma_vs_chi.pdf>]
+<../2100/diameter_histogram.pdf, id=1140, 433.62pt x 433.62pt>
+File: ../2100/diameter_histogram.pdf Graphic file (type pdf)
+<use ../2100/diameter_histogram.pdf>
+Package pdftex.def Info: ../2100/diameter_histogram.pdf  used on input line 161
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [29 <../2100/bestfit_SED.pdf>]
+<../2100/diameter_vs_albedo.pdf, id=1184, 433.62pt x 433.62pt>
+File: ../2100/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../2100/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../2100/diameter_vs_albedo.pdf  used on input line 165
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [30 <../2100/diameter_histogram.pdf>]
+<../2100/diameter_vs_chi.pdf, id=1225, 433.62pt x 433.62pt>
+File: ../2100/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../2100/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../2100/diameter_vs_chi.pdf  used on input line 169.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [31 <../2100/diameter_vs_albedo.pdf>]
+<../2100/diameter_vs_gamma.pdf, id=1270, 433.62pt x 433.62pt>
+File: ../2100/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../2100/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../2100/diameter_vs_gamma.pdf  used on input line 173.
+
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [32 <../2100/diameter_vs_chi.pdf>]
+<../2100/diameter_vs_period.pdf, id=1301, 433.62pt x 433.62pt>
+File: ../2100/diameter_vs_period.pdf Graphic file (type pdf)
+<use ../2100/diameter_vs_period.pdf>
+Package pdftex.def Info: ../2100/diameter_vs_period.pdf  used on input line 177
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [33 <../2100/diameter_vs_gamma.pdf>]
+<../2100/gamma_vs_chi.pdf, id=1331, 433.62pt x 433.62pt>
+File: ../2100/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../2100/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../2100/gamma_vs_chi.pdf  used on input line 181.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [34 <../2100/diameter_vs_period.pdf>]
+<../5693/bestfit_SED.pdf, id=1374, 433.62pt x 289.08pt>
+File: ../5693/bestfit_SED.pdf Graphic file (type pdf)
+<use ../5693/bestfit_SED.pdf>
+Package pdftex.def Info: ../5693/bestfit_SED.pdf  used on input line 186.
+(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+ [35 <../2100/gamma_vs_chi.pdf>]
+<../5693/diameter_histogram.pdf, id=1417, 433.62pt x 433.62pt>
+File: ../5693/diameter_histogram.pdf Graphic file (type pdf)
+<use ../5693/diameter_histogram.pdf>
+Package pdftex.def Info: ../5693/diameter_histogram.pdf  used on input line 190
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [36 <../5693/bestfit_SED.pdf>]
+<../5693/diameter_vs_albedo.pdf, id=1457, 433.62pt x 433.62pt>
+File: ../5693/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../5693/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../5693/diameter_vs_albedo.pdf  used on input line 194
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+
+[37 <../5693/diameter_histogram.pdf>]
+<../5693/diameter_vs_chi.pdf, id=1500, 433.62pt x 433.62pt>
+File: ../5693/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../5693/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../5693/diameter_vs_chi.pdf  used on input line 198.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [38 <../5693/diameter_vs_albedo.pdf>]
+<../5693/diameter_vs_gamma.pdf, id=1544, 433.62pt x 433.62pt>
+File: ../5693/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../5693/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../5693/diameter_vs_gamma.pdf  used on input line 202.
+
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+
+[39 <../5693/diameter_vs_chi.pdf>]
+<../5693/diameter_vs_period.pdf, id=1576, 433.62pt x 433.62pt>
+File: ../5693/diameter_vs_period.pdf Graphic file (type pdf)
+<use ../5693/diameter_vs_period.pdf>
+Package pdftex.def Info: ../5693/diameter_vs_period.pdf  used on input line 206
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [40 <../5693/diameter_vs_gamma.pdf>]
+<../5693/gamma_vs_chi.pdf, id=1606, 433.62pt x 433.62pt>
+File: ../5693/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../5693/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../5693/gamma_vs_chi.pdf  used on input line 210.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+
+[41 <../5693/diameter_vs_period.pdf>]
+<../7735/bestfit_SED.pdf, id=1649, 433.62pt x 289.08pt>
+File: ../7735/bestfit_SED.pdf Graphic file (type pdf)
+<use ../7735/bestfit_SED.pdf>
+Package pdftex.def Info: ../7735/bestfit_SED.pdf  used on input line 215.
+(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+ [42 <../5693/gamma_vs_chi.pdf>]
+<../7735/diameter_histogram.pdf, id=1692, 433.62pt x 433.62pt>
+File: ../7735/diameter_histogram.pdf Graphic file (type pdf)
+<use ../7735/diameter_histogram.pdf>
+Package pdftex.def Info: ../7735/diameter_histogram.pdf  used on input line 219
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [43 <../7735/bestfit_SED.pdf>]
+<../7735/diameter_vs_albedo.pdf, id=1736, 433.62pt x 433.62pt>
+File: ../7735/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../7735/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../7735/diameter_vs_albedo.pdf  used on input line 223
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [44 <../7735/diameter_histogram.pdf>]
+<../7735/diameter_vs_chi.pdf, id=1775, 433.62pt x 433.62pt>
+File: ../7735/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../7735/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../7735/diameter_vs_chi.pdf  used on input line 227.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [45 <../7735/diameter_vs_albedo.pdf>]
+<../7735/diameter_vs_gamma.pdf, id=1820, 433.62pt x 433.62pt>
+File: ../7735/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../7735/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../7735/diameter_vs_gamma.pdf  used on input line 231.
+
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [46 <../7735/diameter_vs_chi.pdf>]
+<../7735/diameter_vs_period.pdf, id=1856, 433.62pt x 433.62pt>
+File: ../7735/diameter_vs_period.pdf Graphic file (type pdf)
+<use ../7735/diameter_vs_period.pdf>
+Package pdftex.def Info: ../7735/diameter_vs_period.pdf  used on input line 235
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [47 <../7735/diameter_vs_gamma.pdf>]
+<../7735/gamma_vs_chi.pdf, id=1888, 433.62pt x 433.62pt>
+File: ../7735/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../7735/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../7735/gamma_vs_chi.pdf  used on input line 239.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [48 <../7735/diameter_vs_period.pdf>]
+<../85713/bestfit_SED.pdf, id=1934, 433.62pt x 289.08pt>
+File: ../85713/bestfit_SED.pdf Graphic file (type pdf)
+<use ../85713/bestfit_SED.pdf>
+Package pdftex.def Info: ../85713/bestfit_SED.pdf  used on input line 244.
+(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+ [49 <../7735/gamma_vs_chi.pdf>]
+<../1990/bestfit_SED.pdf, id=1980, 433.62pt x 289.08pt>
+File: ../1990/bestfit_SED.pdf Graphic file (type pdf)
+<use ../1990/bestfit_SED.pdf>
+Package pdftex.def Info: ../1990/bestfit_SED.pdf  used on input line 249.
+(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+<../1990/diameter_histogram.pdf, id=1981, 433.62pt x 433.62pt>
+File: ../1990/diameter_histogram.pdf Graphic file (type pdf)
+<use ../1990/diameter_histogram.pdf>
+Package pdftex.def Info: ../1990/diameter_histogram.pdf  used on input line 253
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [50 <../85713/bestfit_SED.pdf> <../1990/bestfit_SED.pdf>]
+<../1990/diameter_vs_albedo.pdf, id=2061, 433.62pt x 433.62pt>
+File: ../1990/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../1990/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../1990/diameter_vs_albedo.pdf  used on input line 257
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [51 <../1990/diameter_histogram.pdf>]
+<../1990/diameter_vs_chi.pdf, id=2103, 433.62pt x 433.62pt>
+File: ../1990/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../1990/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../1990/diameter_vs_chi.pdf  used on input line 261.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [52 <../1990/diameter_vs_albedo.pdf>]
+<../1990/diameter_vs_gamma.pdf, id=2150, 433.62pt x 433.62pt>
+File: ../1990/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../1990/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../1990/diameter_vs_gamma.pdf  used on input line 265.
+
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [53 <../1990/diameter_vs_chi.pdf>]
+<../1990/diameter_vs_period.pdf, id=2186, 433.62pt x 433.62pt>
+File: ../1990/diameter_vs_period.pdf Graphic file (type pdf)
+<use ../1990/diameter_vs_period.pdf>
+Package pdftex.def Info: ../1990/diameter_vs_period.pdf  used on input line 269
+.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [54 <../1990/diameter_vs_gamma.pdf>]
+<../1990/gamma_vs_chi.pdf, id=2218, 433.62pt x 433.62pt>
+File: ../1990/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../1990/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../1990/gamma_vs_chi.pdf  used on input line 273.
+(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ [55 <../1990/diameter_vs_period.pdf>] [56 <../1990/gamma_vs_chi.pdf>] (./therm
+ophysical_outputs.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `thermophysical_outputs.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `thermophysical_outputs.out':
+(rerunfilecheck)             Before: 9039922D2E8530E6CE1911CAA1B403FA;687
+(rerunfilecheck)             After:  9814C2D956916ADB9290ECA4E25C967A;103.
  ) 
 Here is how much of TeX's memory you used:
- 12577 strings out of 478337
- 190640 string characters out of 2836666
- 552096 words of memory out of 3000000
- 30844 multiletter control sequences out of 15000+600000
- 478359 words of font info for 66 fonts, out of 8000000 for 9000
+ 12973 strings out of 478268
+ 200707 string characters out of 5846347
+ 533944 words of memory out of 5000000
+ 30934 multiletter control sequences out of 15000+600000
+ 478959 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,12n,91p,251b,495s stack positions out of 10000i,1000n,20000p,200000b,80000s
-<C:/Users/joaha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmbx10.pfb><C:/Users/joaha/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmbx9.pfb><C:/Users/joaha/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmcsc10.pfb><C:/Users/joaha/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/joaha/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/joaha/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/joaha/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/joaha/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/jo
-aha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/U
-sers/joaha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.p
-fb><C:/Users/joaha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmsy6.pfb><C:/Users/joaha/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmsy7.pfb>
-Output written on thermophysical_outputs.pdf (1 page, 145044 bytes).
+ 75i,12n,77p,1072b,468s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{section.10} has been referenced but does not exist,
+ replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.9} has been referenced but does not exist, 
+replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.8} has been referenced but does not exist, 
+replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.7} has been referenced but does not exist, 
+replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.6} has been referenced but does not exist, 
+replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.5} has been referenced but does not exist, 
+replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.4} has been referenced but does not exist, 
+replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.3} has been referenced but does not exist, 
+replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section.2} has been referenced but does not exist, 
+replaced by a fixed one
+
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
+/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
+/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/lo
+cal/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
+/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/te
+xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texl
+ive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texliv
+e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on thermophysical_outputs.pdf (56 pages, 29251036 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
- 5 named destinations out of 1000 (max. 500000)
- 9 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2371 PDF objects out of 2487 (max. 8388607)
+ 665 compressed objects within 7 object streams
+ 77 named destinations out of 1000 (max. 500000)
+ 361 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -569,16 +569,35 @@ def generate_MCMC_results():
     tex_file.write("\\author{Joahan Castaneda Jaimes}\n")
 
     tex_file.write("\\begin{abstract}\n")
-    tex_file.write("test\n")
+    tex_file.write("The Wide-field Infrared Survey Explorer (WISE)" +
+    " telescope has been scanning the sky for over a decade," +
+    " uncovering a vast population of Near Earth Asteroids (NEAs)" + 
+    " as part of the NEOWISE mission. NEAs are of interest to the" + 
+    " scientific community due to their proximity and chaotic" + 
+    " nature, making them a potential threat to Earth while also" + 
+    " promising targets for future missions. In this study, we" + 
+    " assess asteroids by first recovering observational epochs" + 
+    " missed by NEOWISE’s detection software and then using all" + 
+    " valid observational epochs to run a triaxial ellipsoidal" + 
+    " thermophysical model utilizing Monte Carlo Markov Chain (MCMC)" +
+    " techniques. We present predictions of the diameter, albedo," + 
+    " thermal inertia, and other physical characteristics for these" + 
+    " asteroids. Additionally, we report newly discovered epochs for" +
+    " these objects to the International Astronomical Union’s Minor" + 
+    " Planet Center and develop software tools for discovering more" +
+    " missed epochs by NEOWISE across the entire WISE database in an" +
+    " automated fashion.\n")
     tex_file.write("\\end{abstract}\n")
     
     tex_file.write("\\section{Introduction}\n")
 
-    tex_file.write("All the results from the spherical MCMC thermophysical application can be found in this file.\n")
-    tex_file.write("Included is a series of tables with major physical characteristics and a series of plots for each\n")
-    tex_file.write("object modeled.")
+    tex_file.write("All the results from the spherical MCMC" + 
+    " thermophysical application can be found in this file.\n")
+    tex_file.write("Included is a series of tables with major" +
+    " physical characteristics and a series of plots for each\n")
+    tex_file.write("object modeled.\n")
 
-    tex_file.write("\\begin{deluxetable*}{" + 'c'*6 + "}\n")
+    tex_file.write("\\begin{deluxetable*}{" + 'c'*6 + "}[H]\n")
     tex_file.write(' ' * 4 + "\\tablenum{1}\n")
     tex_file.write(' ' * 4 + "\\tablecaption{Physical characteristics from thermophysical modeling of various objects}\n")
     tex_file.write(' ' * 4 + "\\tablewidth{0pt}\n")
@@ -613,11 +632,50 @@ def generate_MCMC_results():
                 line += "{-" + data_object[col][iter] + "}$ \\\ \n"
         tex_file.write(line)
     tex_file.write(' ' * 4 + "\enddata\n")
-    tex_file.write("\end{deluxetable*}\n")
+    tex_file.write("\end{deluxetable*}\n\n")
+    plot_paths = return_all_image_files()
+
+    for neo in plot_paths:
+        tex_file.write("\\section*{\LARGE " + neo + "}\n")
+        for path in plot_paths[neo]:
+            plot_image(tex_file, path)
     tex_file.write("\end{document}\n")
     tex_file.close()
 
-generate_object_table()
-generate_LaTeX_table()
+
+def plot_image(tex_file, image_pdf):
+    tex_file.write("\\begin{figure}[H]\n")
+    tex_file.write(' ' * 4 + "\\plotone{" + image_pdf + "}\n")
+    tex_file.write("\\end{figure}\n\n")
+
+
+def return_all_image_files():
+    files = []
+    curr = os.listdir(".")
+    current_neos = [neo.replace(".txt", '') for neo in curr if ".txt" in neo]
+    neo_paths = {}
+    for neo in current_neos:
+        neo_paths[neo] = f"../{neo}/"
+
+    plot_names = ["bestfit_SED.pdf", "diameter_histogram.pdf", 
+    "diameter_vs_albedo.pdf", "diameter_vs_chi.pdf", 
+    "diameter_vs_gamma.pdf", "diameter_vs_period.pdf",
+    "gamma_vs_chi.pdf"]
+    plot_paths = {}
+
+    for neo in neo_paths:
+        neo_dir = os.listdir(neo_paths[neo])
+        for plot in plot_names:
+            if plot in neo_dir:
+                if neo in plot_paths:
+                    plot_paths[neo].append(neo_paths[neo] + plot)
+                else:
+                    plot_paths[neo] = [neo_paths[neo] + plot]
+    return plot_paths
+
+
+#generate_object_table()
+#generate_LaTeX_table()
 generate_MCMC_results()
 #os.popen("pdflatex thermophysical_outputs.tex")
+#return_all_image_files()
