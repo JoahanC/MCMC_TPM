@@ -1,2 +1,8 @@
 gfortran -o ../WISE-steep-MCMC-PJDFC WISE-steep-MCMC-PJDFC.f ../nedlib.a
 echo 02212
+echo H=13.53 from mpcorb.s3m
+../WISE-steep-MCMC-PJDFC << LAST
+13.53,0.2,0,02212
+55425.175, 53.371,+11.795,0.88430,13.52,+0.03,10.84,+0.03, 5.52,+0.03, 9.99,+9.99
+55243.221, 57.953,+33.664,1.59334,15.03,+0.09,12.77,+0.03, 6.70,+0.03, 4.60,+0.03
+LAST
