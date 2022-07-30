@@ -238,6 +238,7 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
             y_low = min(esed[i])
         if max(esed[i]) > y_high:
             y_high = max(esed[i])
+
         # Plot flux for each wavelength
         plt.plot(wavelengths, esed[i], label=datelabels[i], color=colors[i], lw=0.75, ls=next(lines))    
 
@@ -261,7 +262,13 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
         # Set scale and include error bars
         ax.set_xscale("log")
         ax.set_yscale("log")
-        
+        limtest = ax.get_ylim()
+        if limtest[0] < 1e-99:
+            plt.ylim(y_low / 10., y_high * 10)
+
+
+        print(lower_errors)
+        print(data_y_adjusted)
         plt.errorbar(data_x[i], data_y_adjusted, 
                     yerr=[lower_errors, higher_errors],
                     ecolor=colors[i],
@@ -290,7 +297,10 @@ def generate_diameter_vs_albedo_plot(diameters, albedos, chis):
     print("Generating diameter vs albedo plots.")
 
     pairings = []
-    diameter_break = 0.015
+    diameter_break = 0.1
+    print(len(diameters))
+    print(len(albedos))
+    print(len(chis))
     for i in range(len(diameters)):
         pairings.append([diameters[i], albedos[i], chis[i]])
     pairings.sort()
@@ -367,6 +377,8 @@ def generate_diameter_histogram(diameters):
     log_diameters_copy = log_diameters[:]
     diameters_count = len(log_diameters)
     log_diameters_copy.sort()
+    print(int(diameters_count * 0.16))
+    print(len(diameters))
     sigma_1_low = log_diameters_copy[int(diameters_count * 0.16)]
     sigma_1_high = log_diameters_copy[int(diameters_count * 0.84)]
     sigma_2_low = log_diameters_copy[int(diameters_count * 0.025)]
@@ -416,7 +428,7 @@ def generate_diameter_vs_period_plot(diameters, periods, chis):
 
     else:
         pairings = []
-        diameter_break = 0.015
+        diameter_break = 0.1
         for i in range(len(diameters)):
             pairings.append([diameters[i], periods[i], chis[i]])
         pairings.sort()
@@ -491,7 +503,7 @@ def generate_diameter_vs_gamma_plot(diameters, gammas, chis):
     print("Generating diameter vs gamma plots.")
 
     pairings = []
-    diameter_break = 0.015
+    diameter_break = 0.1
     for i in range(len(diameters)):
         pairings.append([diameters[i], gammas[i], chis[i]])
     pairings.sort()
@@ -542,7 +554,7 @@ def generate_diameter_vs_gamma_plot(diameters, gammas, chis):
     plt.figure(figsize=[6,6])
     ax = plt.gca()
     ax.set_facecolor('#a9a9a9')
-    plt.scatter(diameters, gammas, s=1, c=chis, marker='.')#, color='k')
+    plt.scatter(diameters, gammas, s=1, marker='o', c=chis, linewidths=1, cmap=plt.cm.get_cmap('inferno'))
     plt.colorbar(label=r"fit $\chi^2$")
     plt.text(0.5, .97,f"{len(diameters)}/{len(diameters)} points displayed", ha='center', va='center', transform=ax.transAxes) 
     ax.set_xscale('log')
@@ -871,7 +883,7 @@ def display_MCMC_results(mpc_name):
 #mpc_name = sys.argv[1]
 
 print("Echoing relevant files\n")
-#os.system(f"echo 'PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC -> ../best_fits/{mpc_name}.txt") 
+os.system(f"echo 'PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC") 
 os.system("/bin/cp fort.2 Dhist.dat")
 os.system("/bin/cp fort.32 Dhist_fine.dat")
 os.system("/bin/cp fort.3 DvsPeriod.dat")
@@ -886,6 +898,7 @@ if "general_plots" not in os.listdir('.'):
 generate_SED_plot(best_fit_plotters[0], best_fit_plotters[1], 
                   best_fit_plotters[2], best_fit_plotters[3], 
                   best_fit_plotters[4], best_fit_plotters[5])
+print(len(diameters))
 generate_diameter_histogram(diameters)
 generate_diameter_vs_albedo_plot(diameters, albedos, chis)
 generate_diameter_vs_period_plot(diameters, periods, chis)
