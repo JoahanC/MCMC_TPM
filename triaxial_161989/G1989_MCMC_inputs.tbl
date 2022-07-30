@@ -1,0 +1,8 @@
+|Epoch|       RA|    DEC|    MJD|   Dist|W1_Flux|W1_Sigma|W1_Amp|W2_Flux|W2_Sigma|W2_Amp|W3_Flux|W3_Sigma|W3_Amp|W4_Flux|W4_Sigma|W4_Amp|
+| long|   double| double| double| double| double|  double|double| double|  double|double| double|  double|double| double|  double|double|
+|     |         |       |       |       |       |        |      |       |        |      |       |        |      |       |        |      |
+| null|     null|   null|   null|   null|   null|    null|  null|   null|    null|  null|   null|    null|  null|   null|    null|  null|
+     1 57059.028 226.092 -13.769 0.51782    16.0     0.05   2.12   13.91     0.03   1.17    9.99     9.99    0.0    9.99     9.99    0.0 
+     2 57443.636  80.817  -6.305 0.60931   16.03     0.25   1.28   14.08      0.1   0.58    9.99     9.99    0.0    9.99     9.99    0.0 
+     3 57671.255  302.43 -46.992 0.37484   14.85     0.11   0.22   12.65     0.22   0.33    9.99     9.99    0.0    9.99     9.99    0.0 
+     4 55243.147  67.174 -12.134 0.79551   17.24     0.17   2.91   15.19     0.13   2.19    9.12     0.07   0.83    7.05     0.06   1.15 
