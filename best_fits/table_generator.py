@@ -333,13 +333,21 @@ def generate_object_table():
 
     
     #files = list(os.popen('ls *.txt'))
-    files = ["1990.txt", "2002.txt", "2100.txt", "02212.txt", "5693.txt", "7735.txt", "23606.txt", "85713.txt", "G1819.txt"]
+    #files = ["01990.txt", "2002.txt", "2100.txt", "02212.txt", "5693.txt", "7735.txt", "23606.txt", "85713.txt", "G1819.txt"]
+    files = []
+    curr = os.listdir(".")
+    files = [neo.replace("\n", '') for neo in curr if ".txt" in neo]
+    files.remove("85713.txt")
     
     object_files = []
     object_names = []
     for file in files:
-        object_names.append(file.replace(".txt", '').replace('\n', ''))
-        object_files.append(file[:len(file)])
+        if "triaxial" in file:
+            object_names.append(file.replace(".txt", '').replace('\n', '').replace("triaxial_", "Triaxial "))
+            object_files.append(file[:len(file)])
+        else:
+            object_names.append(file.replace(".txt", '').replace('\n', ''))
+            object_files.append(file[:len(file)])
     
     diameter_mean = []
     diameter_mean_sig = []
@@ -437,6 +445,10 @@ def generate_object_table():
         ratio.append(ratio_vals[0])
         ratio_pos_sig.append(ratio_vals[1])
         ratio_neg_sig.append(ratio_vals[2])
+
+        if "triaxial" in file:
+            object_file.readline()
+            object_file.readline()
 
         pole_peak_line = object_file.readline().split()
         pole_peak_ra.append(pole_peak_line[4])
@@ -600,7 +612,7 @@ def generate_MCMC_results():
     tex_file.write("\\begin{deluxetable*}{" + 'c'*6 + "}[H]\n")
     tex_file.write(' ' * 4 + "\\tablenum{1}\n")
     tex_file.write(' ' * 4 + "\\tablecaption{Physical characteristics from thermophysical modeling of various objects}\n")
-    tex_file.write(' ' * 4 + "\\tablewidth{0pt}\n")
+    tex_file.write(' ' * 4 + "\\tablewidth{10pt}\n")
     tex_file.write(' ' * 4 + "\\tablehead{\n")
     col_names = ["Name", "Diameter", "Albedo", "Theta", "Period", "Crater Fraction"]
     table_header = ' ' * 8
@@ -650,12 +662,14 @@ def plot_image(tex_file, image_pdf):
 
 
 def return_all_image_files():
+    
     files = []
     curr = os.listdir(".")
     current_neos = [neo.replace(".txt", '') for neo in curr if ".txt" in neo]
+    current_neos.remove("85713")
     neo_paths = {}
     for neo in current_neos:
-        neo_paths[neo] = f"../{neo}/"
+        neo_paths[neo] = f"../{neo}/general_plots/"
 
     plot_names = ["bestfit_SED.pdf", "diameter_histogram.pdf", 
     "diameter_vs_albedo.pdf", "diameter_vs_chi.pdf", 
