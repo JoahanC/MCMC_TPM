@@ -198,7 +198,6 @@ def retrieve_MCMC_data():
     cshlines = open(cshfile)
     for line in cshlines.readlines():
         epoch_data = line.rstrip().split(',')
-        print(epoch_data)
         if len(epoch_data) != 16:
             continue
         mjd = float(epoch_data[0])
@@ -226,10 +225,6 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
     """
 
     print("Generating best fit plot for SED.")
-
-    print(len(esed))
-    print(len(wavelengths))
-    print(len(datelabels))
     
     colors = ["#3498db", "#229954", "#c0392b", "#8e44ad", "#f1c40f", "#ec7063", "#34495e", "#6e2c00"]
 
@@ -276,8 +271,6 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
             plt.ylim(y_low / 10., y_high * 10)
 
 
-        print(lower_errors)
-        print(data_y_adjusted)
         plt.errorbar(data_x[i], data_y_adjusted, 
                     yerr=[lower_errors, higher_errors],
                     ecolor=colors[i],
@@ -307,9 +300,6 @@ def generate_diameter_vs_albedo_plot(diameters, albedos, chis):
 
     pairings = []
     diameter_break = 0.1
-    print(len(diameters))
-    print(len(albedos))
-    print(len(chis))
     for i in range(len(diameters)):
         pairings.append([diameters[i], albedos[i], chis[i]])
     pairings.sort()
@@ -386,8 +376,6 @@ def generate_diameter_histogram(diameters):
     log_diameters_copy = log_diameters[:]
     diameters_count = len(log_diameters)
     log_diameters_copy.sort()
-    print(int(diameters_count * 0.16))
-    print(len(diameters))
     sigma_1_low = log_diameters_copy[int(diameters_count * 0.16)]
     sigma_1_high = log_diameters_copy[int(diameters_count * 0.84)]
     sigma_2_low = log_diameters_copy[int(diameters_count * 0.025)]
@@ -431,8 +419,6 @@ def generate_diameter_vs_period_plot(diameters, periods, chis):
     """
 
     print("Generating diameter vs period plots.")
-    print(len(diameters))
-    print(len(periods))
 
     if max(periods) - min(periods) == 0:
         print("Fixed period used, skipping diameter vs period plot")
@@ -594,8 +580,8 @@ def generate_diameter_vs_chi_plots(diameters, chis):
     plt.loglog(diameters, chis, color='k', marker='o', ms=0.5, ls="None")
     plt.xlabel("Diameter (km)", fontsize=13)
     plt.ylabel(r"fit $\chi^2$", fontsize=13)
-    plt.savefig("diameter_vs_chi.png")
-    plt.savefig("diameter_vs_chi.pdf")
+    plt.savefig("general_plots/diameter_vs_chi.png")
+    plt.savefig("general_plots/diameter_vs_chi.pdf")
     plt.close()
 
     plt.figure(figsize=[6, 6])
@@ -912,7 +898,6 @@ if "general_plots" not in os.listdir('.'):
 generate_SED_plot(best_fit_plotters[0], best_fit_plotters[1], 
                   best_fit_plotters[2], best_fit_plotters[3], 
                   best_fit_plotters[4], best_fit_plotters[5])
-print(len(diameters))
 generate_diameter_histogram(diameters)
 generate_diameter_vs_albedo_plot(diameters, albedos, chis)
 generate_diameter_vs_period_plot(diameters, periods, chis)
