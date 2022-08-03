@@ -224,7 +224,7 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
     
     colors = ["#3498db", "#229954", "#c0392b", "#8e44ad", "#f1c40f", "#ec7063", "#34495e", "#6e2c00"]
 
-    plt.figure(figsize=[6,4])
+    plt.figure(figsize=[8,6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95, bottom=0.15)
     ax = plt.gca()
     y_low = 1e99
@@ -267,21 +267,22 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
             plt.ylim(y_low / 10., y_high * 10)
 
 
-        print(lower_errors)
-        print(data_y_adjusted)
         plt.errorbar(data_x[i], data_y_adjusted, 
                     yerr=[lower_errors, higher_errors],
                     ecolor=colors[i],
                     fmt=next(marker),
-                    elinewidth=2,
+                    elinewidth=0.5,
                     color=colors[i],
-                    ms=4)
+                    ms=4,
+                    capsize=2)
 
     plt.legend(loc=2)
     plt.xlabel("Wavelength (microns)", fontsize=12)
     plt.ylabel(r"$\nu$F$_\nu$", fontsize=12)
-    plt.savefig("general_plots/bestfit_SED.png")
-    plt.savefig("general_plots/bestfit_SED.pdf")
+    object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+    plt.title(object_name, loc="left", )
+    plt.savefig("general_plots/bestfit_SED.png", bbox_inches='tight')
+    plt.savefig("general_plots/bestfit_SED.pdf", bbox_inches='tight')
     plt.close()
 
 
@@ -298,9 +299,7 @@ def generate_diameter_vs_albedo_plot(diameters, albedos, chis):
 
     pairings = []
     diameter_break = 0.1
-    print(len(diameters))
-    print(len(albedos))
-    print(len(chis))
+
     for i in range(len(diameters)):
         pairings.append([diameters[i], albedos[i], chis[i]])
     pairings.sort()
@@ -335,7 +334,7 @@ def generate_diameter_vs_albedo_plot(diameters, albedos, chis):
                 segment_diameters.append(pairings[i][0])
                 segment_albedos.append(pairings[i][1])
                 segment_chis.append(pairings[i][2])
-        plt.figure(figsize=[6,6])
+        plt.figure(figsize=[8,6])
         ax = plt.gca()
         ax.set_facecolor('#a9a9a9')
         plt.scatter(segment_diameters, segment_albedos, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
@@ -343,12 +342,14 @@ def generate_diameter_vs_albedo_plot(diameters, albedos, chis):
         plt.text(0.5, .97,f"{len(segment_diameters)}/{len(diameters)} points displayed", ha='center', va='center', transform=ax.transAxes) 
         plt.xlabel("Diameter (km)")
         plt.ylabel("Albedo")
+        object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+        plt.title(object_name, loc="left")
         plt.savefig(f"./diameter_albedo_segments/{idx}_diameter_vs_albedo.png")
         plt.savefig(f"./diameter_albedo_segments/{idx}_diameter_vs_albedo.pdf")
         plt.close()
 
     # Generate base figure
-    plt.figure(figsize=[6,6])
+    plt.figure(figsize=[8,6])
     ax = plt.gca()
     ax.set_facecolor('#a9a9a9')
     plt.scatter(diameters, albedos, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
@@ -356,6 +357,8 @@ def generate_diameter_vs_albedo_plot(diameters, albedos, chis):
     plt.text(0.5, .97,f"{len(diameters)}/{len(diameters)} points displayed", ha='center', va='center', transform=ax.transAxes) 
     plt.xlabel("Diameter (km)")
     plt.ylabel("Albedo")
+    object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+    plt.title(object_name, loc="left")
     plt.savefig("general_plots/diameter_vs_albedo.png")
     plt.savefig("general_plots/diameter_vs_albedo.pdf")
     plt.close()
@@ -377,8 +380,7 @@ def generate_diameter_histogram(diameters):
     log_diameters_copy = log_diameters[:]
     diameters_count = len(log_diameters)
     log_diameters_copy.sort()
-    print(int(diameters_count * 0.16))
-    print(len(diameters))
+
     sigma_1_low = log_diameters_copy[int(diameters_count * 0.16)]
     sigma_1_high = log_diameters_copy[int(diameters_count * 0.84)]
     sigma_2_low = log_diameters_copy[int(diameters_count * 0.025)]
@@ -392,7 +394,7 @@ def generate_diameter_histogram(diameters):
     else:
         hist_step = 0.0001
 
-    plt.figure(figsize=[6, 6])
+    plt.figure(figsize=[8, 6])
     hist_low_limit = int(min(log_diameters) * 1000) / 1000.
     hist_high_limit = (int(max(log_diameters) * 1000) + 1) / 1000.
     plt.hist(log_diameters, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
@@ -408,6 +410,8 @@ def generate_diameter_histogram(diameters):
     # Labeling plot
     plt.xlabel("Diameter (km)")
     plt.ylabel("Number of Monte Carlo Results")
+    object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+    plt.title(object_name, loc="left")
     plt.savefig("general_plots/diameter_histogram.png")
     plt.savefig("general_plots/diameter_histogram.pdf")
 
@@ -462,7 +466,7 @@ def generate_diameter_vs_period_plot(diameters, periods, chis):
                     segment_diameters.append(pairings[i][0])
                     segment_periods.append(pairings[i][1])
                     segment_chis.append(pairings[i][2])
-            plt.figure(figsize=[6,6])
+            plt.figure(figsize=[8,6])
             ax = plt.gca()
             ax.set_facecolor('#a9a9a9')
             plt.scatter(segment_diameters, segment_periods, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
@@ -471,12 +475,14 @@ def generate_diameter_vs_period_plot(diameters, periods, chis):
             ax.set_yscale('log')
             plt.xlabel("Diameter (km)")
             plt.ylabel("Rotation period")
+            object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+            plt.title(object_name, loc="left")
             plt.savefig(f"./diameter_period_segments/{idx}_diameter_vs_period.png")
             plt.savefig(f"./diameter_period_segments/{idx}_diameter_vs_period.pdf")
             plt.close()
             
         # Generate base figure
-        plt.figure(figsize=[6,6])
+        plt.figure(figsize=[8,6])
         ax = plt.gca()
         ax.set_facecolor('#a9a9a9')
         plt.scatter(diameters, periods, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
@@ -485,6 +491,8 @@ def generate_diameter_vs_period_plot(diameters, periods, chis):
         ax.set_yscale('log')
         plt.xlabel("Diameter (km)")
         plt.ylabel("Rotation period")
+        object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+        plt.title(object_name, loc="left")
         plt.savefig("general_plots/diameter_vs_period.png")
         plt.savefig("general_plots/diameter_vs_period.pdf")
         plt.close()
@@ -538,7 +546,7 @@ def generate_diameter_vs_gamma_plot(diameters, gammas, chis):
                 segment_diameters.append(pairings[i][0])
                 segment_gammas.append(pairings[i][1])
                 segment_chis.append(pairings[i][2])
-        plt.figure(figsize=[6,6])
+        plt.figure(figsize=[8,6])
         ax = plt.gca()
         ax.set_facecolor('#a9a9a9')
         plt.scatter(segment_diameters, segment_gammas, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
@@ -547,20 +555,24 @@ def generate_diameter_vs_gamma_plot(diameters, gammas, chis):
         ax.set_yscale('log')
         plt.xlabel("Diameter (km)")
         plt.ylabel("Rotation period")
+        object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+        plt.title(object_name, loc="left")
         plt.savefig(f"./diameter_gamma_segments/{idx}_diameter_vs_gamma.png")
         plt.savefig(f"./diameter_gamma_segments/{idx}_diameter_vs_gamma.pdf")
         plt.close()
 
-    plt.figure(figsize=[6,6])
+    plt.figure(figsize=[8,6])
     ax = plt.gca()
     ax.set_facecolor('#a9a9a9')
-    plt.scatter(diameters, gammas, s=1, marker='o', c=chis, linewidths=1, cmap=plt.cm.get_cmap('inferno'))
+    plt.scatter(diameters, gammas, s=1, marker='o', c=chis, linewidths=1, cmap=plt.cm.get_cmap('plasma'))
     plt.colorbar(label=r"fit $\chi^2$")
     plt.text(0.5, .97,f"{len(diameters)}/{len(diameters)} points displayed", ha='center', va='center', transform=ax.transAxes) 
     ax.set_xscale('log')
     ax.set_yscale('log')
     plt.xlabel("Diameter (km)")
     plt.ylabel(r"Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
+    object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+    plt.title(object_name, loc="left")
     plt.savefig("general_plots/diameter_vs_gamma.png")
     plt.savefig("general_plots/diameter_vs_gamma.pdf")
     plt.close()
@@ -578,20 +590,24 @@ def generate_diameter_vs_chi_plots(diameters, chis):
     """
 
     print("Generating diameter vs chi plots.")
-    plt.figure(figsize=[6, 6])
+    plt.figure(figsize=[8, 6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95)
     plt.loglog(diameters, chis, color='k', marker='o', ms=0.5, ls="None")
     plt.xlabel("Diameter (km)", fontsize=13)
     plt.ylabel(r"fit $\chi^2$", fontsize=13)
+    object_name = os.popen('echo "${PWD##*/}"')
+    plt.title(object_name, loc="left")
     plt.savefig("diameter_vs_chi.png")
     plt.savefig("diameter_vs_chi.pdf")
     plt.close()
 
-    plt.figure(figsize=[6, 6])
+    plt.figure(figsize=[8, 6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95)
     plt.plot(diameters, chis, color='k', marker='o', ms=0.5, ls='None')
     plt.xlabel("Diameter (km)", fontsize=13)
     plt.ylabel(r"fit $\chi^2$", fontsize=13)
+    object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+    plt.title(object_name, loc="left")
     plt.ylim(0.9 * min(chis), 2 * min(chis))  
     plt.savefig("general_plots/diameter_vs_chi_zoom.png")
     plt.savefig("general_plots/diameter_vs_chi_zoom.pdf")
@@ -608,12 +624,13 @@ def generate_gamma_vs_chi_plots(gammas, chis):
     """
 
     print("Generating gamma vs chi plots.")
-    plt.figure(figsize=[6, 6])
+    plt.figure(figsize=[8, 6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95)
     plt.loglog(gammas, chis, color='k', marker='o', ms=0.5, ls='None')
     plt.xlabel(r"Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
     plt.ylabel(r"fit $\chi^2$", fontsize=13)
-
+    object_name = os.getcwd().replace("/Users/jocastan/surf_2022/2022/MCMC_TPM/", '')
+    plt.title(object_name, loc="left")
     plt.savefig("general_plots/gamma_vs_chi.png")
     plt.savefig("general_plots/gamma_vs_chi.pdf")
     plt.close()
@@ -898,7 +915,6 @@ if "general_plots" not in os.listdir('.'):
 generate_SED_plot(best_fit_plotters[0], best_fit_plotters[1], 
                   best_fit_plotters[2], best_fit_plotters[3], 
                   best_fit_plotters[4], best_fit_plotters[5])
-print(len(diameters))
 generate_diameter_histogram(diameters)
 generate_diameter_vs_albedo_plot(diameters, albedos, chis)
 generate_diameter_vs_period_plot(diameters, periods, chis)

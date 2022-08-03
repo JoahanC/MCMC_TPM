@@ -2,7 +2,7 @@
 python3 parser of the output from WISE-steep-MCMC-PJDFC
 To be run this in the directory made for the object.
 """
-import sys
+import itertools
 import os
 import matplotlib.pyplot as plt
 import numpy as np
@@ -36,41 +36,45 @@ def julian_days_utc_converter(jd):
     return year, month, day + decimal_day
 
 
-
-
-
-def retrieve_output_data():
+def retrieve_output_data(object):
     
-    output_file = open("PJDFC.out")
+    output_file = open(f"../{object}/PJDFC.out")
+    albedo_file = open(f"../{object}/DvsAlb.dat", 'r')
     output_file.readline()
 
     diameters = []
     chis = []
     gammas = []
+    periods = []
+    albedos = []
 
     for line in output_file.readlines():
-        datum = line.strip().split()
-        if len(datum) < 10:
-            # Capture odd cases where col 6 was runing into col 5. 
-            # Only a handful, so just skip 
-            continue
+        period = np.e ** float(line.strip()[25:34].strip())
+        gamma = np.e ** float(line.strip()[34:43].strip())
+        diameter = np.e ** float(line.strip()[43:52].strip())
+        chi = float(line.strip()[70:87].strip())
+        diameters.append(diameter)
+        chis.append(chi)
+        gammas.append(gamma)
+        periods.append(period)
+
     
-        diameters.append(np.e ** float(datum[5]))
-        chis.append(float(datum[8]))
-        gammas.append(np.e ** float(datum[4]))
 
-    return diameters, chis, gammas
+    for line in albedo_file.readlines():
+        albedos.append(float(line.strip().split()[1]))
+
+    return diameters, albedos, gammas, chis, periods
 
 
-def retrieve_MCMC_data():
+def retrieve_MCMC_data(object):
     #cp, not mv, so that there is a record of the actual outputs  
-    os.system("/bin/cp ./fort.21 PJDFC.out")
+    os.system(f"/bin/cp ../{object}/fort.21 ../{object}/PJDFC.out")
     #fort.22 is the postscript format of the SED
-    os.system("/bin/cp ./fort.22 SED_data.out")
+    os.system(f"/bin/cp ../{object}/fort.22 ../{object}/SED_data.out")
 
     #^*^ parse and plot SED_data.out here 
     # best fit solution used for SED
-    SED_file = open("SED_data.out")
+    SED_file = open(f"../{object}/SED_data.out")
     print("Reading in best fit solution used for SED.")
     datum_minor = SED_file.readline().rstrip().split()
     datum_major = SED_file.readline().rstrip().split()
@@ -81,8 +85,7 @@ def retrieve_MCMC_data():
     best_fit["pv_median"] = np.e ** (float(datum_minor[3]))
     best_fit["period"] = np.e ** (float(datum_minor[4]))
     best_fit["gamma"] = np.e ** (float(datum_minor[5]))
-    # Period * Thermal Inertia * Gamma * Diameter * Crater Frac * Color
-    best_fit["pjdfc"] = (float(datum_minor[6])) 
+    best_fit["pjdfc"] = (float(datum_minor[6])) #period * thermal inertia Gamma * diameter * crater frac * color
     x = float(datum_minor[7])
     best_fit["crater_frac"] = np.e ** (x) / (1 + np.e ** x)
     best_fit["ir_albedo_ratio"] = np.e ** (float(datum_minor[8]))
@@ -130,17 +133,21 @@ def retrieve_MCMC_data():
     first_line = True
 
     while True:
+
         line = SED_file.readline()
         
+        # In case where only one epoch exists
         if "SRGB" not in line and first_line:
             color.append("#444444")
             data_x.append([])
             data_y.append([])
             data_y_error.append([])
 
+        # Ends cycle
         if line == "":
             break
 
+        # Gather fluxes for entire epoch
         if "/ft" in line:
             esed.append([])
             line = SED_file.readline()
@@ -149,6 +156,7 @@ def retrieve_MCMC_data():
                 esed[-1].append(flux)
                 line = SED_file.readline()
 
+        # Acquire x and y data for epoch
         elif "QQ" in line:
             x_datum, error_datum, y_datum = line.rstrip().split()[0:3]
             data_x[-1].append(float(x_datum))
@@ -178,9 +186,11 @@ def retrieve_MCMC_data():
             data_y.append([])
             data_y_error.append([])
 
+        first_line = False
+
     datelabels = []
-    cshfile = os.popen("ls run*.csh").readline().rstrip()
-    print("\n*** Using " + cshfile + " to get MJDs. Make sure this is right *** \n")
+    cshfile = os.popen(f"ls ../{object}/run*.csh").readline().rstrip()
+    print("\n*** Using "+cshfile+" to get MJDs. Make sure this is right*** \n")
     cshlines = open(cshfile)
     for line in cshlines.readlines():
         epoch_data = line.rstrip().split(',')
@@ -195,7 +205,7 @@ def retrieve_MCMC_data():
     return best_fit, best_fit_plotters, epoch_condition, wavelengths
 
 
-def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_error):
+def generate_SED_plot(object, esed, wavelengths, datelabels, data_x, data_y, data_y_error):
     """
     Generates a plot of best fit for wavelengths across different epochs.
     The outputted graph is in log 10 scale.
@@ -211,30 +221,26 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
     """
 
     print("Generating best fit plot for SED.")
-    colors = ["#000000", "#ff0000", "#0000ff", "#dd00dd", "#ee7700", 
-        "#00ee77", "#999999", "#cccc55", "#55cccc", "#cc55cc"]
-    linestyles = ["solid","dashed","dotted"]
+    
+    colors = ["#3498db", "#229954", "#c0392b", "#8e44ad", "#f1c40f", "#ec7063", "#34495e", "#6e2c00"]
 
-    plt.figure(figsize=[6,4])
+    plt.figure(figsize=[8,6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95, bottom=0.15)
     ax = plt.gca()
     y_low = 1e99
     y_high = 0
 
+    marker = itertools.cycle(('.', 'v', '^', 's', 'D')) 
+    lines = itertools.cycle(('-', ':', '--', '-.'))
     for i in range(len(esed)):
-
         # Self corrects x and y limits
         if min(esed[i]) < y_low:
             y_low = min(esed[i])
         if max(esed[i]) > y_high:
             y_high = max(esed[i])
-        #for j in range(len(wavelengths)):
-        #    print(wavelengths[j], esed[i][j])
+
         # Plot flux for each wavelength
-        plt.plot(wavelengths, esed[i], 
-                color=colors[i % 10], 
-                ls=linestyles[i % 3], 
-                label=datelabels[i])    
+        plt.plot(wavelengths, esed[i], label=datelabels[i], color=colors[i], lw=0.75, ls=next(lines))    
 
         # Adjust y values and set up error ranges
         lower_errors = []
@@ -256,21 +262,30 @@ def generate_SED_plot(esed, wavelengths, datelabels, data_x, data_y, data_y_erro
         # Set scale and include error bars
         ax.set_xscale("log")
         ax.set_yscale("log")
+        limtest = ax.get_ylim()
+        if limtest[0] < 1e-99:
+            plt.ylim(y_low / 10., y_high * 10)
+
+
         plt.errorbar(data_x[i], data_y_adjusted, 
                     yerr=[lower_errors, higher_errors],
-                    ecolor=colors[i%10],
-                    fmt='o',
-                    color=colors[i%10])
+                    ecolor=colors[i],
+                    fmt=next(marker),
+                    elinewidth=0.5,
+                    color=colors[i],
+                    ms=4,
+                    capsize=2)
 
     plt.legend(loc=2)
     plt.xlabel("Wavelength (microns)", fontsize=12)
     plt.ylabel(r"$\nu$F$_\nu$", fontsize=12)
-    plt.savefig("bestfit_SED.png")
-    plt.savefig("bestfit_SED.pdf")
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.savefig(f"../{object}/general_plots/bestfit_SED.png", bbox_inches='tight')
+    plt.savefig(f"../{object}/general_plots/bestfit_SED.pdf", bbox_inches='tight')
     plt.close()
 
 
-def generate_diameter_vs_albedo_plot():
+def generate_diameter_vs_albedo_plot(object, diameters, albedos, chis):
     """
     Generates a plot of diameter and albedo solutions for the MCMC output.
 
@@ -280,56 +295,71 @@ def generate_diameter_vs_albedo_plot():
     """
 
     print("Generating diameter vs albedo plots.")
-    diameters = []
-    albedos = []
+
+    pairings = []
+    diameter_break = 0.1
+
+    for i in range(len(diameters)):
+        pairings.append([diameters[i], albedos[i], chis[i]])
+    pairings.sort()
+    sorted_diameters = []
+    sorted_albedos = []
+    sorted_chis = []
+    for pairing in pairings:
+        sorted_diameters.append(pairing[0])
+        sorted_albedos.append(pairing[1])
+        sorted_chis.append(pairing[2])
+
+    diameter_epochs = []
+    diameter_start = sorted_diameters[0]
+    for i in range(len(sorted_diameters) - 1):
+        if (sorted_diameters[i + 1] - sorted_diameters[i]) > diameter_break:
+            diameter_epochs.append((diameter_start, sorted_diameters[i]))
+            diameter_start = sorted_diameters[i + 1]
+        if i == len(sorted_diameters) - 2:
+            diameter_epochs.append((diameter_start, sorted_diameters[i]))
+
     
-    data_file = open("DvsAlb.dat")
-    for line in data_file.readlines():
-        datum = line.rstrip().split()
-        diameters.append(float(datum[0]))
-        albedos.append(float(datum[1]))
+    if "diameter_albedo_segments" not in os.listdir(f'../{object}/'):
+        os.popen(f"mkdir ../{object}/diameter_albedo_segments")
+        print("Creating diameter_vs_albedo subplot directory")
     
+    for idx, epoch in enumerate(diameter_epochs):
+        segment_diameters = []
+        segment_albedos = []
+        segment_chis = []
+        for i in range(len(pairings)):
+            if pairings[i][0] >= epoch[0] and pairings[i][0] <= epoch[1]:
+                segment_diameters.append(pairings[i][0])
+                segment_albedos.append(pairings[i][1])
+                segment_chis.append(pairings[i][2])
+        plt.figure(figsize=[8,6])
+        ax = plt.gca()
+        plt.scatter(segment_diameters, segment_albedos, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
+        plt.colorbar(label=r"fit $\chi^2$")
+        plt.xlabel("Diameter (km)")
+        plt.ylabel("Albedo")
+        plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+        plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
+        plt.savefig(f"../{object}/diameter_albedo_segments/{idx}_diameter_vs_albedo.png")
+        plt.savefig(f"../{object}/diameter_albedo_segments/{idx}_diameter_vs_albedo.pdf")
+        plt.close()
+
     # Generate base figure
-    plt.figure(figsize=[6,6])
+    plt.figure(figsize=[8,6])
     ax = plt.gca()
-    plt.scatter(diameters, albedos, s=1,marker='o',color='k')
-    ax.set_xscale('log')
-    ax.set_yscale('log')
-
-    # Set up bins for contour levels
-    H_bins, x_bins, y_bins = np.histogram2d(diameters, albedos, bins=30)
-    x_bins_adjusted = [(x_bins[i+1] - x_bins[i])/2. + x_bins[i] for i in range(len(x_bins)-1)]
-    y_bins_adjusted = [(y_bins[i+1] - y_bins[i])/2. + y_bins[i] for i in range(len(y_bins)-1)]
-    H_bins_adjusted = np.transpose(H_bins)
-
-    H_bins_flat = list(H_bins_adjusted.flatten())
-    H_bins_flat.sort()
-    H_total = sum(H_bins_flat)
-
-    H_cumulative = 0
-    level_1 =- 1
-    level_2 =- 1
-    for i in range(len(H_bins_flat)):
-        H_cumulative += H_bins_flat[i]
-        if H_cumulative > 0.05 * H_total and level_2 < 0:
-            level_2 = i
-        if H_cumulative > 0.32 * H_total and level_1 < 0:
-            level_1 = i
-
-    # Add contour linings to plot
-    plt.contour(x_bins_adjusted, y_bins_adjusted, H_bins_adjusted,
-                colors="#cc0000",
-                levels=[H_bins_flat[level_2], H_bins_flat[level_1]])
-    plt.text(max(diameters)/2.,0.5,"Contours contain 68%\nand 95.5% of all points")
-    plt.ylim(0.01, 1)
+    plt.scatter(diameters, albedos, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
+    plt.colorbar(label=r"fit $\chi^2$")
     plt.xlabel("Diameter (km)")
     plt.ylabel("Albedo")
-    plt.savefig("diameter_vs_albedo.png")
-    plt.savefig("diameter_vs_albedo.pdf")
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
+    plt.savefig(f"../{object}/general_plots/diameter_vs_albedo.png")
+    plt.savefig(f"../{object}/general_plots/diameter_vs_albedo.pdf")
     plt.close()
 
 
-def generate_diameter_histogram():
+def generate_diameter_histogram(object, diameters):
     """
     Generates a histogram of diameter solutions for the MCMC output.
 
@@ -339,17 +369,13 @@ def generate_diameter_histogram():
     """
 
     print("Generating diameter histogram.")
-    diameters = []
-    data_file = open("DvsAlb.dat")
-    for line in data_file.readlines():
-        datum = line.rstrip().split()
-        diameters.append(float(datum[0]))
 
     # Set up log scale plot arguments and standard deviation lines
     log_diameters = [np.log10(diameter) for diameter in diameters]
     log_diameters_copy = log_diameters[:]
     diameters_count = len(log_diameters)
     log_diameters_copy.sort()
+
     sigma_1_low = log_diameters_copy[int(diameters_count * 0.16)]
     sigma_1_high = log_diameters_copy[int(diameters_count * 0.84)]
     sigma_2_low = log_diameters_copy[int(diameters_count * 0.025)]
@@ -363,7 +389,7 @@ def generate_diameter_histogram():
     else:
         hist_step = 0.0001
 
-    plt.figure(figsize=[6, 6])
+    plt.figure(figsize=[8, 6])
     hist_low_limit = int(min(log_diameters) * 1000) / 1000.
     hist_high_limit = (int(max(log_diameters) * 1000) + 1) / 1000.
     plt.hist(log_diameters, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
@@ -371,19 +397,20 @@ def generate_diameter_histogram():
             color="black")
 
     # Plotting standard deviation limits on plot
-    plt.axvline(sigma_1_low,color='#cc0000',ls='dashed')
-    plt.axvline(sigma_1_high,color='#cc0000',ls='dashed')
-    plt.axvline(sigma_2_low,color='#cc0000',ls='dotted')
-    plt.axvline(sigma_2_high,color='#cc0000',ls='dotted')
+    plt.axvline(sigma_1_low, color='#cc0000')
+    plt.axvline(sigma_1_high, color='#cc0000')
+    plt.axvline(sigma_2_low, color='#cc0000',ls='dotted')
+    plt.axvline(sigma_2_high, color='#cc0000',ls='dotted')
     
     # Labeling plot
-    plt.xlabel("Diameter (km)")
+    plt.xlabel("Log Diameter (km)")
     plt.ylabel("Number of Monte Carlo Results")
-    plt.savefig("diameter_histogram.png")
-    plt.savefig("diameter_histogram.pdf")
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.savefig(f"../{object}/general_plots/diameter_histogram.png")
+    plt.savefig(f"../{object}/general_plots/diameter_histogram.pdf")
 
 
-def generate_diameter_vs_period_plot():
+def generate_diameter_vs_period_plot(object, diameters, periods, chis):
     """
     Generates a plot of diameter and period solutions for the MCMC output.
 
@@ -393,61 +420,77 @@ def generate_diameter_vs_period_plot():
     """
 
     print("Generating diameter vs period plots.")
-    diameters = []
-    periods = []
-    data_file = open("DvsPeriod.dat")
-    for line in data_file.readlines():
-        datum = line.rstrip().split()
-        diameters.append(float(datum[0]))
-        periods.append(float(datum[1]))
 
     if max(periods) - min(periods) == 0:
         print("Fixed period used, skipping diameter vs period plot")
 
     else:
-        # Generate base figure
-        plt.figure(figsize=[6,6])
-        ax = plt.gca()
-        plt.scatter(diameters, periods, s=1,marker='o',color='k')
-        ax.set_xscale('log')
-        ax.set_yscale('log')
-
-        # Set up bins for contour levels
-        H_bins, x_bins, y_bins = np.histogram2d(diameters, periods, bins=20)
-        x_bins_adjusted = [(x_bins[i + 1] - x_bins[i]) / 2. + x_bins[i] for i in range(len(x_bins) - 1)]
-        y_bins_adjusted = [(y_bins[i + 1] - y_bins[i]) / 2. + y_bins[i] for i in range(len(y_bins) - 1)]
-        H_bins_adjusted  = np.transpose(H_bins)
-        H_output = np.amax(H_bins_adjusted)
+        pairings = []
+        diameter_break = 0.1
+        for i in range(len(diameters)):
+            pairings.append([diameters[i], periods[i], chis[i]])
+        pairings.sort()
+        sorted_diameters = []
+        sorted_periods = []
+        sorted_chis = []
+        for pairing in pairings:
+            sorted_diameters.append(pairing[0])
+            sorted_periods.append(pairing[1])
+            sorted_chis.append(pairing[2])
         
-        H_bins_flat = list(H_bins_adjusted.flatten())
-        H_bins_flat.sort()
-        H_total = sum(H_bins_flat)
+        diameter_epochs = []
+        diameter_start = sorted_diameters[0]
+        for i in range(len(sorted_diameters) - 1):
+            if (sorted_diameters[i + 1] - sorted_diameters[i]) > diameter_break:
+                diameter_epochs.append((diameter_start, sorted_diameters[i]))
+                diameter_start = sorted_diameters[i + 1]
+            if i == len(sorted_diameters) - 2:
+                diameter_epochs.append((diameter_start, sorted_diameters[i]))
 
-        H_cumulative = 0
-        level_1 =- 1
-        level_2 =- 1
-        for i in range(len(H_bins_flat)):
-            H_cumulative += H_bins_flat[i]
-            if H_cumulative > 0.05 * H_total and level_2 < 0:
-                level_2 = i
-            if H_cumulative > 0.32 * H_total and level_1 < 0:
-                level_1 = i
-
-        # Add contour lines to plot
-        plt.contour(x_bins_adjusted, y_bins_adjusted, H_bins_adjusted, 
-                    colors="#cc0000", 
-                    levels=[H_bins_flat[level_2], H_bins_flat[level_1]])
-        plt.text(np.mean(diameters), 0.95 * max(periods), 
-                "Contours contain 68%\nand 95.5% of all points")
-
+        if "diameter_period_segments" not in os.listdir(f'../{object}/'):
+            os.popen(f"mkdir ../{object}/diameter_period_segments")
+            print("Creating diameter_vs_period subplot directory")
+        
+        for idx, epoch in enumerate(diameter_epochs):
+            segment_diameters = []
+            segment_periods = []
+            segment_chis = []
+            for i in range(len(pairings)):
+                if pairings[i][0] >= epoch[0] and pairings[i][0] <= epoch[1]:
+                    segment_diameters.append(pairings[i][0])
+                    segment_periods.append(pairings[i][1])
+                    segment_chis.append(pairings[i][2])
+            plt.figure(figsize=[8,6])
+            ax = plt.gca()
+            plt.scatter(segment_diameters, segment_periods, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
+            plt.colorbar(label=r"fit $\chi^2$")
+            plt.text(0.5, .97,f"{len(segment_diameters)}/{len(diameters)} points displayed", ha='center', va='center', transform=ax.transAxes) 
+            ax.set_yscale('log')
+            plt.xlabel("Diameter (km)")
+            plt.ylabel("Rotation period")
+            plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+            plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
+            plt.savefig(f"../{object}/diameter_period_segments/{idx}_diameter_vs_period.png")
+            plt.savefig(f"../{object}/diameter_period_segments/{idx}_diameter_vs_period.pdf")
+            plt.close()
+            
+        # Generate base figure
+        plt.figure(figsize=[8,6])
+        ax = plt.gca()
+        plt.scatter(diameters, periods, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
+        plt.colorbar(label=r"fit $\chi^2$")
+        plt.text(0.5, .97,f"{len(diameters)}/{len(diameters)} points displayed", ha='center', va='center', transform=ax.transAxes) 
+        ax.set_yscale('log')
         plt.xlabel("Diameter (km)")
         plt.ylabel("Rotation period")
-        plt.savefig("diameter_vs_period.png")
-        plt.savefig("diameter_vs_period.pdf")
+        plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+        plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
+        plt.savefig(f"../{object}/general_plots/diameter_vs_period.png")
+        plt.savefig(f"../{object}/general_plots/diameter_vs_period.pdf")
         plt.close()
 
 
-def generate_diameter_vs_gamma_plot(diameters, gammas):
+def generate_diameter_vs_gamma_plot(object, diameters, gammas, chis):
     """
     Generates a plot of diameter and gamma solutions for the MCMC output.
 
@@ -456,20 +499,73 @@ def generate_diameter_vs_gamma_plot(diameters, gammas):
 
     Returns: None, generates two plots titled diameter_vs_gamma.png/pdf
     """
+
     print("Generating diameter vs gamma plots.")
-    plt.figure(figsize=[6,6])
+
+    pairings = []
+    diameter_break = 0.1
+    for i in range(len(diameters)):
+        pairings.append([diameters[i], gammas[i], chis[i]])
+    pairings.sort()
+    sorted_diameters = []
+    sorted_gammas = []
+    sorted_chis = []
+    for pairing in pairings:
+        sorted_diameters.append(pairing[0])
+        sorted_gammas.append(pairing[1])
+        sorted_chis.append(pairing[2])
+
+    diameter_epochs = []
+    diameter_start = sorted_diameters[0]
+    for i in range(len(sorted_diameters) - 1):
+        if (sorted_diameters[i + 1] - sorted_diameters[i]) > diameter_break:
+            diameter_epochs.append((diameter_start, sorted_diameters[i]))
+            diameter_start = sorted_diameters[i + 1]
+        if i == len(sorted_diameters) - 2:
+            diameter_epochs.append((diameter_start, sorted_diameters[i]))
+
+    
+    if "diameter_gamma_segments" not in os.listdir(f'../{object}/'):
+        os.popen(f"mkdir ../{object}/diameter_gamma_segments")
+        print("Creating diameter_vs_gamma subplot directory")
+    
+    for idx, epoch in enumerate(diameter_epochs):
+        segment_diameters = []
+        segment_gammas = []
+        segment_chis = []
+        for i in range(len(pairings)):
+            if pairings[i][0] >= epoch[0] and pairings[i][0] <= epoch[1]:
+                segment_diameters.append(pairings[i][0])
+                segment_gammas.append(pairings[i][1])
+                segment_chis.append(pairings[i][2])
+        plt.figure(figsize=[8,6])
+        ax = plt.gca()
+        plt.scatter(segment_diameters, segment_gammas, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
+        plt.colorbar(label=r"fit $\chi^2$")
+        plt.xlabel("Diameter (km)")
+        plt.ylabel("Rotation period")
+        plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+        plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
+        plt.savefig(f"../{object}/diameter_gamma_segments/{idx}_diameter_vs_gamma.png")
+        plt.savefig(f"../{object}/diameter_gamma_segments/{idx}_diameter_vs_gamma.pdf")
+        plt.close()
+
+    plt.figure(figsize=[8,6])
     ax = plt.gca()
-    plt.scatter(diameters, gammas, s=1, marker='o', color='k')
+    plt.scatter(diameters, gammas, s=1, marker='o', c=chis, linewidths=1, cmap=plt.cm.get_cmap('plasma'))
+    plt.colorbar(label=r"fit $\chi^2$")
     ax.set_xscale('log')
     ax.set_yscale('log')
     plt.xlabel("Diameter (km)")
-    plt.ylabel("Gamma")
-    plt.savefig("diameter_vs_gamma.png")
-    plt.savefig("diameter_vs_gamma.pdf")
+    plt.ylabel(r"Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
+    plt.savefig(f"../{object}/general_plots/diameter_vs_gamma.png")
+    plt.savefig(f"../{object}/general_plots/diameter_vs_gamma.pdf")
     plt.close()
 
 
-def generate_diameter_vs_chi_plots(diameters, chis):
+def generate_diameter_vs_chi_plots(object, diameters, chis):
     """
     Generates a plot of diameter and chi solutions for the MCMC output.
 
@@ -481,26 +577,28 @@ def generate_diameter_vs_chi_plots(diameters, chis):
     """
 
     print("Generating diameter vs chi plots.")
-    plt.figure(figsize=[6, 6])
+    plt.figure(figsize=[8, 6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95)
     plt.loglog(diameters, chis, color='k', marker='o', ms=0.5, ls="None")
     plt.xlabel("Diameter (km)", fontsize=13)
     plt.ylabel(r"fit $\chi^2$", fontsize=13)
-    plt.savefig("diameter_vs_chi.png")
-    plt.savefig("diameter_vs_chi.pdf")
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.savefig(f"../{object}/general_plots/diameter_vs_chi.png")
+    plt.savefig(f"../{object}/general_plots/diameter_vs_chi.pdf")
     plt.close()
 
-    plt.figure(figsize=[6, 6])
+    plt.figure(figsize=[8, 6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95)
     plt.plot(diameters, chis, color='k', marker='o', ms=0.5, ls='None')
     plt.xlabel("Diameter (km)", fontsize=13)
     plt.ylabel(r"fit $\chi^2$", fontsize=13)
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
     plt.ylim(0.9 * min(chis), 2 * min(chis))  
-    plt.savefig("diameter_vs_chi_zoom.png")
-    plt.savefig("diameter_vs_chi_zoom.pdf")
+    plt.savefig(f"../{object}/general_plots/diameter_vs_chi_zoom.png")
+    plt.savefig(f"../{object}/general_plots/diameter_vs_chi_zoom.pdf")
     plt.close()
 
-def generate_gamma_vs_chi_plots(gammas, chis):
+def generate_gamma_vs_chi_plots(object, gammas, chis):
     """
     Generates a plot of gamma and chi solutions for the MCMC output.
 
@@ -511,27 +609,16 @@ def generate_gamma_vs_chi_plots(gammas, chis):
     """
 
     print("Generating gamma vs chi plots.")
-    plt.figure(figsize=[6, 6])
+    plt.figure(figsize=[8, 6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95)
     plt.loglog(gammas, chis, color='k', marker='o', ms=0.5, ls='None')
     plt.xlabel(r"Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
     plt.ylabel(r"fit $\chi^2$", fontsize=13)
-
-    plt.savefig("gamma_vs_chi.png")
-    plt.savefig("gamma_vs_chi.pdf")
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.savefig(f"../{object}/general_plots/gamma_vs_chi.png")
+    plt.savefig(f"../{object}/general_plots/gamma_vs_chi.pdf")
     plt.close()
 
-
-def regex_loop(line, value, index, start_key, stop_key):
-    while True:
-        if value == start_key:
-            value = ""
-        if line[index] == stop_key:
-            value = value.strip()
-            break
-        value += line[index]
-        index += 1
-    return value, index
 
 def determine_mean_median_vals(line, median_sigma_type):
     """
@@ -539,10 +626,8 @@ def determine_mean_median_vals(line, median_sigma_type):
 
     Arguments: line (str) -- The line containing all values
     """
-    
     index = 0
     mean = ""
-    
     while True:
         if mean == "dia=" or mean == "p_V =" or mean == "theta1=" :
             mean = ""
@@ -551,30 +636,74 @@ def determine_mean_median_vals(line, median_sigma_type):
             break
         mean += line[index]
         index += 1
-    
-    mean_sigma, index = regex_loop(line, "", index, "+/-", 'm')
-    median, index = regex_loop(line, "", index, "median", '+')
+    mean_sigma = ""
+    while True:
+        if mean_sigma == "+/-":
+            mean_sigma = ""
+        if line[index] == "m":
+            mean_sigma = mean_sigma.strip()
+            break
+        mean_sigma += line[index]
+        index += 1
+    median = ""
+    while True:
+        if median == "median":
+            median = ""
+        if line[index] == "+":
+            median = median.strip()
+            break
+        median += line[index]
+        index += 1
     
     if median_sigma_type == "multi":
-        
-        median_pos_sigma, index = regex_loop(line, "", index, '+', '-')
-        median_neg_sigma, index = regex_loop(line, "", index, '-', '%')
+        median_pos_sigma = ""
+        median_neg_sigma = ""
+        while True:
+            if median_pos_sigma == "+":
+                median_pos_sigma = ""
+            if line[index] == '-':
+                median_pos_sigma = median_pos_sigma.strip()
+                break
+            median_pos_sigma += line[index]
+            index += 1
+        while True:
+            if median_neg_sigma == "-":
+                median_neg_sigma = ""
+            if line[index] == '%':
+                median_neg_sigma = median_neg_sigma.strip()
+                break
+            median_neg_sigma += line[index]
+            index += 1
         outputs = [mean, mean_sigma, median, median_pos_sigma, median_neg_sigma]
-        
         return outputs
     
     if median_sigma_type == "single":
-        
-        median_sigma, index = regex_loop(line, "", index, "+/-", '%')
+        median_sigma = ""
+        while True:
+            if median_sigma == "+/-":
+                median_sigma = ""
+            if line[index] == '%':
+                median_sigma = median_sigma.strip()
+                break
+            median_sigma += line[index]
+            index += 1
         outputs = [mean, mean_sigma, median, median_sigma]
-        
         return mean, mean_sigma, median, median_sigma
 
 
 def determine_period(line):
+    period = ""
     period_pos_sigma = ""
     period_neg_sigma = ""
-    period, index = regex_loop(line, "", 0, "Period [h] =", '+')
+    index = 0
+    while True:
+        if period == "Period [h] =":
+            period = ""
+        if line[index] == '+':
+            period = period.strip()
+            break
+        period += line[index]
+        index += 1
     while True:
         if period_pos_sigma.strip() == "0.0   0.0%":
             outputs = [period, "0.0", "0.0"]
@@ -586,16 +715,46 @@ def determine_period(line):
             break
         period_pos_sigma += line[index]
         index += 1
-    period_neg_sigma, index = regex_loop(line, "", index, '-', '%')
-
-    outputs = [period, period_pos_sigma, period_neg_sigma]
-    return outputs
+    while True:
+        if period_neg_sigma == "-":
+            period_neg_sigma = ""
+        if line[index] == '%':
+            period_neg_sigma = period_neg_sigma.strip()
+            outputs = [period, period_pos_sigma, period_neg_sigma]
+            return outputs
+        period_neg_sigma += line[index]
+        index += 1
 
     
 def determine_square_vals(line):
-    value, index = regex_loop(line, "", 0, "sqrt(kappa*rho*C)=", '+')
-    value_pos_sigma, index = regex_loop(line, "", index, '+', '-')
-    value_neg_sigma, index = regex_loop(line, "", index, '-', '%')
+    value = ""
+    value_pos_sigma = ""
+    value_neg_sigma = ""
+    index = 0
+    while True:
+        if value == "sqrt(kappa*rho*C)=":
+            value = ""
+        if line[index] == '+':
+            value = value.strip()
+            break
+        value += line[index]
+        index += 1
+    while True:
+        if value_pos_sigma == '+':
+            value_pos_sigma = ""
+        if line[index] == '-':
+            value_pos_sigma = value_pos_sigma.strip()
+            break
+        value_pos_sigma += line[index]
+        index += 1
+    while True:
+        if value_neg_sigma == "-":
+            value_neg_sigma = ""
+        if line[index] == '%':
+            value_neg_sigma = value_neg_sigma.strip()
+            break
+        value_neg_sigma += line[index]
+        index += 1
     outputs = [value, value_pos_sigma, value_neg_sigma]
     return outputs
 
@@ -610,7 +769,14 @@ def determine_crater_fraction(line):
             break
         fraction += line[index]
         index += 1
-    fraction_pos_sigma, index = regex_loop(line, "", index, '+', '-')
+    while True:
+        if fraction_pos_sigma == '+':
+            fraction_pos_sigma = ""
+        if line[index] == '-':
+            fraction_pos_sigma = fraction_pos_sigma.strip()
+            break
+        fraction_pos_sigma += line[index]
+        index += 1
     while index < len(line):
         if fraction_neg_sigma == '-':
             fraction_neg_sigma = ""
@@ -631,90 +797,69 @@ def determine_p_V_ratio(line):
             break
         ratio += line[index]
         index += 1
-    ratio_pos_sigma, index = regex_loop(line, "", index, '+', '-')
-    ratio_neg_sigma, index = regex_loop(line, "", index, '-', '%')
+    while True:
+        if ratio_pos_sigma == '+':
+            ratio_pos_sigma = ""
+        if line[index] == '-':
+            ratio_pos_sigma = ratio_pos_sigma.strip()
+            break
+        ratio_pos_sigma += line[index]
+        index += 1
+    while True:
+        if ratio_neg_sigma == '-':
+            ratio_neg_sigma = ""
+        if line[index] == '%':
+            ratio_neg_sigma = ratio_neg_sigma.strip()
+            break
+        ratio_neg_sigma += line[index]
+        index += 1
     outputs = [ratio, ratio_pos_sigma, ratio_neg_sigma]
     return outputs
 
 
-def display_MCMC_results():
-    with open("best_fit.txt", 'r') as file:
-        values = []
-        line_1 = file.readline().split()
-        line_1[4] = "I=1 ... MNC ="
-        output_1 = f"{line_1[0]} {line_1[1]} {line_1[2]} {line_1[3]}"
-        output_1 += f" {line_1[4]} {line_1[5]} {line_1[6]}"
-        line_2 = file.readline().split()
-        output_2 = f"Patch & Total Weights: {line_2[4]} & {line_2[5]}"
-        print(output_2)
-        line_3 = file.readline().strip()
-        print(line_3)
-        line_4 = file.readline().strip()
-        print(line_4)
-        file.readline()
-        print("Out of 1 ... NMC loop\n\n*** Properties ***\n")
-        
+def display_MCMC_results(mpc_name):
+    mpc_data = []
+    with open(f"../best_fits/{mpc_name}.txt", 'r') as file:
+        for i in range(5):
+            file.readline()
         line_6 = file.readline()
         diameter_vals = determine_mean_median_vals(line_6, "multi")
-        output_6 = f"Diameter (Mean): {diameter_vals[0]} +/-{diameter_vals[1]}"
+        output_6 = f"Diameter (Mean): {diameter_vals[0]} +/- {diameter_vals[1]}"
         print(output_6)
         output_7 = f"Diameter (Median): {diameter_vals[2]} +{diameter_vals[3]}%/-{diameter_vals[4]}%"
         print(output_7)
-        
-        for value in diameter_vals:
-            values.append(value)
-        
         line_8 = file.readline()
         p_V_vals = determine_mean_median_vals(line_8, "single")
-        output_8 = f"p_V (Mean): {p_V_vals[0]} +/-{p_V_vals[1]}"
+        output_8 = f"p_V (Mean): {p_V_vals[0]} +/- {p_V_vals[1]}"
         print(output_8)
-        output_9 = f"p_V (Median): {p_V_vals[2]} +/-{p_V_vals[3]}%"
+        output_9 = f"p_V (Median): {p_V_vals[2]} +/- {p_V_vals[3]}%"
         print(output_9)
-        
-        for value in p_V_vals:
-            values.append(value)
-        
         line_10 = file.readline()
         theta_vals = determine_mean_median_vals(line_10, "multi")
-        output_10 = f"Theta_1 (Mean): {theta_vals[0]} +/-{theta_vals[1]}"
+        output_10 = f"Theta_1 (Mean): {theta_vals[0]} +/- {theta_vals[1]}"
         print(output_10)
         output_11 = f"Theta_1 (Median): {theta_vals[2]} +{theta_vals[3]}%/-{theta_vals[4]}%"
         print(output_11)
         
-        for value in theta_vals:
-            values.append(value)
-
         line_12 = file.readline()
         period_vals = determine_period(line_12)
         output_12 = f"Period (hours): {period_vals[0]} +{period_vals[1]}%/-{period_vals[2]}%"
         print(output_12)
 
-        for value in period_vals:
-            values.append(value)
-
         line_13 = file.readline()
         sqrt_vals = determine_square_vals(line_13)
-        output_13 = f"Sqrt(Kappa*Rho*C): {sqrt_vals[0]} +{sqrt_vals[1]}%/-{sqrt_vals[2]}%"
+        output_13 = f"Sqrt(Kappa*Rho*C): {sqrt_vals[0]} +{sqrt_vals[1]}%/{sqrt_vals[2]}%"
         print(output_13)
-
-        for value in sqrt_vals:
-            values.append(value)
 
         line_14 = file.readline()
         crater_vals = determine_crater_fraction(line_14)
         output_14 = f"Crater Fraction: {crater_vals[0]} +{crater_vals[1]}/-{crater_vals[2]}"
         print(output_14)
 
-        for value in crater_vals:
-            values.append(value)
-
         line_15 = file.readline()
         ratio_vals = determine_p_V_ratio(line_15)
         output_15 = f"p_IR/p_V: {ratio_vals[0]} +{ratio_vals[1]}%/-{ratio_vals[2]}%"
         print(output_15)
-
-        for value in ratio_vals:
-            values.append(value)
 
         line_16 = file.readline().split()
         output_16 = f"Pole peak at: {line_16[4]} {line_16[5]}"
@@ -734,26 +879,48 @@ def display_MCMC_results():
         output_20 = f"Moment eigenvector: {line_20[2]} at RA,DEC: "
         output_20 += f"{line_20[5]} {line_20[6]}\n"
         print(output_20)
-    
-    return values
 
 
-print("Echoing relevant files\n")
-os.system("echo 'PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC -> best_fit.txt") 
-os.system("/bin/cp fort.2 Dhist.dat")
-os.system("/bin/cp fort.32 Dhist_fine.dat")
-os.system("/bin/cp fort.3 DvsPeriod.dat")
-os.system("/bin/cp fort.4 DvsAlb.dat")
-display_MCMC_results()
+OBJECT_MAP = {"02100": "Ra-Shalom", 
+              "02212": "Hephaistos", 
+              "05189": "1990 UQ",
+              "05693": "1993 EA", 
+              "07335": "1989 JA", 
+              "23606": "1996 AS1",
+              "68950": "2002 QF15", 
+              "G1989": "Cacus", 
+              "triaxial_02100": "Ra-Shalom", 
+              "triaxial_02212": "Hephaistos", 
+              "triaxial_05189": "1990 UQ",
+              "triaxial_05693": "1993 EA", 
+              "triaxial_07335": "1989 JA", 
+              "triaxial_23606": "1996 AS1",
+              "triaxial_68950": "2002 QF15", 
+              "triaxial_G1989": "Cacus"}
 
-best_fit, best_fit_plotters, epoch_condition, wavelengths = retrieve_MCMC_data()
-diameters, chis, gammas = retrieve_output_data()
-generate_SED_plot(best_fit_plotters[0], best_fit_plotters[1], 
-                  best_fit_plotters[2], best_fit_plotters[3], 
-                  best_fit_plotters[4], best_fit_plotters[5])
-generate_diameter_histogram()
-generate_diameter_vs_albedo_plot()
-generate_diameter_vs_period_plot()
-generate_diameter_vs_gamma_plot(diameters, gammas)
-generate_diameter_vs_chi_plots(diameters, chis)
-generate_gamma_vs_chi_plots(gammas, chis)
+objects = ["02100", "02212", "05189", "05693", "07335", "23606", "68950", "G1989", "triaxial_02100", "triaxial_02212", "triaxial_05189", 
+           "triaxial_05693", "triaxial_07335", "triaxial_23606", "triaxial_68950", "triaxial_G1989"]
+
+for object in objects:
+    print(f"{OBJECT_MAP[object]} ({object})")
+    print("Echoing relevant files\n")
+    os.system(f"echo '../{object}/PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC") 
+    os.system(f"/bin/cp ../{object}/fort.2 ../{object}/Dhist.dat")
+    os.system(f"/bin/cp ../{object}/fort.32 ../{object}/Dhist_fine.dat")
+    os.system(f"/bin/cp ../{object}/fort.3 ../{object}/DvsPeriod.dat")
+    os.system(f"/bin/cp ../{object}/fort.4 ../{object}/DvsAlb.dat")
+
+    best_fit, best_fit_plotters, epoch_condition, wavelengths = retrieve_MCMC_data(object)
+    diameters, albedos, gammas, chis, periods = retrieve_output_data(object)
+    if "general_plots" not in os.listdir(f'../{object}/.'):
+        os.popen(f"mkdir ../{object}/general_plots")
+        print("Creating plotting directory")
+    generate_SED_plot(object, best_fit_plotters[0], best_fit_plotters[1], 
+                    best_fit_plotters[2], best_fit_plotters[3], 
+                    best_fit_plotters[4], best_fit_plotters[5])
+    generate_diameter_histogram(object, diameters)
+    generate_diameter_vs_albedo_plot(object, diameters, albedos, chis)
+    generate_diameter_vs_period_plot(object, diameters, periods, chis)
+    generate_diameter_vs_gamma_plot(object, diameters, gammas, chis)
+    generate_diameter_vs_chi_plots(object, diameters, chis)
+    generate_gamma_vs_chi_plots(object, gammas, chis)
