@@ -73,17 +73,15 @@ def retrieve_output_data(object):
         gamma = np.e ** float(line.strip()[34:43].strip())
         diameter = np.e ** float(line.strip()[43:52].strip())
         chi = float(line.strip()[70:87].strip())
-        albedos.append(albedo)
         diameters.append(diameter)
         chis.append(chi)
         gammas.append(gamma)
         periods.append(period)
-        if float(line[17:25].strip()) >= 0:
-            print(index, line[17:25].strip())
-            print("diameter", diameter)
-            print("gamma", gamma)
-            print("chi", chi)
         index += 1
+
+    with open("fort.4", 'r') as albedo_file:
+        for line in albedo_file.readlines():
+            albedos.append(float(line.split()[1]))
 
     return diameters, albedos, gammas, chis, periods
 
@@ -309,13 +307,14 @@ def generate_SED_plot(object, esed, wavelengths, datelabels, data_x, data_y, dat
                     color=colors[i],
                     ms=4,
                     capsize=2)
-
+    ax = plt.gca()
+    ax.set_facecolor("white")
     plt.legend(loc=2)
     plt.xlabel("Wavelength (microns)", fontsize=12)
     plt.ylabel(r"$\nu$F$_\nu$", fontsize=12)
     plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
-    plt.savefig(f"../{object}/general_plots/bestfit_SED.png", bbox_inches='tight')
-    plt.savefig(f"../{object}/general_plots/bestfit_SED.pdf", bbox_inches='tight')
+    plt.savefig(f"../{object}/general_plots/bestfit_SED.png")
+    plt.savefig(f"../{object}/general_plots/bestfit_SED.pdf")
     plt.close()
 
 
@@ -430,7 +429,8 @@ def generate_diameter_histogram(object, diameters):
     """
 
     print("Generating diameter histogram.")
-
+    for i in range(50):
+        print(diameters[i])
     # Set up log scale plot arguments and standard deviation lines
     log_diameters = [np.log10(diameter) for diameter in diameters]
     log_diameters_copy = log_diameters[:]
@@ -451,6 +451,7 @@ def generate_diameter_histogram(object, diameters):
         hist_step = 0.0001
 
     plt.figure(figsize=[8, 6])
+    
     hist_low_limit = int(min(log_diameters) * 1000) / 1000.
     hist_high_limit = (int(max(log_diameters) * 1000) + 1) / 1000.
     plt.hist(log_diameters, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
@@ -462,7 +463,7 @@ def generate_diameter_histogram(object, diameters):
     plt.axvline(sigma_1_high, color='#cc0000')
     plt.axvline(sigma_2_low, color='#cc0000',ls='dotted')
     plt.axvline(sigma_2_high, color='#cc0000',ls='dotted')
-    
+
     # Labeling plot
     plt.xlabel("Log Diameter (km)")
     plt.ylabel("Number of Monte Carlo Results")
@@ -533,10 +534,11 @@ def generate_diameter_vs_period_plot(object, diameters, periods, chis):
                     segment_chis.append(pairings[i][2])
             plt.figure(figsize=[8,6])
             ax = plt.gca()
+            ax.set_xscale("log")
+            ax.set_yscale("log")
             plt.scatter(segment_diameters, segment_periods, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
             plt.colorbar(label=r"fit $\chi^2$")
             plt.text(0.5, .97,f"{len(segment_diameters)}/{len(diameters)} points displayed", ha='center', va='center', transform=ax.transAxes) 
-            ax.set_yscale('log')
             plt.xlabel("Diameter (km)")
             plt.ylabel("Rotation period")
             plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
@@ -548,12 +550,13 @@ def generate_diameter_vs_period_plot(object, diameters, periods, chis):
         # Plot the figure with all points
         plt.figure(figsize=[8,6])
         ax = plt.gca()
+        ax.set_xscale("log")
+        ax.set_yscale("log")
         plt.scatter(diameters, periods, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
         plt.colorbar(label=r"fit $\chi^2$")
-        plt.text(0.5, .97,f"{len(diameters)}/{len(diameters)} points displayed", ha='center', va='center', transform=ax.transAxes) 
-        ax.set_yscale('log')
-        plt.xlabel("Diameter (km)")
-        plt.ylabel("Rotation period")
+        plt.text(0.5, .97,f"{len(diameters)} points displayed", ha='center', va='center', transform=ax.transAxes) 
+        plt.xlabel("Log Diameter (km)")
+        plt.ylabel("Log Rotation period (hr)")
         plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
         plt.title(f"{len(diameters)} points displayed", loc="right")
         plt.savefig(f"../{object}/general_plots/diameter_vs_period.png")
@@ -623,6 +626,8 @@ def generate_diameter_vs_gamma_plot(object, diameters, gammas, chis):
                 segment_chis.append(pairings[i][2])
         plt.figure(figsize=[8,6])
         ax = plt.gca()
+        ax.set_xscale("log")
+        ax.set_yscale("log")
         plt.scatter(segment_diameters, segment_gammas, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
         plt.colorbar(label=r"fit $\chi^2$")
         plt.xlabel("Diameter (km)")
@@ -640,8 +645,8 @@ def generate_diameter_vs_gamma_plot(object, diameters, gammas, chis):
     plt.colorbar(label=r"fit $\chi^2$")
     ax.set_xscale('log')
     ax.set_yscale('log')
-    plt.xlabel("Diameter (km)")
-    plt.ylabel(r"Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
+    plt.xlabel("Log Diameter (km)")
+    plt.ylabel(r"Log Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
     plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
     plt.title(f"{len(diameters)} points displayed", loc="right")
     plt.savefig(f"../{object}/general_plots/diameter_vs_gamma.png")
@@ -674,8 +679,8 @@ def generate_diameter_vs_chi_plots(object, diameters, chis):
     plt.figure(figsize=[8, 6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95)
     plt.loglog(diameters, chis, color='k', marker='o', ms=0.5, ls="None")
-    plt.xlabel("Diameter (km)", fontsize=13)
-    plt.ylabel(r"fit $\chi^2$", fontsize=13)
+    plt.xlabel("Log Diameter (km)", fontsize=13)
+    plt.ylabel(r"Log fit $\chi^2$", fontsize=13)
     plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
     plt.savefig(f"../{object}/general_plots/diameter_vs_chi.png")
     plt.savefig(f"../{object}/general_plots/diameter_vs_chi.pdf")
@@ -683,9 +688,9 @@ def generate_diameter_vs_chi_plots(object, diameters, chis):
 
     plt.figure(figsize=[8, 6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95)
-    plt.plot(diameters, chis, color='k', marker='o', ms=0.5, ls='None')
-    plt.xlabel("Diameter (km)", fontsize=13)
-    plt.ylabel(r"fit $\chi^2$", fontsize=13)
+    plt.loglog(diameters, chis, color='k', marker='o', ms=0.5, ls='None')
+    plt.xlabel("Log Diameter (km)", fontsize=13)
+    plt.ylabel(r"Log fit $\chi^2$", fontsize=13)
     plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
     plt.ylim(0.9 * min(chis), 2 * min(chis))  
     plt.savefig(f"../{object}/general_plots/diameter_vs_chi_zoom.png")
@@ -715,8 +720,8 @@ def generate_gamma_vs_chi_plots(object, gammas, chis):
     plt.figure(figsize=[8, 6])
     plt.subplots_adjust(left=0.15, right=0.95, top=0.95)
     plt.loglog(gammas, chis, color='k', marker='o', ms=0.5, ls='None')
-    plt.xlabel(r"Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
-    plt.ylabel(r"fit $\chi^2$", fontsize=13)
+    plt.xlabel(r"Log Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
+    plt.ylabel(r"Log fit $\chi^2$", fontsize=13)
     plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
     plt.savefig(f"../{object}/general_plots/gamma_vs_chi.png")
     plt.savefig(f"../{object}/general_plots/gamma_vs_chi.pdf")
@@ -996,7 +1001,7 @@ OBJECT_MAP = {"02100": "Ra-Shalom",
 
 objects = ["02100", "02212", "05189", "05693", "07335", "23606", "68950", "85713", "G1989"]
 
-for object in objects[0:1]:
+for object in objects:
     print(f"{OBJECT_MAP[object]} ({object})")
     print("Echoing relevant files\n")
     os.system(f"echo '../{object}/PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC") 
@@ -1007,17 +1012,15 @@ for object in objects[0:1]:
 
     best_fit, best_fit_plotters, epoch_condition, wavelengths = retrieve_MCMC_data(object)
     diameters, albedos, gammas, chis, periods = retrieve_output_data(object)
-    print(len(diameters))
     if "general_plots" not in os.listdir(f'../{object}/.'):
         os.popen(f"mkdir ../{object}/general_plots")
         print("Creating plotting directory")
-    #generate_SED_plot(object, best_fit_plotters[0], best_fit_plotters[1], 
-    #                best_fit_plotters[2], best_fit_plotters[3], 
-    #                best_fit_plotters[4], best_fit_plotters[5])
-    print(albedos[0:5])
-    #generate_diameter_histogram(object, diameters)
-    # generate_diameter_vs_albedo_plot(object, diameters, albedos, chis)
-    #generate_diameter_vs_period_plot(object, diameters, periods, chis)
-    #generate_diameter_vs_gamma_plot(object, diameters, gammas, chis)
-    #generate_diameter_vs_chi_plots(object, diameters, chis)
-    #generate_gamma_vs_chi_plots(object, gammas, chis)
+    generate_SED_plot(object, best_fit_plotters[0], best_fit_plotters[1], 
+                    best_fit_plotters[2], best_fit_plotters[3], 
+                    best_fit_plotters[4], best_fit_plotters[5])
+    generate_diameter_histogram(object, diameters)
+    generate_diameter_vs_albedo_plot(object, diameters, albedos, chis)
+    generate_diameter_vs_period_plot(object, diameters, periods, chis)
+    generate_diameter_vs_gamma_plot(object, diameters, gammas, chis)
+    generate_diameter_vs_chi_plots(object, diameters, chis)
+    generate_gamma_vs_chi_plots(object, gammas, chis)
