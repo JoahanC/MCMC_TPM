@@ -337,7 +337,6 @@ def generate_object_table():
     files = []
     curr = os.listdir(".")
     files = [neo.replace("\n", '') for neo in curr if ".txt" in neo]
-    files.remove("85713.txt")
     
     object_files = []
     object_names = []
@@ -662,11 +661,11 @@ def plot_image(tex_file, image_pdf):
 
 
 def return_all_image_files():
-    
-    files = []
+    """
+    Returns all of the existing image files located in the MCMC TPM folder.
+    """
     curr = os.listdir(".")
     current_neos = [neo.replace(".txt", '') for neo in curr if ".txt" in neo]
-    current_neos.remove("85713")
     neo_paths = {}
     for neo in current_neos:
         neo_paths[neo] = f"../{neo}/general_plots/"

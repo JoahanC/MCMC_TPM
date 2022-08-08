@@ -36,11 +36,10 @@ def julian_days_utc_converter(jd):
     return year, month, day + decimal_day
 
 
-
-
-
 def retrieve_output_data():
+    """
     
+    """
     output_file = open("PJDFC.out")
     output_file.readline()
 

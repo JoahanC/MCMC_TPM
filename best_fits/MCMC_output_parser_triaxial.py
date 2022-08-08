@@ -14,12 +14,16 @@ def julian_days_utc_converter(jd):
     Returns a date in utc format corresponding to the given 
     Julian day number.
 
-    Arguments: jd (float) -- a julian date entry
+    Parameters
+    ----------
+    jd : float
+        A julian date entry
 
-    Returns: (tup) -- a utc format entry with year[0], month[1], and
-                      day[2].
+    Returns
+    -------
+    A tuple representation of a utc format entry with year[0], month[1], and
+    day[2].
     """
-
     jd_adjusted = float(jd) + 0.5
     decimal_day = modf(jd_adjusted)[0]
     x_2 = floor(jd - 1721119.5)
@@ -30,16 +34,30 @@ def julian_days_utc_converter(jd):
     year = 100 * c_2 + c_1
     month = floor((5 * x_0 + 461) / 153)
     day = x_0 - floor((153 * month - 457) / 5) + 1
+
     if month > 12:
         month = month - 12
         year = year + 1    
+    
     return year, month, day + decimal_day
 
 
 def retrieve_output_data(object):
+    """
+    Generates the diameter and albedo values for an object based on the fort.21 file.
+
+    Parameters
+    ----------
+    object : str
+        The folder name of the object being analyzed.
+
+    Returns
+    -------
+    A tuple containing the diameters[0], albedos[1], gammas[2], 
+    chi^2 values[3], and period[4] values for each solution point. 
+    """
     
     output_file = open(f"../{object}/PJDFC.out")
-    albedo_file = open(f"../{object}/DvsAlb.dat", 'r')
     output_file.readline()
 
     diameters = []
@@ -49,19 +67,16 @@ def retrieve_output_data(object):
     albedos = []
 
     for line in output_file.readlines():
+        albedo = np.e ** float(line.strip()[17:25].strip())
         period = np.e ** float(line.strip()[25:34].strip())
         gamma = np.e ** float(line.strip()[34:43].strip())
         diameter = np.e ** float(line.strip()[43:52].strip())
-        chi = float(line.strip()[70:87].strip())
+        chi = float(line.strip()[88:105].strip())
+        albedos.append(albedo)
         diameters.append(diameter)
         chis.append(chi)
         gammas.append(gamma)
         periods.append(period)
-
-    
-
-    for line in albedo_file.readlines():
-        albedos.append(float(line.strip().split()[1]))
 
     return diameters, albedos, gammas, chis, periods
 
@@ -77,6 +92,7 @@ def retrieve_MCMC_data(object):
     SED_file = open(f"../{object}/SED_data.out")
     print("Reading in best fit solution used for SED.")
     datum_minor = SED_file.readline().rstrip().split()
+    SED_file.readline()
     datum_major = SED_file.readline().rstrip().split()
     best_fit = {}
 
@@ -194,7 +210,7 @@ def retrieve_MCMC_data(object):
     cshlines = open(cshfile)
     for line in cshlines.readlines():
         epoch_data = line.rstrip().split(',')
-        if len(epoch_data) != 12:
+        if len(epoch_data) != 16:
             continue
         mjd = float(epoch_data[0])
         year, month, day = julian_days_utc_converter(2400000.5 + mjd)
@@ -266,7 +282,6 @@ def generate_SED_plot(object, esed, wavelengths, datelabels, data_x, data_y, dat
         if limtest[0] < 1e-99:
             plt.ylim(y_low / 10., y_high * 10)
 
-
         plt.errorbar(data_x[i], data_y_adjusted, 
                     yerr=[lower_errors, higher_errors],
                     ecolor=colors[i],
@@ -279,7 +294,8 @@ def generate_SED_plot(object, esed, wavelengths, datelabels, data_x, data_y, dat
     plt.legend(loc=2)
     plt.xlabel("Wavelength (microns)", fontsize=12)
     plt.ylabel(r"$\nu$F$_\nu$", fontsize=12)
-    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    name = object.replace("triaxial_", '')
+    plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
     plt.savefig(f"../{object}/general_plots/bestfit_SED.png", bbox_inches='tight')
     plt.savefig(f"../{object}/general_plots/bestfit_SED.pdf", bbox_inches='tight')
     plt.close()
@@ -335,11 +351,14 @@ def generate_diameter_vs_albedo_plot(object, diameters, albedos, chis):
                 segment_chis.append(pairings[i][2])
         plt.figure(figsize=[8,6])
         ax = plt.gca()
+        ax.set_xscale("log")
+        ax.set_yscale("log")
         plt.scatter(segment_diameters, segment_albedos, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
         plt.colorbar(label=r"fit $\chi^2$")
         plt.xlabel("Diameter (km)")
         plt.ylabel("Albedo")
-        plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+        name = object.replace("triaxial_", '')
+        plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
         plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
         plt.savefig(f"../{object}/diameter_albedo_segments/{idx}_diameter_vs_albedo.png")
         plt.savefig(f"../{object}/diameter_albedo_segments/{idx}_diameter_vs_albedo.pdf")
@@ -348,12 +367,15 @@ def generate_diameter_vs_albedo_plot(object, diameters, albedos, chis):
     # Generate base figure
     plt.figure(figsize=[8,6])
     ax = plt.gca()
+    ax.set_xscale("log")
+    ax.set_yscale("log")
     plt.scatter(diameters, albedos, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
     plt.colorbar(label=r"fit $\chi^2$")
     plt.xlabel("Diameter (km)")
     plt.ylabel("Albedo")
-    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
-    plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
+    name = object.replace("triaxial_", '')
+    plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
+    plt.title(f"{len(diameters)} points displayed", loc="right")
     plt.savefig(f"../{object}/general_plots/diameter_vs_albedo.png")
     plt.savefig(f"../{object}/general_plots/diameter_vs_albedo.pdf")
     plt.close()
@@ -405,7 +427,8 @@ def generate_diameter_histogram(object, diameters):
     # Labeling plot
     plt.xlabel("Log Diameter (km)")
     plt.ylabel("Number of Monte Carlo Results")
-    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    name = object.replace("triaxial_", '')
+    plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
     plt.savefig(f"../{object}/general_plots/diameter_histogram.png")
     plt.savefig(f"../{object}/general_plots/diameter_histogram.pdf")
 
@@ -468,7 +491,8 @@ def generate_diameter_vs_period_plot(object, diameters, periods, chis):
             ax.set_yscale('log')
             plt.xlabel("Diameter (km)")
             plt.ylabel("Rotation period")
-            plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+            name = object.replace("triaxial_", '')
+            plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
             plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
             plt.savefig(f"../{object}/diameter_period_segments/{idx}_diameter_vs_period.png")
             plt.savefig(f"../{object}/diameter_period_segments/{idx}_diameter_vs_period.pdf")
@@ -483,8 +507,9 @@ def generate_diameter_vs_period_plot(object, diameters, periods, chis):
         ax.set_yscale('log')
         plt.xlabel("Diameter (km)")
         plt.ylabel("Rotation period")
-        plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
-        plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
+        name = object.replace("triaxial_", '')
+        plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
+        plt.title(f"{len(diameters)} points displayed", loc="right")
         plt.savefig(f"../{object}/general_plots/diameter_vs_period.png")
         plt.savefig(f"../{object}/general_plots/diameter_vs_period.pdf")
         plt.close()
@@ -544,7 +569,8 @@ def generate_diameter_vs_gamma_plot(object, diameters, gammas, chis):
         plt.colorbar(label=r"fit $\chi^2$")
         plt.xlabel("Diameter (km)")
         plt.ylabel("Rotation period")
-        plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+        name = object.replace("triaxial_", '')
+        plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
         plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
         plt.savefig(f"../{object}/diameter_gamma_segments/{idx}_diameter_vs_gamma.png")
         plt.savefig(f"../{object}/diameter_gamma_segments/{idx}_diameter_vs_gamma.pdf")
@@ -558,8 +584,9 @@ def generate_diameter_vs_gamma_plot(object, diameters, gammas, chis):
     ax.set_yscale('log')
     plt.xlabel("Diameter (km)")
     plt.ylabel(r"Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
-    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
-    plt.title(f"{len(segment_diameters)}/{len(diameters)} points displayed", loc="right")
+    name = object.replace("triaxial_", '')
+    plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
+    plt.title(f"{len(diameters)} points displayed", loc="right")
     plt.savefig(f"../{object}/general_plots/diameter_vs_gamma.png")
     plt.savefig(f"../{object}/general_plots/diameter_vs_gamma.pdf")
     plt.close()
@@ -592,7 +619,8 @@ def generate_diameter_vs_chi_plots(object, diameters, chis):
     plt.plot(diameters, chis, color='k', marker='o', ms=0.5, ls='None')
     plt.xlabel("Diameter (km)", fontsize=13)
     plt.ylabel(r"fit $\chi^2$", fontsize=13)
-    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    name = object.replace("triaxial_", '')
+    plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
     plt.ylim(0.9 * min(chis), 2 * min(chis))  
     plt.savefig(f"../{object}/general_plots/diameter_vs_chi_zoom.png")
     plt.savefig(f"../{object}/general_plots/diameter_vs_chi_zoom.pdf")
@@ -614,7 +642,8 @@ def generate_gamma_vs_chi_plots(object, gammas, chis):
     plt.loglog(gammas, chis, color='k', marker='o', ms=0.5, ls='None')
     plt.xlabel(r"Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
     plt.ylabel(r"fit $\chi^2$", fontsize=13)
-    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    name = object.replace("triaxial_", '')
+    plt.title(f"{OBJECT_MAP[object]} ({name})", loc="left")
     plt.savefig(f"../{object}/general_plots/gamma_vs_chi.png")
     plt.savefig(f"../{object}/general_plots/gamma_vs_chi.pdf")
     plt.close()
@@ -881,30 +910,23 @@ def display_MCMC_results(mpc_name):
         print(output_20)
 
 
-OBJECT_MAP = {"02100": "Ra-Shalom", 
-              "02212": "Hephaistos", 
-              "05189": "1990 UQ",
-              "05693": "1993 EA", 
-              "07335": "1989 JA", 
-              "23606": "1996 AS1",
-              "68950": "2002 QF15", 
-              "G1989": "Cacus", 
-              "triaxial_02100": "Ra-Shalom", 
-              "triaxial_02212": "Hephaistos", 
+OBJECT_MAP = {"triaxial_02212": "Hephaistos", 
               "triaxial_05189": "1990 UQ",
+              "triaxial_85713": "1998 SS49",
               "triaxial_05693": "1993 EA", 
               "triaxial_07335": "1989 JA", 
               "triaxial_23606": "1996 AS1",
               "triaxial_68950": "2002 QF15", 
+              "triaxial_85713": "1998 SS49",
               "triaxial_G1989": "Cacus"}
 
-objects = ["02100", "02212", "05189", "05693", "07335", "23606", "68950", "G1989", "triaxial_02100", "triaxial_02212", "triaxial_05189", 
-           "triaxial_05693", "triaxial_07335", "triaxial_23606", "triaxial_68950", "triaxial_G1989"]
+objects = ["triaxial_02212", "triaxial_05189",
+           "triaxial_05693", "triaxial_07335", "triaxial_23606", "triaxial_68950", "triaxial_85713", "triaxial_G1989"]
 
 for object in objects:
     print(f"{OBJECT_MAP[object]} ({object})")
     print("Echoing relevant files\n")
-    os.system(f"echo '../{object}/PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC") 
+    os.system(f"echo '../{object}/fort.21' | ../read-WISE-rc-MCMC-PJDFCS") 
     os.system(f"/bin/cp ../{object}/fort.2 ../{object}/Dhist.dat")
     os.system(f"/bin/cp ../{object}/fort.32 ../{object}/Dhist_fine.dat")
     os.system(f"/bin/cp ../{object}/fort.3 ../{object}/DvsPeriod.dat")

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.27)  1 AUG 2022 15:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.27)  8 AUG 2022 07:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -572,963 +572,1172 @@ Overfull \hbox (14.75804pt too wide) in paragraph at lines 17--17
 [][]| $[]$ [][][]| 
  []
 
-<../68950/general_plots/bestfit_SED.pdf, id=9, 433.62pt x 289.08pt>
+<../68950/general_plots/bestfit_SED.pdf, id=9, 527.79686pt x 410.2828pt>
 File: ../68950/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../68950/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../68950/general_plots/bestfit_SED.pdf  used on input 
 line 52.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
 [1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<../68950/general_plots/diameter_histogram.pdf, id=27, 433.62pt x 433.62pt>
+<../68950/general_plots/diameter_histogram.pdf, id=27, 578.16pt x 433.62pt>
 File: ../68950/general_plots/diameter_histogram.pdf Graphic file (type pdf)
 <use ../68950/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../68950/general_plots/diameter_histogram.pdf  used on
  input line 56.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
 
 [2 <../68950/general_plots/bestfit_SED.pdf>]
-<../68950/general_plots/diameter_vs_albedo.pdf, id=74, 433.62pt x 433.62pt>
+<../68950/general_plots/diameter_vs_albedo.pdf, id=75, 578.16pt x 433.62pt>
 File: ../68950/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
 <use ../68950/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../68950/general_plots/diameter_vs_albedo.pdf  used on
  input line 60.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
  [3 <../68950/general_plots/diameter_histogram.pdf>]
-<../68950/general_plots/diameter_vs_gamma.pdf, id=114, 433.62pt x 433.62pt>
+<../68950/general_plots/diameter_vs_chi.pdf, id=122, 578.16pt x 433.62pt>
+File: ../68950/general_plots/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../68950/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../68950/general_plots/diameter_vs_chi.pdf  used on in
+put line 64.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [4 <../68950/general_plots/diameter_vs_albedo.pdf>]
+<../68950/general_plots/diameter_vs_gamma.pdf, id=173, 578.16pt x 433.62pt>
 File: ../68950/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
 <use ../68950/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../68950/general_plots/diameter_vs_gamma.pdf  used on 
-input line 64.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [4 <../68950/general_plots/diameter_vs_albedo.pdf>]
-<../68950/general_plots/gamma_vs_chi.pdf, id=163, 433.62pt x 433.62pt>
+input line 68.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [5 <../68950/general_plots/diameter_vs_chi.pdf>]
+<../68950/general_plots/gamma_vs_chi.pdf, id=210, 578.16pt x 433.62pt>
 File: ../68950/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../68950/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../68950/general_plots/gamma_vs_chi.pdf  used on input
- line 68.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [5 <../68950/general_plots/diameter_vs_gamma.pdf>]
-<../05189/general_plots/bestfit_SED.pdf, id=217, 433.62pt x 289.08pt>
+ line 72.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [6 <../68950/general_plots/diameter_vs_gamma.pdf>]
+<../05189/general_plots/bestfit_SED.pdf, id=267, 527.79686pt x 410.2828pt>
 File: ../05189/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../05189/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../05189/general_plots/bestfit_SED.pdf  used on input 
-line 73.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
- [6 <../68950/general_plots/gamma_vs_chi.pdf>]
-<../05189/general_plots/diameter_histogram.pdf, id=259, 433.62pt x 433.62pt>
+line 77.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+ [7 <../68950/general_plots/gamma_vs_chi.pdf>]
+<../05189/general_plots/diameter_histogram.pdf, id=315, 578.16pt x 433.62pt>
 File: ../05189/general_plots/diameter_histogram.pdf Graphic file (type pdf)
 <use ../05189/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../05189/general_plots/diameter_histogram.pdf  used on
- input line 77.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [7 <../05189/general_plots/bestfit_SED.pdf>]
-<../05189/general_plots/diameter_vs_albedo.pdf, id=304, 433.62pt x 433.62pt>
+ input line 81.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [8 <../05189/general_plots/bestfit_SED.pdf>]
+<../05189/general_plots/diameter_vs_albedo.pdf, id=363, 578.16pt x 433.62pt>
 File: ../05189/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
 <use ../05189/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../05189/general_plots/diameter_vs_albedo.pdf  used on
- input line 81.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [8 <../05189/general_plots/diameter_histogram.pdf>]
-<../05189/general_plots/diameter_vs_gamma.pdf, id=346, 433.62pt x 433.62pt>
+ input line 85.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [9 <../05189/general_plots/diameter_histogram.pdf>]
+<../05189/general_plots/diameter_vs_chi.pdf, id=412, 578.16pt x 433.62pt>
+File: ../05189/general_plots/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../05189/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../05189/general_plots/diameter_vs_chi.pdf  used on in
+put line 89.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+
+[10 <../05189/general_plots/diameter_vs_albedo.pdf>]
+<../05189/general_plots/diameter_vs_gamma.pdf, id=463, 578.16pt x 433.62pt>
 File: ../05189/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
 <use ../05189/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../05189/general_plots/diameter_vs_gamma.pdf  used on 
-input line 85.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [9 <../05189/general_plots/diameter_vs_albedo.pdf>]
-<../05189/general_plots/diameter_vs_period.pdf, id=394, 433.62pt x 433.62pt>
+input line 93.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [11 <../05189/general_plots/diameter_vs_chi.pdf>]
+<../05189/general_plots/diameter_vs_period.pdf, id=504, 578.16pt x 433.62pt>
 File: ../05189/general_plots/diameter_vs_period.pdf Graphic file (type pdf)
 <use ../05189/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../05189/general_plots/diameter_vs_period.pdf  used on
- input line 89.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
-
-[10 <../05189/general_plots/diameter_vs_gamma.pdf>]
-<../05189/general_plots/gamma_vs_chi.pdf, id=449, 433.62pt x 433.62pt>
+ input line 97.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [12 <../05189/general_plots/diameter_vs_gamma.pdf>]
+<../05189/general_plots/gamma_vs_chi.pdf, id=562, 578.16pt x 433.62pt>
 File: ../05189/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../05189/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../05189/general_plots/gamma_vs_chi.pdf  used on input
- line 93.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [11 <../05189/general_plots/diameter_vs_period.pdf>]
+ line 101.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+
+[13 <../05189/general_plots/diameter_vs_period.pdf>]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.96 \section*{\LARGE triaxial_02212}
-                                     
+l.104 \section*{\LARGE triaxial_02212}
+                                      
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.96 \section*{\LARGE triaxial_02212}
-                                     
+l.104 \section*{\LARGE triaxial_02212}
+                                      
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.96 \section*{\LARGE triaxial_02212}
-                                     
+l.104 \section*{\LARGE triaxial_02212}
+                                      
 ? 
 ! Extra }, or forgotten \endgroup.
 \H@old@ssect ...penalty \@M \sec@upcase {#5}\par }
                                                   \endgroup \else \def \@svs...
-l.96 \section*{\LARGE triaxial_02212}
-                                     
+l.104 \section*{\LARGE triaxial_02212}
+                                      
 ? 
-<../triaxial_02212/general_plots/bestfit_SED.pdf, id=497, 433.62pt x 289.08pt>
+<../triaxial_02212/general_plots/bestfit_SED.pdf, id=615, 527.79686pt x 410.282
+8pt>
 File: ../triaxial_02212/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../triaxial_02212/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../triaxial_02212/general_plots/bestfit_SED.pdf  used 
-on input line 98.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
-[12 <../05189/general_plots/gamma_vs_chi.pdf>]
-<../triaxial_02212/general_plots/diameter_histogram.pdf, id=541, 433.62pt x 433
+on input line 106.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+[14 <../05189/general_plots/gamma_vs_chi.pdf>]
+<../triaxial_02212/general_plots/diameter_histogram.pdf, id=663, 578.16pt x 433
 .62pt>
 File: ../triaxial_02212/general_plots/diameter_histogram.pdf Graphic file (type
  pdf)
 <use ../triaxial_02212/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../triaxial_02212/general_plots/diameter_histogram.pdf
-  used on input line 102.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [13 <../triaxial_02212/general_plots/bestfit_SED.pdf>]
-<../triaxial_02212/general_plots/diameter_vs_albedo.pdf, id=586, 433.62pt x 433
+  used on input line 110.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [15 <../triaxial_02212/general_plots/bestfit_SED.pdf>]
+<../triaxial_02212/general_plots/diameter_vs_albedo.pdf, id=709, 578.16pt x 433
 .62pt>
 File: ../triaxial_02212/general_plots/diameter_vs_albedo.pdf Graphic file (type
  pdf)
 <use ../triaxial_02212/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../triaxial_02212/general_plots/diameter_vs_albedo.pdf
-  used on input line 106.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [14 <../triaxial_02212/general_plots/diameter_histogram.pdf>]
-<../triaxial_02212/general_plots/diameter_vs_chi.pdf, id=628, 433.62pt x 433.62
+  used on input line 114.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [16 <../triaxial_02212/general_plots/diameter_histogram.pdf>]
+<../triaxial_02212/general_plots/diameter_vs_chi.pdf, id=756, 578.16pt x 433.62
 pt>
 File: ../triaxial_02212/general_plots/diameter_vs_chi.pdf Graphic file (type pd
 f)
 <use ../triaxial_02212/general_plots/diameter_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_02212/general_plots/diameter_vs_chi.pdf  u
-sed on input line 110.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [15 <../triaxial_02212/general_plots/diameter_vs_albedo.pdf>]
-<../triaxial_02212/general_plots/diameter_vs_gamma.pdf, id=679, 433.62pt x 433.
+sed on input line 118.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [17 <../triaxial_02212/general_plots/diameter_vs_albedo.pdf>]
+<../triaxial_02212/general_plots/diameter_vs_gamma.pdf, id=810, 578.16pt x 433.
 62pt>
 File: ../triaxial_02212/general_plots/diameter_vs_gamma.pdf Graphic file (type 
 pdf)
 <use ../triaxial_02212/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../triaxial_02212/general_plots/diameter_vs_gamma.pdf 
- used on input line 114.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [16 <../triaxial_02212/general_plots/diameter_vs_chi.pdf>]
-<../triaxial_02212/general_plots/diameter_vs_period.pdf, id=714, 433.62pt x 433
+ used on input line 122.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [18 <../triaxial_02212/general_plots/diameter_vs_chi.pdf>]
+<../triaxial_02212/general_plots/diameter_vs_period.pdf, id=854, 433.62pt x 433
 .62pt>
 File: ../triaxial_02212/general_plots/diameter_vs_period.pdf Graphic file (type
  pdf)
 <use ../triaxial_02212/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../triaxial_02212/general_plots/diameter_vs_period.pdf
-  used on input line 118.
+  used on input line 126.
 (pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [17 <../triaxial_02212/general_plots/diameter_vs_gamma.pdf>]
-<../triaxial_02212/general_plots/gamma_vs_chi.pdf, id=771, 433.62pt x 433.62pt>
+ [19 <../triaxial_02212/general_plots/diameter_vs_gamma.pdf>]
+<../triaxial_02212/general_plots/gamma_vs_chi.pdf, id=913, 578.16pt x 433.62pt>
 
 File: ../triaxial_02212/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../triaxial_02212/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_02212/general_plots/gamma_vs_chi.pdf  used
- on input line 122.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [18 <../triaxial_02212/general_plots/diameter_vs_period.pdf>]
-<../G1989/general_plots/bestfit_SED.pdf, id=822, 527.79686pt x 410.2828pt>
+ on input line 130.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [20 <../triaxial_02212/general_plots/diameter_vs_period.pdf>]
+<../G1989/general_plots/bestfit_SED.pdf, id=963, 527.79686pt x 410.2828pt>
 File: ../G1989/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../G1989/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../G1989/general_plots/bestfit_SED.pdf  used on input 
-line 127.
+line 135.
 (pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
- [19 <../triaxial_02212/general_plots/gamma_vs_chi.pdf>]
-<../G1989/general_plots/diameter_histogram.pdf, id=868, 578.16pt x 433.62pt>
+ [21 <../triaxial_02212/general_plots/gamma_vs_chi.pdf>]
+<../G1989/general_plots/diameter_histogram.pdf, id=1012, 578.16pt x 433.62pt>
 File: ../G1989/general_plots/diameter_histogram.pdf Graphic file (type pdf)
 <use ../G1989/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../G1989/general_plots/diameter_histogram.pdf  used on
- input line 131.
+ input line 139.
 (pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
- [20 <../G1989/general_plots/bestfit_SED.pdf>]
-<../G1989/general_plots/diameter_vs_albedo.pdf, id=915, 578.16pt x 433.62pt>
+ [22 <../G1989/general_plots/bestfit_SED.pdf>]
+<../G1989/general_plots/diameter_vs_albedo.pdf, id=1061, 578.16pt x 433.62pt>
 File: ../G1989/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
 <use ../G1989/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../G1989/general_plots/diameter_vs_albedo.pdf  used on
- input line 135.
+ input line 143.
 (pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
- [21 <../G1989/general_plots/diameter_histogram.pdf>]
-<../G1989/general_plots/diameter_vs_gamma.pdf, id=957, 578.16pt x 433.62pt>
+ [23 <../G1989/general_plots/diameter_histogram.pdf>]
+<../G1989/general_plots/diameter_vs_chi.pdf, id=1106, 578.16pt x 433.62pt>
+File: ../G1989/general_plots/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../G1989/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../G1989/general_plots/diameter_vs_chi.pdf  used on in
+put line 147.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [24 <../G1989/general_plots/diameter_vs_albedo.pdf>]
+<../G1989/general_plots/diameter_vs_gamma.pdf, id=1161, 578.16pt x 433.62pt>
 File: ../G1989/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
 <use ../G1989/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../G1989/general_plots/diameter_vs_gamma.pdf  used on 
-input line 139.
+input line 151.
 (pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
- [22 <../G1989/general_plots/diameter_vs_albedo.pdf>]
-<../G1989/general_plots/diameter_vs_period.pdf, id=1009, 578.16pt x 433.62pt>
+ [25 <../G1989/general_plots/diameter_vs_chi.pdf>]
+<../G1989/general_plots/diameter_vs_period.pdf, id=1205, 578.16pt x 433.62pt>
 File: ../G1989/general_plots/diameter_vs_period.pdf Graphic file (type pdf)
 <use ../G1989/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../G1989/general_plots/diameter_vs_period.pdf  used on
- input line 143.
+ input line 155.
 (pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
- [23 <../G1989/general_plots/diameter_vs_gamma.pdf>]
-<../G1989/general_plots/gamma_vs_chi.pdf, id=1066, 578.16pt x 433.62pt>
+ [26 <../G1989/general_plots/diameter_vs_gamma.pdf>]
+<../G1989/general_plots/gamma_vs_chi.pdf, id=1267, 578.16pt x 433.62pt>
 File: ../G1989/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../G1989/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../G1989/general_plots/gamma_vs_chi.pdf  used on input
- line 147.
+ line 159.
 (pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
- [24 <../G1989/general_plots/diameter_vs_period.pdf>]
-<../23606/general_plots/bestfit_SED.pdf, id=1117, 433.62pt x 289.08pt>
+ [27 <../G1989/general_plots/diameter_vs_period.pdf>]
+<../23606/general_plots/bestfit_SED.pdf, id=1322, 527.79686pt x 410.2828pt>
 File: ../23606/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../23606/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../23606/general_plots/bestfit_SED.pdf  used on input 
-line 152.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
- [25 <../G1989/general_plots/gamma_vs_chi.pdf>]
-<../23606/general_plots/diameter_histogram.pdf, id=1164, 433.62pt x 433.62pt>
+line 164.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+ [28 <../G1989/general_plots/gamma_vs_chi.pdf>]
+<../23606/general_plots/diameter_histogram.pdf, id=1372, 578.16pt x 433.62pt>
 File: ../23606/general_plots/diameter_histogram.pdf Graphic file (type pdf)
 <use ../23606/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../23606/general_plots/diameter_histogram.pdf  used on
- input line 156.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [26 <../23606/general_plots/bestfit_SED.pdf>]
-<../23606/general_plots/diameter_vs_albedo.pdf, id=1210, 433.62pt x 433.62pt>
+ input line 168.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [29 <../23606/general_plots/bestfit_SED.pdf>]
+<../23606/general_plots/diameter_vs_albedo.pdf, id=1421, 578.16pt x 433.62pt>
 File: ../23606/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
 <use ../23606/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../23606/general_plots/diameter_vs_albedo.pdf  used on
- input line 160.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [27 <../23606/general_plots/diameter_histogram.pdf>]
-<../23606/general_plots/diameter_vs_gamma.pdf, id=1251, 433.62pt x 433.62pt>
+ input line 172.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+
+[30 <../23606/general_plots/diameter_histogram.pdf>]
+<../23606/general_plots/diameter_vs_chi.pdf, id=1468, 578.16pt x 433.62pt>
+File: ../23606/general_plots/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../23606/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../23606/general_plots/diameter_vs_chi.pdf  used on in
+put line 176.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [31 <../23606/general_plots/diameter_vs_albedo.pdf>]
+<../23606/general_plots/diameter_vs_gamma.pdf, id=1519, 578.16pt x 433.62pt>
 File: ../23606/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
 <use ../23606/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../23606/general_plots/diameter_vs_gamma.pdf  used on 
-input line 164.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
-
-[28 <../23606/general_plots/diameter_vs_albedo.pdf>]
-<../23606/general_plots/diameter_vs_period.pdf, id=1300, 433.62pt x 433.62pt>
+input line 180.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [32 <../23606/general_plots/diameter_vs_chi.pdf>]
+<../23606/general_plots/diameter_vs_period.pdf, id=1555, 578.16pt x 433.62pt>
 File: ../23606/general_plots/diameter_vs_period.pdf Graphic file (type pdf)
 <use ../23606/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../23606/general_plots/diameter_vs_period.pdf  used on
- input line 168.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [29 <../23606/general_plots/diameter_vs_gamma.pdf>]
-<../23606/general_plots/gamma_vs_chi.pdf, id=1354, 433.62pt x 433.62pt>
+ input line 184.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+
+[33 <../23606/general_plots/diameter_vs_gamma.pdf>]
+<../23606/general_plots/gamma_vs_chi.pdf, id=1612, 578.16pt x 433.62pt>
 File: ../23606/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../23606/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../23606/general_plots/gamma_vs_chi.pdf  used on input
- line 172.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [30 <../23606/general_plots/diameter_vs_period.pdf>]
+ line 188.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [34 <../23606/general_plots/diameter_vs_period.pdf>]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.175 \section*{\LARGE triaxial_07335}
+l.191 \section*{\LARGE triaxial_07335}
                                       
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.175 \section*{\LARGE triaxial_07335}
+l.191 \section*{\LARGE triaxial_07335}
                                       
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.175 \section*{\LARGE triaxial_07335}
+l.191 \section*{\LARGE triaxial_07335}
                                       
 ? 
 ! Extra }, or forgotten \endgroup.
 \H@old@ssect ...penalty \@M \sec@upcase {#5}\par }
                                                   \endgroup \else \def \@svs...
-l.175 \section*{\LARGE triaxial_07335}
+l.191 \section*{\LARGE triaxial_07335}
                                       
 ? 
-<../triaxial_07335/general_plots/bestfit_SED.pdf, id=1402, 433.62pt x 289.08pt>
-
+<../triaxial_07335/general_plots/bestfit_SED.pdf, id=1664, 527.79686pt x 410.28
+28pt>
 File: ../triaxial_07335/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../triaxial_07335/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../triaxial_07335/general_plots/bestfit_SED.pdf  used 
-on input line 177.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
-[31 <../23606/general_plots/gamma_vs_chi.pdf>]
-<../triaxial_07335/general_plots/diameter_histogram.pdf, id=1446, 433.62pt x 43
+on input line 193.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+[35 <../23606/general_plots/gamma_vs_chi.pdf>]
+<../triaxial_07335/general_plots/diameter_histogram.pdf, id=1711, 578.16pt x 43
 3.62pt>
 File: ../triaxial_07335/general_plots/diameter_histogram.pdf Graphic file (type
  pdf)
 <use ../triaxial_07335/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../triaxial_07335/general_plots/diameter_histogram.pdf
-  used on input line 181.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [32 <../triaxial_07335/general_plots/bestfit_SED.pdf>]
-<../triaxial_07335/general_plots/diameter_vs_albedo.pdf, id=1491, 433.62pt x 43
+  used on input line 197.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [36 <../triaxial_07335/general_plots/bestfit_SED.pdf>]
+<../triaxial_07335/general_plots/diameter_vs_albedo.pdf, id=1760, 578.16pt x 43
 3.62pt>
 File: ../triaxial_07335/general_plots/diameter_vs_albedo.pdf Graphic file (type
  pdf)
 <use ../triaxial_07335/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../triaxial_07335/general_plots/diameter_vs_albedo.pdf
-  used on input line 185.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [33 <../triaxial_07335/general_plots/diameter_histogram.pdf>]
-<../triaxial_07335/general_plots/diameter_vs_gamma.pdf, id=1531, 433.62pt x 433
+  used on input line 201.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [37 <../triaxial_07335/general_plots/diameter_histogram.pdf>]
+<../triaxial_07335/general_plots/diameter_vs_chi.pdf, id=1808, 578.16pt x 433.6
+2pt>
+File: ../triaxial_07335/general_plots/diameter_vs_chi.pdf Graphic file (type pd
+f)
+<use ../triaxial_07335/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../triaxial_07335/general_plots/diameter_vs_chi.pdf  u
+sed on input line 205.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [38 <../triaxial_07335/general_plots/diameter_vs_albedo.pdf>]
+<../triaxial_07335/general_plots/diameter_vs_gamma.pdf, id=1861, 578.16pt x 433
 .62pt>
 File: ../triaxial_07335/general_plots/diameter_vs_gamma.pdf Graphic file (type 
 pdf)
 <use ../triaxial_07335/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../triaxial_07335/general_plots/diameter_vs_gamma.pdf 
- used on input line 189.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [34 <../triaxial_07335/general_plots/diameter_vs_albedo.pdf>]
-<../triaxial_07335/general_plots/gamma_vs_chi.pdf, id=1581, 433.62pt x 433.62pt
+ used on input line 209.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [39 <../triaxial_07335/general_plots/diameter_vs_chi.pdf>]
+<../triaxial_07335/general_plots/gamma_vs_chi.pdf, id=1906, 578.16pt x 433.62pt
 >
 File: ../triaxial_07335/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../triaxial_07335/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_07335/general_plots/gamma_vs_chi.pdf  used
- on input line 193.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [35 <../triaxial_07335/general_plots/diameter_vs_gamma.pdf>]
+ on input line 213.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [40 <../triaxial_07335/general_plots/diameter_vs_gamma.pdf>]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.196 \section*{\LARGE triaxial_05693}
+l.216 \section*{\LARGE triaxial_05693}
                                       
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.196 \section*{\LARGE triaxial_05693}
+l.216 \section*{\LARGE triaxial_05693}
                                       
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.196 \section*{\LARGE triaxial_05693}
+l.216 \section*{\LARGE triaxial_05693}
                                       
 ? 
 ! Extra }, or forgotten \endgroup.
 \H@old@ssect ...penalty \@M \sec@upcase {#5}\par }
                                                   \endgroup \else \def \@svs...
-l.196 \section*{\LARGE triaxial_05693}
+l.216 \section*{\LARGE triaxial_05693}
                                       
 ? 
-<../triaxial_05693/general_plots/bestfit_SED.pdf, id=1636, 433.62pt x 289.08pt>
-
+<../triaxial_05693/general_plots/bestfit_SED.pdf, id=1965, 527.79686pt x 410.28
+28pt>
 File: ../triaxial_05693/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../triaxial_05693/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../triaxial_05693/general_plots/bestfit_SED.pdf  used 
-on input line 198.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
-[36 <../triaxial_07335/general_plots/gamma_vs_chi.pdf>]
-<../triaxial_05693/general_plots/diameter_histogram.pdf, id=1681, 433.62pt x 43
+on input line 218.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+[41 <../triaxial_07335/general_plots/gamma_vs_chi.pdf>]
+<../triaxial_05693/general_plots/diameter_histogram.pdf, id=2015, 578.16pt x 43
 3.62pt>
 File: ../triaxial_05693/general_plots/diameter_histogram.pdf Graphic file (type
  pdf)
 <use ../triaxial_05693/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../triaxial_05693/general_plots/diameter_histogram.pdf
-  used on input line 202.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [37 <../triaxial_05693/general_plots/bestfit_SED.pdf>]
-<../triaxial_05693/general_plots/diameter_vs_albedo.pdf, id=1723, 433.62pt x 43
+  used on input line 222.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [42 <../triaxial_05693/general_plots/bestfit_SED.pdf>]
+<../triaxial_05693/general_plots/diameter_vs_albedo.pdf, id=2062, 578.16pt x 43
 3.62pt>
 File: ../triaxial_05693/general_plots/diameter_vs_albedo.pdf Graphic file (type
  pdf)
 <use ../triaxial_05693/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../triaxial_05693/general_plots/diameter_vs_albedo.pdf
-  used on input line 206.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [38 <../triaxial_05693/general_plots/diameter_histogram.pdf>]
-<../triaxial_05693/general_plots/diameter_vs_chi.pdf, id=1763, 433.62pt x 433.6
+  used on input line 226.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [43 <../triaxial_05693/general_plots/diameter_histogram.pdf>]
+<../triaxial_05693/general_plots/diameter_vs_chi.pdf, id=2110, 578.16pt x 433.6
 2pt>
 File: ../triaxial_05693/general_plots/diameter_vs_chi.pdf Graphic file (type pd
 f)
 <use ../triaxial_05693/general_plots/diameter_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_05693/general_plots/diameter_vs_chi.pdf  u
-sed on input line 210.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [39 <../triaxial_05693/general_plots/diameter_vs_albedo.pdf>]
-<../triaxial_05693/general_plots/diameter_vs_gamma.pdf, id=1812, 433.62pt x 433
+sed on input line 230.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [44 <../triaxial_05693/general_plots/diameter_vs_albedo.pdf>]
+<../triaxial_05693/general_plots/diameter_vs_gamma.pdf, id=2162, 578.16pt x 433
 .62pt>
 File: ../triaxial_05693/general_plots/diameter_vs_gamma.pdf Graphic file (type 
 pdf)
 <use ../triaxial_05693/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../triaxial_05693/general_plots/diameter_vs_gamma.pdf 
- used on input line 214.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
+ used on input line 234.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
 
-[40 <../triaxial_05693/general_plots/diameter_vs_chi.pdf>]
-<../triaxial_05693/general_plots/gamma_vs_chi.pdf, id=1847, 433.62pt x 433.62pt
+[45 <../triaxial_05693/general_plots/diameter_vs_chi.pdf>]
+<../triaxial_05693/general_plots/gamma_vs_chi.pdf, id=2205, 578.16pt x 433.62pt
 >
 File: ../triaxial_05693/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../triaxial_05693/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_05693/general_plots/gamma_vs_chi.pdf  used
- on input line 218.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [41 <../triaxial_05693/general_plots/diameter_vs_gamma.pdf>]
+ on input line 238.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [46 <../triaxial_05693/general_plots/diameter_vs_gamma.pdf>]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.221 \section*{\LARGE triaxial_02100}
+l.241 \section*{\LARGE triaxial_02100}
                                       
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.221 \section*{\LARGE triaxial_02100}
+l.241 \section*{\LARGE triaxial_02100}
                                       
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.221 \section*{\LARGE triaxial_02100}
+l.241 \section*{\LARGE triaxial_02100}
                                       
 ? 
 ! Extra }, or forgotten \endgroup.
 \H@old@ssect ...penalty \@M \sec@upcase {#5}\par }
                                                   \endgroup \else \def \@svs...
-l.221 \section*{\LARGE triaxial_02100}
+l.241 \section*{\LARGE triaxial_02100}
                                       
 ? 
-<../triaxial_02100/general_plots/bestfit_SED.pdf, id=1902, 433.62pt x 289.08pt>
+<../triaxial_02100/general_plots/bestfit_SED.pdf, id=2263, 433.62pt x 289.08pt>
 
 File: ../triaxial_02100/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../triaxial_02100/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../triaxial_02100/general_plots/bestfit_SED.pdf  used 
-on input line 223.
+on input line 243.
 (pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
-[42 <../triaxial_05693/general_plots/gamma_vs_chi.pdf>]
-<../triaxial_02100/general_plots/diameter_histogram.pdf, id=1945, 433.62pt x 43
+[47 <../triaxial_05693/general_plots/gamma_vs_chi.pdf>]
+<../triaxial_02100/general_plots/diameter_histogram.pdf, id=2310, 433.62pt x 43
 3.62pt>
 File: ../triaxial_02100/general_plots/diameter_histogram.pdf Graphic file (type
  pdf)
 <use ../triaxial_02100/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../triaxial_02100/general_plots/diameter_histogram.pdf
-  used on input line 227.
+  used on input line 247.
 (pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [43 <../triaxial_02100/general_plots/bestfit_SED.pdf>]
-<../triaxial_02100/general_plots/diameter_vs_albedo.pdf, id=1991, 433.62pt x 43
+ [48 <../triaxial_02100/general_plots/bestfit_SED.pdf>]
+<../triaxial_02100/general_plots/diameter_vs_albedo.pdf, id=2354, 433.62pt x 43
 3.62pt>
 File: ../triaxial_02100/general_plots/diameter_vs_albedo.pdf Graphic file (type
  pdf)
 <use ../triaxial_02100/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../triaxial_02100/general_plots/diameter_vs_albedo.pdf
-  used on input line 231.
+  used on input line 251.
 (pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [44 <../triaxial_02100/general_plots/diameter_histogram.pdf>]
-<../triaxial_02100/general_plots/diameter_vs_chi.pdf, id=2032, 433.62pt x 433.6
+ [49 <../triaxial_02100/general_plots/diameter_histogram.pdf>]
+<../triaxial_02100/general_plots/diameter_vs_chi.pdf, id=2396, 433.62pt x 433.6
 2pt>
 File: ../triaxial_02100/general_plots/diameter_vs_chi.pdf Graphic file (type pd
 f)
 <use ../triaxial_02100/general_plots/diameter_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_02100/general_plots/diameter_vs_chi.pdf  u
-sed on input line 235.
+sed on input line 255.
 (pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [45 <../triaxial_02100/general_plots/diameter_vs_albedo.pdf>]
-<../triaxial_02100/general_plots/diameter_vs_gamma.pdf, id=2082, 433.62pt x 433
+ [50 <../triaxial_02100/general_plots/diameter_vs_albedo.pdf>]
+<../triaxial_02100/general_plots/diameter_vs_gamma.pdf, id=2446, 433.62pt x 433
 .62pt>
 File: ../triaxial_02100/general_plots/diameter_vs_gamma.pdf Graphic file (type 
 pdf)
 <use ../triaxial_02100/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../triaxial_02100/general_plots/diameter_vs_gamma.pdf 
- used on input line 239.
+ used on input line 259.
 (pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
 
-[46 <../triaxial_02100/general_plots/diameter_vs_chi.pdf>]
-<../triaxial_02100/general_plots/gamma_vs_chi.pdf, id=2118, 433.62pt x 433.62pt
+[51 <../triaxial_02100/general_plots/diameter_vs_chi.pdf>]
+<../triaxial_02100/general_plots/gamma_vs_chi.pdf, id=2483, 433.62pt x 433.62pt
 >
 File: ../triaxial_02100/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../triaxial_02100/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_02100/general_plots/gamma_vs_chi.pdf  used
- on input line 243.
+ on input line 263.
 (pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [47 <../triaxial_02100/general_plots/diameter_vs_gamma.pdf>]
-<../05693/general_plots/bestfit_SED.pdf, id=2173, 433.62pt x 289.08pt>
+ [52 <../triaxial_02100/general_plots/diameter_vs_gamma.pdf>]
+<../85713/general_plots/bestfit_SED.pdf, id=2538, 527.79686pt x 410.2828pt>
+File: ../85713/general_plots/bestfit_SED.pdf Graphic file (type pdf)
+<use ../85713/general_plots/bestfit_SED.pdf>
+Package pdftex.def Info: ../85713/general_plots/bestfit_SED.pdf  used on input 
+line 268.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+ [53 <../triaxial_02100/general_plots/gamma_vs_chi.pdf>]
+<../85713/general_plots/diameter_histogram.pdf, id=2583, 578.16pt x 433.62pt>
+File: ../85713/general_plots/diameter_histogram.pdf Graphic file (type pdf)
+<use ../85713/general_plots/diameter_histogram.pdf>
+Package pdftex.def Info: ../85713/general_plots/diameter_histogram.pdf  used on
+ input line 272.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [54 <../85713/general_plots/bestfit_SED.pdf>]
+<../85713/general_plots/diameter_vs_albedo.pdf, id=2632, 578.16pt x 433.62pt>
+File: ../85713/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../85713/general_plots/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../85713/general_plots/diameter_vs_albedo.pdf  used on
+ input line 276.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [55 <../85713/general_plots/diameter_histogram.pdf>]
+<../85713/general_plots/diameter_vs_chi.pdf, id=2680, 578.16pt x 433.62pt>
+File: ../85713/general_plots/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../85713/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../85713/general_plots/diameter_vs_chi.pdf  used on in
+put line 280.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [56 <../85713/general_plots/diameter_vs_albedo.pdf>]
+<../85713/general_plots/diameter_vs_gamma.pdf, id=2732, 578.16pt x 433.62pt>
+File: ../85713/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../85713/general_plots/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../85713/general_plots/diameter_vs_gamma.pdf  used on 
+input line 284.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [57 <../85713/general_plots/diameter_vs_chi.pdf>]
+<../85713/general_plots/diameter_vs_period.pdf, id=2770, 578.16pt x 433.62pt>
+File: ../85713/general_plots/diameter_vs_period.pdf Graphic file (type pdf)
+<use ../85713/general_plots/diameter_vs_period.pdf>
+Package pdftex.def Info: ../85713/general_plots/diameter_vs_period.pdf  used on
+ input line 288.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [58 <../85713/general_plots/diameter_vs_gamma.pdf>]
+<../85713/general_plots/gamma_vs_chi.pdf, id=2827, 578.16pt x 433.62pt>
+File: ../85713/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../85713/general_plots/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../85713/general_plots/gamma_vs_chi.pdf  used on input
+ line 292.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [59 <../85713/general_plots/diameter_vs_period.pdf>]
+<../05693/general_plots/bestfit_SED.pdf, id=2880, 527.79686pt x 410.2828pt>
 File: ../05693/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../05693/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../05693/general_plots/bestfit_SED.pdf  used on input 
-line 248.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
- [48 <../triaxial_02100/general_plots/gamma_vs_chi.pdf>]
-<../05693/general_plots/diameter_histogram.pdf, id=2218, 433.62pt x 433.62pt>
+line 297.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+ [60 <../85713/general_plots/gamma_vs_chi.pdf>]
+<../05693/general_plots/diameter_histogram.pdf, id=2927, 578.16pt x 433.62pt>
 File: ../05693/general_plots/diameter_histogram.pdf Graphic file (type pdf)
 <use ../05693/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../05693/general_plots/diameter_histogram.pdf  used on
- input line 252.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [49 <../05693/general_plots/bestfit_SED.pdf>]
-<../05693/general_plots/diameter_vs_albedo.pdf, id=2260, 433.62pt x 433.62pt>
+ input line 301.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [61 <../05693/general_plots/bestfit_SED.pdf>]
+<../05693/general_plots/diameter_vs_albedo.pdf, id=2974, 578.16pt x 433.62pt>
 File: ../05693/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
 <use ../05693/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../05693/general_plots/diameter_vs_albedo.pdf  used on
- input line 256.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [50 <../05693/general_plots/diameter_histogram.pdf>]
-<../05693/general_plots/diameter_vs_gamma.pdf, id=2302, 433.62pt x 433.62pt>
+ input line 305.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [62 <../05693/general_plots/diameter_histogram.pdf>]
+<../05693/general_plots/diameter_vs_chi.pdf, id=3022, 578.16pt x 433.62pt>
+File: ../05693/general_plots/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../05693/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../05693/general_plots/diameter_vs_chi.pdf  used on in
+put line 309.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+
+[63 <../05693/general_plots/diameter_vs_albedo.pdf>]
+<../05693/general_plots/diameter_vs_gamma.pdf, id=3074, 578.16pt x 433.62pt>
 File: ../05693/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
 <use ../05693/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../05693/general_plots/diameter_vs_gamma.pdf  used on 
-input line 260.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [51 <../05693/general_plots/diameter_vs_albedo.pdf>]
-<../05693/general_plots/diameter_vs_period.pdf, id=2353, 433.62pt x 433.62pt>
+input line 313.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [64 <../05693/general_plots/diameter_vs_chi.pdf>]
+<../05693/general_plots/diameter_vs_period.pdf, id=3111, 578.16pt x 433.62pt>
 File: ../05693/general_plots/diameter_vs_period.pdf Graphic file (type pdf)
 <use ../05693/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../05693/general_plots/diameter_vs_period.pdf  used on
- input line 264.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [52 <../05693/general_plots/diameter_vs_gamma.pdf>]
-<../05693/general_plots/gamma_vs_chi.pdf, id=2407, 433.62pt x 433.62pt>
+ input line 317.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [65 <../05693/general_plots/diameter_vs_gamma.pdf>]
+<../05693/general_plots/gamma_vs_chi.pdf, id=3168, 578.16pt x 433.62pt>
 File: ../05693/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../05693/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../05693/general_plots/gamma_vs_chi.pdf  used on input
- line 268.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [53 <../05693/general_plots/diameter_vs_period.pdf>]
-<../02100/general_plots/bestfit_SED.pdf, id=2456, 433.62pt x 289.08pt>
+ line 321.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+
+[66 <../05693/general_plots/diameter_vs_period.pdf>]
+<../02100/general_plots/bestfit_SED.pdf, id=3221, 527.79686pt x 410.2828pt>
 File: ../02100/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../02100/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../02100/general_plots/bestfit_SED.pdf  used on input 
-line 273.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
- [54 <../05693/general_plots/gamma_vs_chi.pdf>]
-<../02100/general_plots/diameter_histogram.pdf, id=2499, 433.62pt x 433.62pt>
+line 326.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+ [67 <../05693/general_plots/gamma_vs_chi.pdf>]
+<../02100/general_plots/diameter_histogram.pdf, id=3269, 578.16pt x 433.62pt>
 File: ../02100/general_plots/diameter_histogram.pdf Graphic file (type pdf)
 <use ../02100/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../02100/general_plots/diameter_histogram.pdf  used on
- input line 277.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [55 <../02100/general_plots/bestfit_SED.pdf>]
-<../02100/general_plots/diameter_vs_albedo.pdf, id=2544, 433.62pt x 433.62pt>
+ input line 330.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [68 <../02100/general_plots/bestfit_SED.pdf>]
+<../02100/general_plots/diameter_vs_albedo.pdf, id=3316, 578.16pt x 433.62pt>
 File: ../02100/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
 <use ../02100/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../02100/general_plots/diameter_vs_albedo.pdf  used on
- input line 281.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [56 <../02100/general_plots/diameter_histogram.pdf>]
-<../02100/general_plots/diameter_vs_gamma.pdf, id=2585, 433.62pt x 433.62pt>
+ input line 334.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [69 <../02100/general_plots/diameter_histogram.pdf>]
+<../02100/general_plots/diameter_vs_chi.pdf, id=3362, 578.16pt x 433.62pt>
+File: ../02100/general_plots/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../02100/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../02100/general_plots/diameter_vs_chi.pdf  used on in
+put line 338.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [70 <../02100/general_plots/diameter_vs_albedo.pdf>]
+<../02100/general_plots/diameter_vs_gamma.pdf, id=3415, 578.16pt x 433.62pt>
 File: ../02100/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
 <use ../02100/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../02100/general_plots/diameter_vs_gamma.pdf  used on 
-input line 285.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [57 <../02100/general_plots/diameter_vs_albedo.pdf>]
-<../02100/general_plots/diameter_vs_period.pdf, id=2635, 433.62pt x 433.62pt>
+input line 342.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [71 <../02100/general_plots/diameter_vs_chi.pdf>]
+<../02100/general_plots/diameter_vs_period.pdf, id=3452, 578.16pt x 433.62pt>
 File: ../02100/general_plots/diameter_vs_period.pdf Graphic file (type pdf)
 <use ../02100/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../02100/general_plots/diameter_vs_period.pdf  used on
- input line 289.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
-
-[58 <../02100/general_plots/diameter_vs_gamma.pdf>]
-<../02100/general_plots/gamma_vs_chi.pdf, id=2689, 433.62pt x 433.62pt>
+ input line 346.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [72 <../02100/general_plots/diameter_vs_gamma.pdf>]
+<../02100/general_plots/gamma_vs_chi.pdf, id=3509, 578.16pt x 433.62pt>
 File: ../02100/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../02100/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../02100/general_plots/gamma_vs_chi.pdf  used on input
- line 293.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [59 <../02100/general_plots/diameter_vs_period.pdf>]
-<../07335/general_plots/bestfit_SED.pdf, id=2739, 433.62pt x 289.08pt>
-File: ../07335/general_plots/bestfit_SED.pdf Graphic file (type pdf)
-<use ../07335/general_plots/bestfit_SED.pdf>
-Package pdftex.def Info: ../07335/general_plots/bestfit_SED.pdf  used on input 
-line 298.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
- [60 <../02100/general_plots/gamma_vs_chi.pdf>]
-<../07335/general_plots/diameter_histogram.pdf, id=2782, 433.62pt x 433.62pt>
-File: ../07335/general_plots/diameter_histogram.pdf Graphic file (type pdf)
-<use ../07335/general_plots/diameter_histogram.pdf>
-Package pdftex.def Info: ../07335/general_plots/diameter_histogram.pdf  used on
- input line 302.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
-
-[61 <../07335/general_plots/bestfit_SED.pdf>]
-<../07335/general_plots/diameter_vs_albedo.pdf, id=2828, 433.62pt x 433.62pt>
-File: ../07335/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
-<use ../07335/general_plots/diameter_vs_albedo.pdf>
-Package pdftex.def Info: ../07335/general_plots/diameter_vs_albedo.pdf  used on
- input line 306.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [62 <../07335/general_plots/diameter_histogram.pdf>]
-<../07335/general_plots/diameter_vs_gamma.pdf, id=2867, 433.62pt x 433.62pt>
-File: ../07335/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
-<use ../07335/general_plots/diameter_vs_gamma.pdf>
-Package pdftex.def Info: ../07335/general_plots/diameter_vs_gamma.pdf  used on 
-input line 310.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [63 <../07335/general_plots/diameter_vs_albedo.pdf>]
-<../07335/general_plots/diameter_vs_period.pdf, id=2918, 433.62pt x 433.62pt>
-File: ../07335/general_plots/diameter_vs_period.pdf Graphic file (type pdf)
-<use ../07335/general_plots/diameter_vs_period.pdf>
-Package pdftex.def Info: ../07335/general_plots/diameter_vs_period.pdf  used on
- input line 314.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
-
-[64 <../07335/general_plots/diameter_vs_gamma.pdf>]
-<../07335/general_plots/gamma_vs_chi.pdf, id=2973, 433.62pt x 433.62pt>
-File: ../07335/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
-<use ../07335/general_plots/gamma_vs_chi.pdf>
-Package pdftex.def Info: ../07335/general_plots/gamma_vs_chi.pdf  used on input
- line 318.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [65 <../07335/general_plots/diameter_vs_period.pdf>]
+ line 350.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [73 <../02100/general_plots/diameter_vs_period.pdf>]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.321 \section*{\LARGE triaxial_G1989}
+l.353 \section*{\LARGE triaxial_85713}
                                       
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.321 \section*{\LARGE triaxial_G1989}
+l.353 \section*{\LARGE triaxial_85713}
                                       
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.321 \section*{\LARGE triaxial_G1989}
+l.353 \section*{\LARGE triaxial_85713}
                                       
 ? 
 ! Extra }, or forgotten \endgroup.
 \H@old@ssect ...penalty \@M \sec@upcase {#5}\par }
                                                   \endgroup \else \def \@svs...
-l.321 \section*{\LARGE triaxial_G1989}
+l.353 \section*{\LARGE triaxial_85713}
                                       
 ? 
-<../triaxial_G1989/general_plots/bestfit_SED.pdf, id=3023, 433.62pt x 289.08pt>
-
+<../triaxial_85713/general_plots/bestfit_SED.pdf, id=3562, 527.79686pt x 410.28
+28pt>
+File: ../triaxial_85713/general_plots/bestfit_SED.pdf Graphic file (type pdf)
+<use ../triaxial_85713/general_plots/bestfit_SED.pdf>
+Package pdftex.def Info: ../triaxial_85713/general_plots/bestfit_SED.pdf  used 
+on input line 355.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+[74 <../02100/general_plots/gamma_vs_chi.pdf>]
+<../triaxial_85713/general_plots/diameter_histogram.pdf, id=3609, 578.16pt x 43
+3.62pt>
+File: ../triaxial_85713/general_plots/diameter_histogram.pdf Graphic file (type
+ pdf)
+<use ../triaxial_85713/general_plots/diameter_histogram.pdf>
+Package pdftex.def Info: ../triaxial_85713/general_plots/diameter_histogram.pdf
+  used on input line 359.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [75 <../triaxial_85713/general_plots/bestfit_SED.pdf>]
+<../triaxial_85713/general_plots/diameter_vs_albedo.pdf, id=3658, 578.16pt x 43
+3.62pt>
+File: ../triaxial_85713/general_plots/diameter_vs_albedo.pdf Graphic file (type
+ pdf)
+<use ../triaxial_85713/general_plots/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../triaxial_85713/general_plots/diameter_vs_albedo.pdf
+  used on input line 363.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [76 <../triaxial_85713/general_plots/diameter_histogram.pdf>]
+<../triaxial_85713/general_plots/diameter_vs_chi.pdf, id=3705, 578.16pt x 433.6
+2pt>
+File: ../triaxial_85713/general_plots/diameter_vs_chi.pdf Graphic file (type pd
+f)
+<use ../triaxial_85713/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../triaxial_85713/general_plots/diameter_vs_chi.pdf  u
+sed on input line 367.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [77 <../triaxial_85713/general_plots/diameter_vs_albedo.pdf>]
+<../triaxial_85713/general_plots/diameter_vs_gamma.pdf, id=3758, 578.16pt x 433
+.62pt>
+File: ../triaxial_85713/general_plots/diameter_vs_gamma.pdf Graphic file (type 
+pdf)
+<use ../triaxial_85713/general_plots/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../triaxial_85713/general_plots/diameter_vs_gamma.pdf 
+ used on input line 371.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [78 <../triaxial_85713/general_plots/diameter_vs_chi.pdf>]
+<../triaxial_85713/general_plots/gamma_vs_chi.pdf, id=3801, 578.16pt x 433.62pt
+>
+File: ../triaxial_85713/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../triaxial_85713/general_plots/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../triaxial_85713/general_plots/gamma_vs_chi.pdf  used
+ on input line 375.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [79 <../triaxial_85713/general_plots/diameter_vs_gamma.pdf>]
+<../07335/general_plots/bestfit_SED.pdf, id=3860, 527.79686pt x 410.2828pt>
+File: ../07335/general_plots/bestfit_SED.pdf Graphic file (type pdf)
+<use ../07335/general_plots/bestfit_SED.pdf>
+Package pdftex.def Info: ../07335/general_plots/bestfit_SED.pdf  used on input 
+line 380.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+ [80 <../triaxial_85713/general_plots/gamma_vs_chi.pdf>]
+<../07335/general_plots/diameter_histogram.pdf, id=3909, 578.16pt x 433.62pt>
+File: ../07335/general_plots/diameter_histogram.pdf Graphic file (type pdf)
+<use ../07335/general_plots/diameter_histogram.pdf>
+Package pdftex.def Info: ../07335/general_plots/diameter_histogram.pdf  used on
+ input line 384.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [81 <../07335/general_plots/bestfit_SED.pdf>]
+<../07335/general_plots/diameter_vs_albedo.pdf, id=3958, 578.16pt x 433.62pt>
+File: ../07335/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
+<use ../07335/general_plots/diameter_vs_albedo.pdf>
+Package pdftex.def Info: ../07335/general_plots/diameter_vs_albedo.pdf  used on
+ input line 388.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [82 <../07335/general_plots/diameter_histogram.pdf>]
+<../07335/general_plots/diameter_vs_chi.pdf, id=4004, 578.16pt x 433.62pt>
+File: ../07335/general_plots/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../07335/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../07335/general_plots/diameter_vs_chi.pdf  used on in
+put line 392.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [83 <../07335/general_plots/diameter_vs_albedo.pdf>]
+<../07335/general_plots/diameter_vs_gamma.pdf, id=4056, 578.16pt x 433.62pt>
+File: ../07335/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
+<use ../07335/general_plots/diameter_vs_gamma.pdf>
+Package pdftex.def Info: ../07335/general_plots/diameter_vs_gamma.pdf  used on 
+input line 396.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+[84 <../07335/general_plots/diameter_vs_chi.pdf>]
+<../07335/general_plots/diameter_vs_period.pdf, id=4098, 578.16pt x 433.62pt>
+File: ../07335/general_plots/diameter_vs_period.pdf Graphic file (type pdf)
+<use ../07335/general_plots/diameter_vs_period.pdf>
+Package pdftex.def Info: ../07335/general_plots/diameter_vs_period.pdf  used on
+ input line 400.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [85 <../07335/general_plots/diameter_vs_gamma.pdf>]
+<../07335/general_plots/gamma_vs_chi.pdf, id=4159, 578.16pt x 433.62pt>
+File: ../07335/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
+<use ../07335/general_plots/gamma_vs_chi.pdf>
+Package pdftex.def Info: ../07335/general_plots/gamma_vs_chi.pdf  used on input
+ line 404.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [86 <../07335/general_plots/diameter_vs_period.pdf>]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.407 \section*{\LARGE triaxial_G1989}
+                                      
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.407 \section*{\LARGE triaxial_G1989}
+                                      
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.407 \section*{\LARGE triaxial_G1989}
+                                      
+? 
+! Extra }, or forgotten \endgroup.
+\H@old@ssect ...penalty \@M \sec@upcase {#5}\par }
+                                                  \endgroup \else \def \@svs...
+l.407 \section*{\LARGE triaxial_G1989}
+                                      
+? 
+<../triaxial_G1989/general_plots/bestfit_SED.pdf, id=4211, 527.79686pt x 410.28
+28pt>
 File: ../triaxial_G1989/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../triaxial_G1989/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../triaxial_G1989/general_plots/bestfit_SED.pdf  used 
-on input line 323.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
-[66 <../07335/general_plots/gamma_vs_chi.pdf>]
-<../triaxial_G1989/general_plots/diameter_histogram.pdf, id=3068, 433.62pt x 43
+on input line 409.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+[87 <../07335/general_plots/gamma_vs_chi.pdf>]
+<../triaxial_G1989/general_plots/diameter_histogram.pdf, id=4261, 578.16pt x 43
 3.62pt>
 File: ../triaxial_G1989/general_plots/diameter_histogram.pdf Graphic file (type
  pdf)
 <use ../triaxial_G1989/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../triaxial_G1989/general_plots/diameter_histogram.pdf
-  used on input line 327.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [67 <../triaxial_G1989/general_plots/bestfit_SED.pdf>]
-<../triaxial_G1989/general_plots/diameter_vs_albedo.pdf, id=3113, 433.62pt x 43
+  used on input line 413.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [88 <../triaxial_G1989/general_plots/bestfit_SED.pdf>]
+<../triaxial_G1989/general_plots/diameter_vs_albedo.pdf, id=4310, 578.16pt x 43
 3.62pt>
 File: ../triaxial_G1989/general_plots/diameter_vs_albedo.pdf Graphic file (type
  pdf)
 <use ../triaxial_G1989/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../triaxial_G1989/general_plots/diameter_vs_albedo.pdf
-  used on input line 331.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [68 <../triaxial_G1989/general_plots/diameter_histogram.pdf>]
-<../triaxial_G1989/general_plots/diameter_vs_chi.pdf, id=3157, 433.62pt x 433.6
+  used on input line 417.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [89 <../triaxial_G1989/general_plots/diameter_histogram.pdf>]
+<../triaxial_G1989/general_plots/diameter_vs_chi.pdf, id=4358, 578.16pt x 433.6
 2pt>
 File: ../triaxial_G1989/general_plots/diameter_vs_chi.pdf Graphic file (type pd
 f)
 <use ../triaxial_G1989/general_plots/diameter_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_G1989/general_plots/diameter_vs_chi.pdf  u
-sed on input line 335.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [69 <../triaxial_G1989/general_plots/diameter_vs_albedo.pdf>]
-<../triaxial_G1989/general_plots/diameter_vs_gamma.pdf, id=3206, 433.62pt x 433
+sed on input line 421.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [90 <../triaxial_G1989/general_plots/diameter_vs_albedo.pdf>]
+<../triaxial_G1989/general_plots/diameter_vs_gamma.pdf, id=4414, 578.16pt x 433
 .62pt>
 File: ../triaxial_G1989/general_plots/diameter_vs_gamma.pdf Graphic file (type 
 pdf)
 <use ../triaxial_G1989/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../triaxial_G1989/general_plots/diameter_vs_gamma.pdf 
- used on input line 339.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [70 <../triaxial_G1989/general_plots/diameter_vs_chi.pdf>]
-<../triaxial_G1989/general_plots/diameter_vs_period.pdf, id=3242, 433.62pt x 43
+ used on input line 425.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [91 <../triaxial_G1989/general_plots/diameter_vs_chi.pdf>]
+<../triaxial_G1989/general_plots/diameter_vs_period.pdf, id=4461, 578.16pt x 43
 3.62pt>
 File: ../triaxial_G1989/general_plots/diameter_vs_period.pdf Graphic file (type
  pdf)
 <use ../triaxial_G1989/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../triaxial_G1989/general_plots/diameter_vs_period.pdf
-  used on input line 343.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [71 <../triaxial_G1989/general_plots/diameter_vs_gamma.pdf>]
-<../triaxial_G1989/general_plots/gamma_vs_chi.pdf, id=3297, 433.62pt x 433.62pt
+  used on input line 429.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [92 <../triaxial_G1989/general_plots/diameter_vs_gamma.pdf>]
+<../triaxial_G1989/general_plots/gamma_vs_chi.pdf, id=4522, 578.16pt x 433.62pt
 >
 File: ../triaxial_G1989/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../triaxial_G1989/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_G1989/general_plots/gamma_vs_chi.pdf  used
- on input line 347.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [72 <../triaxial_G1989/general_plots/diameter_vs_period.pdf>]
+ on input line 433.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [93 <../triaxial_G1989/general_plots/diameter_vs_period.pdf>]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.350 \section*{\LARGE triaxial_23606}
+l.436 \section*{\LARGE triaxial_23606}
                                       
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.350 \section*{\LARGE triaxial_23606}
+l.436 \section*{\LARGE triaxial_23606}
                                       
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.350 \section*{\LARGE triaxial_23606}
+l.436 \section*{\LARGE triaxial_23606}
                                       
 ? 
 ! Extra }, or forgotten \endgroup.
 \H@old@ssect ...penalty \@M \sec@upcase {#5}\par }
                                                   \endgroup \else \def \@svs...
-l.350 \section*{\LARGE triaxial_23606}
+l.436 \section*{\LARGE triaxial_23606}
                                       
 ? 
-<../triaxial_23606/general_plots/bestfit_SED.pdf, id=3346, 433.62pt x 289.08pt>
-
+<../triaxial_23606/general_plots/bestfit_SED.pdf, id=4578, 527.79686pt x 410.28
+28pt>
 File: ../triaxial_23606/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../triaxial_23606/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../triaxial_23606/general_plots/bestfit_SED.pdf  used 
-on input line 352.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
-[73 <../triaxial_G1989/general_plots/gamma_vs_chi.pdf>]
-<../triaxial_23606/general_plots/diameter_histogram.pdf, id=3392, 433.62pt x 43
+on input line 438.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+[94 <../triaxial_G1989/general_plots/gamma_vs_chi.pdf>]
+<../triaxial_23606/general_plots/diameter_histogram.pdf, id=4630, 578.16pt x 43
 3.62pt>
 File: ../triaxial_23606/general_plots/diameter_histogram.pdf Graphic file (type
  pdf)
 <use ../triaxial_23606/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../triaxial_23606/general_plots/diameter_histogram.pdf
-  used on input line 356.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [74 <../triaxial_23606/general_plots/bestfit_SED.pdf>]
-<../triaxial_23606/general_plots/diameter_vs_albedo.pdf, id=3437, 433.62pt x 43
+  used on input line 442.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [95 <../triaxial_23606/general_plots/bestfit_SED.pdf>]
+<../triaxial_23606/general_plots/diameter_vs_albedo.pdf, id=4679, 578.16pt x 43
 3.62pt>
 File: ../triaxial_23606/general_plots/diameter_vs_albedo.pdf Graphic file (type
  pdf)
 <use ../triaxial_23606/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../triaxial_23606/general_plots/diameter_vs_albedo.pdf
-  used on input line 360.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [75 <../triaxial_23606/general_plots/diameter_histogram.pdf>]
-<../triaxial_23606/general_plots/diameter_vs_gamma.pdf, id=3477, 433.62pt x 433
+  used on input line 446.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [96 <../triaxial_23606/general_plots/diameter_histogram.pdf>]
+<../triaxial_23606/general_plots/diameter_vs_chi.pdf, id=4725, 578.16pt x 433.6
+2pt>
+File: ../triaxial_23606/general_plots/diameter_vs_chi.pdf Graphic file (type pd
+f)
+<use ../triaxial_23606/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../triaxial_23606/general_plots/diameter_vs_chi.pdf  u
+sed on input line 450.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [97 <../triaxial_23606/general_plots/diameter_vs_albedo.pdf>]
+<../triaxial_23606/general_plots/diameter_vs_gamma.pdf, id=4778, 578.16pt x 433
 .62pt>
 File: ../triaxial_23606/general_plots/diameter_vs_gamma.pdf Graphic file (type 
 pdf)
 <use ../triaxial_23606/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../triaxial_23606/general_plots/diameter_vs_gamma.pdf 
- used on input line 364.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [76 <../triaxial_23606/general_plots/diameter_vs_albedo.pdf>]
-<../triaxial_23606/general_plots/diameter_vs_period.pdf, id=3527, 433.62pt x 43
+ used on input line 454.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+
+[98 <../triaxial_23606/general_plots/diameter_vs_chi.pdf>]
+<../triaxial_23606/general_plots/diameter_vs_period.pdf, id=4820, 578.16pt x 43
 3.62pt>
 File: ../triaxial_23606/general_plots/diameter_vs_period.pdf Graphic file (type
  pdf)
 <use ../triaxial_23606/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../triaxial_23606/general_plots/diameter_vs_period.pdf
-  used on input line 368.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
-
-[77 <../triaxial_23606/general_plots/diameter_vs_gamma.pdf>]
-<../triaxial_23606/general_plots/gamma_vs_chi.pdf, id=3582, 433.62pt x 433.62pt
+  used on input line 458.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [99 <../triaxial_23606/general_plots/diameter_vs_gamma.pdf>]
+<../triaxial_23606/general_plots/gamma_vs_chi.pdf, id=4878, 578.16pt x 433.62pt
 >
 File: ../triaxial_23606/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../triaxial_23606/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_23606/general_plots/gamma_vs_chi.pdf  used
- on input line 372.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [78 <../triaxial_23606/general_plots/diameter_vs_period.pdf>]
+ on input line 462.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [100 <../triaxial_23606/general_plots/diameter_vs_period.pdf>]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.375 \section*{\LARGE triaxial_68950}
+l.465 \section*{\LARGE triaxial_68950}
                                       
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.375 \section*{\LARGE triaxial_68950}
+l.465 \section*{\LARGE triaxial_68950}
                                       
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.375 \section*{\LARGE triaxial_68950}
+l.465 \section*{\LARGE triaxial_68950}
                                       
 ? 
 ! Extra }, or forgotten \endgroup.
 \H@old@ssect ...penalty \@M \sec@upcase {#5}\par }
                                                   \endgroup \else \def \@svs...
-l.375 \section*{\LARGE triaxial_68950}
+l.465 \section*{\LARGE triaxial_68950}
                                       
 ? 
-<../triaxial_68950/general_plots/bestfit_SED.pdf, id=3630, 433.62pt x 289.08pt>
-
+<../triaxial_68950/general_plots/bestfit_SED.pdf, id=4929, 527.79686pt x 410.28
+28pt>
 File: ../triaxial_68950/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../triaxial_68950/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../triaxial_68950/general_plots/bestfit_SED.pdf  used 
-on input line 377.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
-[79 <../triaxial_23606/general_plots/gamma_vs_chi.pdf>]
-<../triaxial_68950/general_plots/diameter_histogram.pdf, id=3676, 433.62pt x 43
+on input line 467.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+[101 <../triaxial_23606/general_plots/gamma_vs_chi.pdf>]
+<../triaxial_68950/general_plots/diameter_histogram.pdf, id=4978, 578.16pt x 43
 3.62pt>
 File: ../triaxial_68950/general_plots/diameter_histogram.pdf Graphic file (type
  pdf)
 <use ../triaxial_68950/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../triaxial_68950/general_plots/diameter_histogram.pdf
-  used on input line 381.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [80 <../triaxial_68950/general_plots/bestfit_SED.pdf>]
-<../triaxial_68950/general_plots/diameter_vs_albedo.pdf, id=3723, 433.62pt x 43
+  used on input line 471.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [102 <../triaxial_68950/general_plots/bestfit_SED.pdf>]
+<../triaxial_68950/general_plots/diameter_vs_albedo.pdf, id=5026, 578.16pt x 43
 3.62pt>
 File: ../triaxial_68950/general_plots/diameter_vs_albedo.pdf Graphic file (type
  pdf)
 <use ../triaxial_68950/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../triaxial_68950/general_plots/diameter_vs_albedo.pdf
-  used on input line 385.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [81 <../triaxial_68950/general_plots/diameter_histogram.pdf>]
-<../triaxial_68950/general_plots/diameter_vs_gamma.pdf, id=3764, 433.62pt x 433
+  used on input line 475.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [103 <../triaxial_68950/general_plots/diameter_histogram.pdf>]
+<../triaxial_68950/general_plots/diameter_vs_chi.pdf, id=5073, 578.16pt x 433.6
+2pt>
+File: ../triaxial_68950/general_plots/diameter_vs_chi.pdf Graphic file (type pd
+f)
+<use ../triaxial_68950/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../triaxial_68950/general_plots/diameter_vs_chi.pdf  u
+sed on input line 479.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [104 <../triaxial_68950/general_plots/diameter_vs_albedo.pdf>]
+<../triaxial_68950/general_plots/diameter_vs_gamma.pdf, id=5126, 578.16pt x 433
 .62pt>
 File: ../triaxial_68950/general_plots/diameter_vs_gamma.pdf Graphic file (type 
 pdf)
 <use ../triaxial_68950/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../triaxial_68950/general_plots/diameter_vs_gamma.pdf 
- used on input line 389.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [82 <../triaxial_68950/general_plots/diameter_vs_albedo.pdf>]
-<../triaxial_68950/general_plots/gamma_vs_chi.pdf, id=3814, 433.62pt x 433.62pt
+ used on input line 483.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [105 <../triaxial_68950/general_plots/diameter_vs_chi.pdf>]
+<../triaxial_68950/general_plots/gamma_vs_chi.pdf, id=5169, 578.16pt x 433.62pt
 >
 File: ../triaxial_68950/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../triaxial_68950/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_68950/general_plots/gamma_vs_chi.pdf  used
- on input line 393.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
-
-[83 <../triaxial_68950/general_plots/diameter_vs_gamma.pdf>]
-<../02212/general_plots/bestfit_SED.pdf, id=3871, 433.62pt x 289.08pt>
+ on input line 487.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [106 <../triaxial_68950/general_plots/diameter_vs_gamma.pdf>]
+<../02212/general_plots/bestfit_SED.pdf, id=5228, 527.79686pt x 410.2828pt>
 File: ../02212/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../02212/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../02212/general_plots/bestfit_SED.pdf  used on input 
-line 398.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
- [84 <../triaxial_68950/general_plots/gamma_vs_chi.pdf>]
-<../02212/general_plots/diameter_histogram.pdf, id=3916, 433.62pt x 433.62pt>
+line 492.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+ [107 <../triaxial_68950/general_plots/gamma_vs_chi.pdf>]
+<../02212/general_plots/diameter_histogram.pdf, id=5276, 578.16pt x 433.62pt>
 File: ../02212/general_plots/diameter_histogram.pdf Graphic file (type pdf)
 <use ../02212/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../02212/general_plots/diameter_histogram.pdf  used on
- input line 402.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [85 <../02212/general_plots/bestfit_SED.pdf>]
-<../02212/general_plots/diameter_vs_albedo.pdf, id=3961, 433.62pt x 433.62pt>
+ input line 496.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [108 <../02212/general_plots/bestfit_SED.pdf>]
+<../02212/general_plots/diameter_vs_albedo.pdf, id=5322, 578.16pt x 433.62pt>
 File: ../02212/general_plots/diameter_vs_albedo.pdf Graphic file (type pdf)
 <use ../02212/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../02212/general_plots/diameter_vs_albedo.pdf  used on
- input line 406.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [86 <../02212/general_plots/diameter_histogram.pdf>]
-<../02212/general_plots/diameter_vs_gamma.pdf, id=4000, 433.62pt x 433.62pt>
+ input line 500.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [109 <../02212/general_plots/diameter_histogram.pdf>]
+<../02212/general_plots/diameter_vs_chi.pdf, id=5368, 578.16pt x 433.62pt>
+File: ../02212/general_plots/diameter_vs_chi.pdf Graphic file (type pdf)
+<use ../02212/general_plots/diameter_vs_chi.pdf>
+Package pdftex.def Info: ../02212/general_plots/diameter_vs_chi.pdf  used on in
+put line 504.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [110 <../02212/general_plots/diameter_vs_albedo.pdf>]
+<../02212/general_plots/diameter_vs_gamma.pdf, id=5421, 578.16pt x 433.62pt>
 File: ../02212/general_plots/diameter_vs_gamma.pdf Graphic file (type pdf)
 <use ../02212/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../02212/general_plots/diameter_vs_gamma.pdf  used on 
-input line 410.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [87 <../02212/general_plots/diameter_vs_albedo.pdf>]
-<../02212/general_plots/diameter_vs_period.pdf, id=4049, 433.62pt x 433.62pt>
+input line 508.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [111 <../02212/general_plots/diameter_vs_chi.pdf>]
+<../02212/general_plots/diameter_vs_period.pdf, id=5457, 578.16pt x 433.62pt>
 File: ../02212/general_plots/diameter_vs_period.pdf Graphic file (type pdf)
 <use ../02212/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../02212/general_plots/diameter_vs_period.pdf  used on
- input line 414.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [88 <../02212/general_plots/diameter_vs_gamma.pdf>]
-<../02212/general_plots/gamma_vs_chi.pdf, id=4103, 433.62pt x 433.62pt>
+ input line 512.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [112 <../02212/general_plots/diameter_vs_gamma.pdf>]
+<../02212/general_plots/gamma_vs_chi.pdf, id=5513, 578.16pt x 433.62pt>
 File: ../02212/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../02212/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../02212/general_plots/gamma_vs_chi.pdf  used on input
- line 418.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [89 <../02212/general_plots/diameter_vs_period.pdf>]
+ line 516.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [113 <../02212/general_plots/diameter_vs_period.pdf>]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.421 \section*{\LARGE triaxial_05189}
+l.519 \section*{\LARGE triaxial_05189}
                                       
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.421 \section*{\LARGE triaxial_05189}
+l.519 \section*{\LARGE triaxial_05189}
                                       
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.421 \section*{\LARGE triaxial_05189}
+l.519 \section*{\LARGE triaxial_05189}
                                       
 ? 
 ! Extra }, or forgotten \endgroup.
 \H@old@ssect ...penalty \@M \sec@upcase {#5}\par }
                                                   \endgroup \else \def \@svs...
-l.421 \section*{\LARGE triaxial_05189}
+l.519 \section*{\LARGE triaxial_05189}
                                       
 ? 
-<../triaxial_05189/general_plots/bestfit_SED.pdf, id=4151, 433.62pt x 289.08pt>
-
+<../triaxial_05189/general_plots/bestfit_SED.pdf, id=5564, 527.79686pt x 410.28
+28pt>
 File: ../triaxial_05189/general_plots/bestfit_SED.pdf Graphic file (type pdf)
 <use ../triaxial_05189/general_plots/bestfit_SED.pdf>
 Package pdftex.def Info: ../triaxial_05189/general_plots/bestfit_SED.pdf  used 
-on input line 423.
-(pdftex.def)             Requested size: 436.15294pt x 290.78192pt.
-[90 <../02212/general_plots/gamma_vs_chi.pdf>]
-<../triaxial_05189/general_plots/diameter_histogram.pdf, id=4194, 433.62pt x 43
+on input line 521.
+(pdftex.def)             Requested size: 436.15294pt x 339.05092pt.
+[114 <../02212/general_plots/gamma_vs_chi.pdf>]
+<../triaxial_05189/general_plots/diameter_histogram.pdf, id=5611, 578.16pt x 43
 3.62pt>
 File: ../triaxial_05189/general_plots/diameter_histogram.pdf Graphic file (type
  pdf)
 <use ../triaxial_05189/general_plots/diameter_histogram.pdf>
 Package pdftex.def Info: ../triaxial_05189/general_plots/diameter_histogram.pdf
-  used on input line 427.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [91 <../triaxial_05189/general_plots/bestfit_SED.pdf>]
-<../triaxial_05189/general_plots/diameter_vs_albedo.pdf, id=4238, 433.62pt x 43
+  used on input line 525.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [115 <../triaxial_05189/general_plots/bestfit_SED.pdf>]
+<../triaxial_05189/general_plots/diameter_vs_albedo.pdf, id=5659, 578.16pt x 43
 3.62pt>
 File: ../triaxial_05189/general_plots/diameter_vs_albedo.pdf Graphic file (type
  pdf)
 <use ../triaxial_05189/general_plots/diameter_vs_albedo.pdf>
 Package pdftex.def Info: ../triaxial_05189/general_plots/diameter_vs_albedo.pdf
-  used on input line 431.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [92 <../triaxial_05189/general_plots/diameter_histogram.pdf>]
-<../triaxial_05189/general_plots/diameter_vs_chi.pdf, id=4279, 433.62pt x 433.6
+  used on input line 529.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [116 <../triaxial_05189/general_plots/diameter_histogram.pdf>]
+<../triaxial_05189/general_plots/diameter_vs_chi.pdf, id=5705, 578.16pt x 433.6
 2pt>
 File: ../triaxial_05189/general_plots/diameter_vs_chi.pdf Graphic file (type pd
 f)
 <use ../triaxial_05189/general_plots/diameter_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_05189/general_plots/diameter_vs_chi.pdf  u
-sed on input line 435.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [93 <../triaxial_05189/general_plots/diameter_vs_albedo.pdf>]
-<../triaxial_05189/general_plots/diameter_vs_gamma.pdf, id=4329, 433.62pt x 433
+sed on input line 533.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [117 <../triaxial_05189/general_plots/diameter_vs_albedo.pdf>]
+<../triaxial_05189/general_plots/diameter_vs_gamma.pdf, id=5756, 578.16pt x 433
 .62pt>
 File: ../triaxial_05189/general_plots/diameter_vs_gamma.pdf Graphic file (type 
 pdf)
 <use ../triaxial_05189/general_plots/diameter_vs_gamma.pdf>
 Package pdftex.def Info: ../triaxial_05189/general_plots/diameter_vs_gamma.pdf 
- used on input line 439.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [94 <../triaxial_05189/general_plots/diameter_vs_chi.pdf>]
-<../triaxial_05189/general_plots/diameter_vs_period.pdf, id=4360, 433.62pt x 43
+ used on input line 537.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+
+[118 <../triaxial_05189/general_plots/diameter_vs_chi.pdf>]
+<../triaxial_05189/general_plots/diameter_vs_period.pdf, id=5796, 578.16pt x 43
 3.62pt>
 File: ../triaxial_05189/general_plots/diameter_vs_period.pdf Graphic file (type
  pdf)
 <use ../triaxial_05189/general_plots/diameter_vs_period.pdf>
 Package pdftex.def Info: ../triaxial_05189/general_plots/diameter_vs_period.pdf
-  used on input line 443.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [95 <../triaxial_05189/general_plots/diameter_vs_gamma.pdf>]
-<../triaxial_05189/general_plots/gamma_vs_chi.pdf, id=4414, 433.62pt x 433.62pt
+  used on input line 541.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [119 <../triaxial_05189/general_plots/diameter_vs_gamma.pdf>]
+<../triaxial_05189/general_plots/gamma_vs_chi.pdf, id=5853, 578.16pt x 433.62pt
 >
 File: ../triaxial_05189/general_plots/gamma_vs_chi.pdf Graphic file (type pdf)
 <use ../triaxial_05189/general_plots/gamma_vs_chi.pdf>
 Package pdftex.def Info: ../triaxial_05189/general_plots/gamma_vs_chi.pdf  used
- on input line 447.
-(pdftex.def)             Requested size: 436.15294pt x 436.1729pt.
- [96 <../triaxial_05189/general_plots/diameter_vs_period.pdf>] [97 <../triaxial
-_05189/general_plots/gamma_vs_chi.pdf>]
-(./thermophysical_outputs.aux)
+ on input line 545.
+(pdftex.def)             Requested size: 436.15294pt x 327.11313pt.
+ [120 <../triaxial_05189/general_plots/diameter_vs_period.pdf>] [121 <../triaxi
+al_05189/general_plots/gamma_vs_chi.pdf>] (./thermophysical_outputs.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
@@ -1537,13 +1746,13 @@ Package rerunfilecheck Info: File `thermophysical_outputs.out' has not changed.
 (rerunfilecheck)             Checksum: 9814C2D956916ADB9290ECA4E25C967A;103.
  ) 
 Here is how much of TeX's memory you used:
- 13266 strings out of 478268
- 221660 string characters out of 5846347
- 543942 words of memory out of 5000000
- 31179 multiletter control sequences out of 15000+600000
+ 13438 strings out of 478268
+ 229907 string characters out of 5846347
+ 544841 words of memory out of 5000000
+ 31323 multiletter control sequences out of 15000+600000
  481963 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,77p,1072b,469s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,77p,1072b,468s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 ></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
@@ -1556,10 +1765,10 @@ texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/tex
 live/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texli
 ve/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive
 /2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on thermophysical_outputs.pdf (97 pages, 57979918 bytes).
+Output written on thermophysical_outputs.pdf (121 pages, 75754607 bytes).
 PDF statistics:
- 4588 PDF objects out of 5155 (max. 8388607)
- 1243 compressed objects within 13 object streams
- 116 named destinations out of 1000 (max. 500000)
- 489 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6038 PDF objects out of 6186 (max. 8388607)
+ 1539 compressed objects within 16 object streams
+ 142 named destinations out of 1000 (max. 500000)
+ 609 words of extra memory for PDF output out of 10000 (max. 10000000)
 
