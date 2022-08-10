@@ -17,7 +17,7 @@ def julian_days_utc_converter(jd):
     Parameters
     ----------
     jd : float
-        A julian date entry
+        A julian date entry.
 
     Returns
     -------
@@ -318,6 +318,236 @@ def generate_SED_plot(object, esed, wavelengths, datelabels, data_x, data_y, dat
     plt.close()
 
 
+def generate_diameter_histogram(object, diameters):
+    """
+    Generates a histogram of diameter solutions for the MCMC output.
+
+    Parameters
+    ----------
+    object : str
+        The folder name of the object being analyzed.
+
+    diameters : list
+        A list of diameter values for each MCMC solution
+
+    Returns: None, generates two plots titled diameter_histogram.png/pdf
+    """
+
+    print("Generating diameter histogram.")
+    # Set up log scale plot arguments and standard deviation lines
+    log_diameters = [np.log10(diameter) for diameter in diameters]
+    log_diameters_copy = log_diameters[:]
+    diameters_count = len(log_diameters)
+    log_diameters_copy.sort()
+
+    sigma_1_low = log_diameters_copy[int(diameters_count * 0.16)]
+    sigma_1_high = log_diameters_copy[int(diameters_count * 0.84)]
+    sigma_2_low = log_diameters_copy[int(diameters_count * 0.025)]
+    sigma_2_high = log_diameters_copy[int(diameters_count * 0.975)]
+
+    # Adjust step size based on spacing
+    if sigma_2_high - sigma_2_low > 0.2:
+        hist_step = 0.01
+    elif sigma_2_high - sigma_2_low > 0.02:
+        hist_step = 0.001
+    else:
+        hist_step = 0.0001
+
+    plt.figure(figsize=[8, 6])
+    
+    hist_low_limit = int(min(log_diameters) * 1000) / 1000.
+    hist_high_limit = (int(max(log_diameters) * 1000) + 1) / 1000.
+    plt.hist(log_diameters, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
+            histtype="step",
+            color="black")
+
+    # Plotting standard deviation limits on plot
+    plt.axvline(sigma_1_low, color='#cc0000')
+    plt.axvline(sigma_1_high, color='#cc0000')
+    plt.axvline(sigma_2_low, color='#cc0000',ls='dotted')
+    plt.axvline(sigma_2_high, color='#cc0000',ls='dotted')
+
+    # Labeling plot
+    plt.xlabel("Log Diameter (km)")
+    plt.ylabel("Number of Monte Carlo Results")
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.savefig(f"../{object}/general_plots/diameter_histogram.png")
+    plt.savefig(f"../{object}/general_plots/diameter_histogram.pdf")
+
+
+def generate_albedo_histogram(object, albedos):
+    """
+    Generates a histogram of diameter solutions for the MCMC output.
+
+    Parameters
+    ----------
+    object : str
+        The folder name of the object being analyzed.
+
+    albedos : list
+        A list of albedo values for each MCMC solution
+
+    Returns: None, generates two plots titled albedo_histogram.png/pdf
+    """
+
+    print("Generating albedo histogram.")
+    # Set up log scale plot arguments and standard deviation lines
+    log_albedos = [np.log10(albedo) for albedo in albedos]
+    log_albedos_copy = log_albedos[:]
+    albedos_count = len(log_albedos)
+    log_albedos_copy.sort()
+
+    sigma_1_low = log_albedos_copy[int(albedos_count * 0.16)]
+    sigma_1_high = log_albedos_copy[int(albedos_count * 0.84)]
+    sigma_2_low = log_albedos_copy[int(albedos_count * 0.025)]
+    sigma_2_high = log_albedos_copy[int(albedos_count * 0.975)]
+
+    # Adjust step size based on spacing
+    if sigma_2_high - sigma_2_low > 0.2:
+        hist_step = 0.01
+    elif sigma_2_high - sigma_2_low > 0.02:
+        hist_step = 0.001
+    else:
+        hist_step = 0.0001
+
+    plt.figure(figsize=[8, 6])
+    
+    hist_low_limit = int(min(log_albedos) * 1000) / 1000.
+    hist_high_limit = (int(max(log_albedos) * 1000) + 1) / 1000.
+    plt.hist(log_albedos, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
+            histtype="step",
+            color="black")
+
+    # Plotting standard deviation limits on plot
+    plt.axvline(sigma_1_low, color='#cc0000')
+    plt.axvline(sigma_1_high, color='#cc0000')
+    plt.axvline(sigma_2_low, color='#cc0000',ls='dotted')
+    plt.axvline(sigma_2_high, color='#cc0000',ls='dotted')
+
+    # Labeling plot
+    plt.xlabel("Log Albedo")
+    plt.ylabel("Number of Monte Carlo Results")
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.savefig(f"../{object}/general_plots/albedo_histogram.png")
+    plt.savefig(f"../{object}/general_plots/albedo_histogram.pdf")
+
+
+def generate_gamma_histogram(object, gammas):
+    """
+    Generates a histogram of diameter solutions for the MCMC output.
+
+    Parameters
+    ----------
+    object : str
+        The folder name of the object being analyzed.
+
+    gammas : list
+        A list of gamma values for each MCMC solution
+
+    Returns: None, generates two plots titled gamma_histogram.png/pdf
+    """
+
+    print("Generating gamma histogram.")
+    # Set up log scale plot arguments and standard deviation lines
+    log_gammas = [np.log10(gamma) for gamma in gammas]
+    log_gammas_copy = log_gammas[:]
+    gammas_count = len(log_gammas)
+    log_gammas_copy.sort()
+
+    sigma_1_low = log_gammas_copy[int(gammas_count * 0.16)]
+    sigma_1_high = log_gammas_copy[int(gammas_count * 0.84)]
+    sigma_2_low = log_gammas_copy[int(gammas_count * 0.025)]
+    sigma_2_high = log_gammas_copy[int(gammas_count * 0.975)]
+
+    # Adjust step size based on spacing
+    if sigma_2_high - sigma_2_low > 0.2:
+        hist_step = 0.01
+    elif sigma_2_high - sigma_2_low > 0.02:
+        hist_step = 0.001
+    else:
+        hist_step = 0.0001
+
+    plt.figure(figsize=[8, 6])
+    
+    hist_low_limit = int(min(log_gammas) * 1000) / 1000.
+    hist_high_limit = (int(max(log_gammas) * 1000) + 1) / 1000.
+    plt.hist(log_gammas, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
+            histtype="step",
+            color="black")
+
+    # Plotting standard deviation limits on plot
+    plt.axvline(sigma_1_low, color='#cc0000')
+    plt.axvline(sigma_1_high, color='#cc0000')
+    plt.axvline(sigma_2_low, color='#cc0000',ls='dotted')
+    plt.axvline(sigma_2_high, color='#cc0000',ls='dotted')
+
+    # Labeling plot
+    plt.xlabel(r"Log Thermal inertia ($J~m^{-2}~s^{-0.5}~K^{-1})$)", fontsize=13)
+    plt.ylabel("Number of Monte Carlo Results")
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.savefig(f"../{object}/general_plots/gamma_histogram.png")
+    plt.savefig(f"../{object}/general_plots/gamma_histogram.pdf")
+
+
+def generate_period_histogram(object, periods):
+    """
+    Generates a histogram of diameter solutions for the MCMC output.
+
+    Parameters
+    ----------
+    object : str
+        The folder name of the object being analyzed.
+
+    periods : list
+        A list of period values for each MCMC solution
+
+    Returns: None, generates two plots titled period_histogram.png/pdf
+    """
+
+    print("Generating period histogram.")
+    if max(periods) - min(periods) == 0:
+        print("Fixed period used, skipping period histogram.")
+    # Set up log scale plot arguments and standard deviation lines
+    log_periods = [np.log10(period) for period in periods]
+    log_periods_copy = log_periods[:]
+    periods_count = len(log_periods)
+    log_periods_copy.sort()
+
+    sigma_1_low = log_periods_copy[int(periods_count * 0.16)]
+    sigma_1_high = log_periods_copy[int(periods_count * 0.84)]
+    sigma_2_low = log_periods_copy[int(periods_count * 0.025)]
+    sigma_2_high = log_periods_copy[int(periods_count * 0.975)]
+
+    # Adjust step size based on spacing
+    if sigma_2_high - sigma_2_low > 0.2:
+        hist_step = 0.01
+    elif sigma_2_high - sigma_2_low > 0.02:
+        hist_step = 0.001
+    else:
+        hist_step = 0.0001
+
+    plt.figure(figsize=[8, 6])
+    
+    hist_low_limit = int(min(log_periods) * 1000) / 1000.
+    hist_high_limit = (int(max(log_periods) * 1000) + 1) / 1000.
+    plt.hist(log_periods, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
+            histtype="step",
+            color="black")
+
+    # Plotting standard deviation limits on plot
+    plt.axvline(sigma_1_low, color='#cc0000')
+    plt.axvline(sigma_1_high, color='#cc0000')
+    plt.axvline(sigma_2_low, color='#cc0000',ls='dotted')
+    plt.axvline(sigma_2_high, color='#cc0000',ls='dotted')
+
+    # Labeling plot
+    plt.xlabel(r"Log Period (hr)", fontsize=13)
+    plt.ylabel("Number of Monte Carlo Results")
+    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    plt.savefig(f"../{object}/general_plots/period_histogram.png")
+    plt.savefig(f"../{object}/general_plots/period_histogram.pdf")
+
+
 def generate_diameter_vs_albedo_plot(object, diameters, albedos, chis):
     """
     Generates a plot of diameter and albedo solutions for the MCMC output.
@@ -413,64 +643,31 @@ def generate_diameter_vs_albedo_plot(object, diameters, albedos, chis):
     plt.close()
 
 
-def generate_diameter_histogram(object, diameters):
+def generate_diameter_vs_albedo_hex(object, diameters, albedos):
     """
-    Generates a histogram of diameter solutions for the MCMC output.
+    Generates a hexplot of the diameter and albedo solutions for an MCMC run.
 
     Parameters
     ----------
     object : str
-        The folder name of the object being analyzed.
+        The folder specific name of the object being modeled.
 
     diameters : list
-        A list of diameter values for each MCMC solution
+        
 
-    Returns: None, generates two plots titled diameter_histogram.png/pdf
     """
-
-    print("Generating diameter histogram.")
-    for i in range(50):
-        print(diameters[i])
-    # Set up log scale plot arguments and standard deviation lines
-    log_diameters = [np.log10(diameter) for diameter in diameters]
-    log_diameters_copy = log_diameters[:]
-    diameters_count = len(log_diameters)
-    log_diameters_copy.sort()
-
-    sigma_1_low = log_diameters_copy[int(diameters_count * 0.16)]
-    sigma_1_high = log_diameters_copy[int(diameters_count * 0.84)]
-    sigma_2_low = log_diameters_copy[int(diameters_count * 0.025)]
-    sigma_2_high = log_diameters_copy[int(diameters_count * 0.975)]
-
-    # Adjust step size based on spacing
-    if sigma_2_high - sigma_2_low > 0.2:
-        hist_step = 0.01
-    elif sigma_2_high - sigma_2_low > 0.02:
-        hist_step = 0.001
-    else:
-        hist_step = 0.0001
-
-    plt.figure(figsize=[8, 6])
-    
-    hist_low_limit = int(min(log_diameters) * 1000) / 1000.
-    hist_high_limit = (int(max(log_diameters) * 1000) + 1) / 1000.
-    plt.hist(log_diameters, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
-            histtype="step",
-            color="black")
-
-    # Plotting standard deviation limits on plot
-    plt.axvline(sigma_1_low, color='#cc0000')
-    plt.axvline(sigma_1_high, color='#cc0000')
-    plt.axvline(sigma_2_low, color='#cc0000',ls='dotted')
-    plt.axvline(sigma_2_high, color='#cc0000',ls='dotted')
-
-    # Labeling plot
-    plt.xlabel("Log Diameter (km)")
-    plt.ylabel("Number of Monte Carlo Results")
-    plt.title(f"{OBJECT_MAP[object]} ({object})", loc="left")
-    plt.savefig(f"../{object}/general_plots/diameter_histogram.png")
-    plt.savefig(f"../{object}/general_plots/diameter_histogram.pdf")
-
+    fig, ax = plt.subplots()
+    binplot = ax.hexbin(diameters, albedos, gridsize=100, bins="log", cmap='plasma')#, cmap=plt.cm.get_cmap('plasma'))
+    cbar = fig.colorbar(binplot, ax=ax, label="Number of Monte Carlo Results", pad=0.08)
+    cbar.set_label("Number of Monte Carlo Results", rotation=270, labelpad=12)
+    cbar.ax.yaxis.set_ticks_position("left")
+    ax.set(xlim=min(diameters), ylim=min(albedos))
+    ax.set_xlabel("Diameter (km)") 
+    ax.set_ylabel("Albedo")
+    ax.set_title(f"{OBJECT_MAP[object]} ({object})", loc="left")
+    fig.savefig(f"../{object}/general_plots/diameter_vs_albedo_hex.png")
+    fig.savefig(f"../{object}/general_plots/diameter_vs_albedo_hex.pdf")
+    plt.close()
 
 def generate_diameter_vs_period_plot(object, diameters, periods, chis):
     """
@@ -1001,7 +1198,7 @@ OBJECT_MAP = {"02100": "Ra-Shalom",
 
 objects = ["02100", "02212", "05189", "05693", "07335", "23606", "68950", "85713", "G1989"]
 
-for object in objects:
+for object in objects[0:1]:
     print(f"{OBJECT_MAP[object]} ({object})")
     print("Echoing relevant files\n")
     os.system(f"echo '../{object}/PJDFC.out' | ../read-WISE-rc-MCMC-PJDFC") 
@@ -1018,9 +1215,13 @@ for object in objects:
     generate_SED_plot(object, best_fit_plotters[0], best_fit_plotters[1], 
                     best_fit_plotters[2], best_fit_plotters[3], 
                     best_fit_plotters[4], best_fit_plotters[5])
-    generate_diameter_histogram(object, diameters)
-    generate_diameter_vs_albedo_plot(object, diameters, albedos, chis)
-    generate_diameter_vs_period_plot(object, diameters, periods, chis)
-    generate_diameter_vs_gamma_plot(object, diameters, gammas, chis)
-    generate_diameter_vs_chi_plots(object, diameters, chis)
-    generate_gamma_vs_chi_plots(object, gammas, chis)
+    #generate_diameter_histogram(object, diameters)
+    #generate_albedo_histogram(object, albedos)
+    #generate_gamma_histogram(object, gammas)
+    #generate_period_histogram(object, periods)
+    #generate_diameter_vs_albedo_plot(object, diameters, albedos, chis)
+    generate_diameter_vs_albedo_hex(object, diameters, albedos)
+    #generate_diameter_vs_period_plot(object, diameters, periods, chis)
+    #generate_diameter_vs_gamma_plot(object, diameters, gammas, chis)
+    #generate_diameter_vs_chi_plots(object, diameters, chis)
+    #generate_gamma_vs_chi_plots(object, gammas, chis)
