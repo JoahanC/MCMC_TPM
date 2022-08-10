@@ -1,4 +1,0 @@
-	SUBROUTINE INIT_ORBIT
-	WRITE (*,*) 'default INIT_ORBIT called'
-	RETURN
-	END

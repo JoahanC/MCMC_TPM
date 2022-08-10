@@ -1,4 +1,0 @@
-	SUBROUTINE INIT_ASPECT
-	WRITE (*,*) 'default INIT_ASPECT called'
-	RETURN
-	END

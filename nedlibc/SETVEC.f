@@ -1,8 +1,0 @@
-	SUBROUTINE SETVEC(X,Y,Z,V)
-	REAL*4 X,Y,Z,V(3)
-	V(1) = X
-	V(2) = Y
-	V(3) = Z
-	RETURN
-	END
-
