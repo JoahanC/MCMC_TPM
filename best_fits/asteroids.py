@@ -287,6 +287,11 @@ class Asteroid(object):
         return physical_chars
 
 
+    def clear_plot_directory(self):
+        
+        for file in os.listdir(f"../{self.directory}/general_plots/"):
+            os.remove(file)
+
     def generate_histograms(self):
         """
         Generates histogram plots for diameter, albedo, gamma, and period solutions.
@@ -298,6 +303,13 @@ class Asteroid(object):
 
     
     def generate_chi_scatterplots(self):
+        chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.albedos,
+                                 self.chis, "Diameter", "Albedo", unit_x="km")
+        
+    
+    def generate_hexbins(self):
+        hexbin_template(self.directory, self.packed_name, self.diameters, self.albedos,
+                        "Diameter", "Albedo", unit_x="km")
         pass
 
 

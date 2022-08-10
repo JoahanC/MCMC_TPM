@@ -24,6 +24,9 @@ for idx, dir in enumerate(dirs):
 print("Finished generating Asteroid objects.\n")
 
 print("Generating histogram plots")
-for object in objects:
-    object.generate_histograms()
+for idx, object in enumerate(objects):
+    print(f"Processing object {idx + 1}/{len(objects)}: {object.packed_name}")
+    #object.generate_histograms()
+    #object.generate_chi_scatterplots()
+    object.generate_hexbins()
 
