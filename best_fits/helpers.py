@@ -658,3 +658,109 @@ def comparison_histogram_template(packed_name, values_1, values_2, label, unit=N
     fig.savefig(f"./comparison_plots/{packed_name}/{label.replace(' ', '_').lower()}_histogram.png")
     fig.savefig(f"./comparison_plots/{packed_name}/{label.replace(' ', '_').lower()}_histogram.pdf")
     plt.close(fig)
+
+
+def comparison_scatterplot_template():
+    pass
+
+
+def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, values_y_t, 
+                               label_x, label_y, unit_x=None, unit_y=None):
+    """
+    Template function for generating hexbin diagrams of two physical properties.
+
+    Parameters
+    ----------
+
+    directory : str
+        The name of the folder this object's results are located in.
+
+    packed_name : str
+        The packed MPC designated name.
+
+    values_x : list
+        The list of plottable values to be on the x-axis.
+
+    values_y : list
+        The list of plottable values to be on the y-axis.
+
+    label_x : str
+        The name of the values plotted on the x-axis.
+
+    label_y : str
+        The name of the values plotted on the y-axis.
+
+    unit_x : str
+        A unit of the quantity being plotted on the x-axis. OPTIONAL.
+    
+    unit_y : str
+        A unit of the quantity being plotted on the y-axis. OPTIONAL.
+
+    log_scale : bool
+        Whether the plot should be created in logspace 10.
+    """
+    values_x_s = [np.log10(value) for value in values_x_s]
+    values_y_s = [np.log10(value) for value in values_y_s]
+    values_x_t = [np.log10(value) for value in values_x_t]
+    values_y_t = [np.log10(value) for value in values_y_t]
+    #values_x_s = reject_outliers(np.array(values_x_s), 7)
+    #values_y_s = reject_outliers(np.array(values_y_s), 7)
+    #values_x_t = reject_outliers(np.array(values_x_t), 7)
+    #values_y_t = reject_outliers(np.array(values_y_t), 7)
+    
+    absolute_x_minima = min(values_x_s)
+    if min(values_x_t) < min(values_x_t):
+        absolute_x_minima = min(values_x_t)
+    
+    absolute_x_maxima = max(values_x_s)
+    if max(values_x_t) < max(values_x_t):
+        absolute_x_minima = max(values_x_t)
+    
+    absolute_y_minima = min(values_y_s)
+    if min(values_y_t) < min(values_y_t):
+        absolute_y_minima = min(values_y_t)
+    
+    absolute_y_maxima = max(values_y_s)
+    if max(values_y_t) < max(values_y_t):
+        absolute_y_minima = max(values_y_t)
+    
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    ax1.set_facecolor("#0e0783")
+    binplot = ax1.hexbin(values_x_s, values_y_s, gridsize=100, cmap="plasma")
+    cbar = fig.colorbar(binplot, ax=ax1, label="Number of Monte Carlo Results", location="top", pad=0.08)
+    cbar.set_label("Number of Monte Carlo Results", labelpad=12)
+    cbar.ax.xaxis.set_ticks_position("bottom")
+    ax1.set_xlim(absolute_x_minima, absolute_x_maxima)
+    ax1.set_ylim(absolute_y_minima, absolute_y_maxima)
+    label_string_x = f"Log {label_x}"
+    if unit_x != None:
+        label_string_x = f"Log {label_x} ({unit_x})"
+    ax1.set_xlabel(label_string_x)
+    label_string_y = f"Log {label_y}"
+    if unit_y != None:
+        label_string_y = f"Log {label_y} ({unit_y})"
+    ax1.set_ylabel(label_string_y)
+    ax1.set_title(f"{packed_name} (Spherical)", loc="left", pad=60)
+
+    ax2.set_facecolor("#0e0783")
+    binplot = ax2.hexbin(values_x_t, values_y_t, gridsize=100, cmap="plasma")
+    cbar = fig.colorbar(binplot, ax=ax2, label="Number of Monte Carlo Results", location="top", pad=0.08)
+    cbar.set_label("Number of Monte Carlo Results", labelpad=12)
+    cbar.ax.xaxis.set_ticks_position("bottom")
+    ax2.set_yticklabels([])
+    ax2.set_xlim(absolute_x_minima, absolute_x_maxima)
+    ax2.set_ylim(absolute_y_minima, absolute_y_maxima)
+    label_string_x = f"Log {label_x}"
+    if unit_x != None:
+        label_string_x = f"Log {label_x} ({unit_x})"
+    ax2.set_xlabel(label_string_x)
+    label_string_y = f"Log {label_y}"
+    if unit_y != None:
+        label_string_y = f"Log {label_y} ({unit_y})"
+    #ax2.set_ylabel(label_string_y, rotation=270)
+    ax2.set_title(f"{packed_name} (Triaxial Ellipsoid)", loc="left", pad=60)
+    
+    title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
+    fig.savefig(f"./comparison_plots/{packed_name}/{title_file_name}_hex.png")
+    fig.savefig(f"./comparison_plots/{packed_name}/{title_file_name}_hex.pdf")
+    plt.close(fig)

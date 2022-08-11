@@ -24,7 +24,7 @@ for idx, dir in enumerate(dirs):
     objects.append(Asteroid(dir))
 print("Finished generating Asteroid objects.\n")
 
-for idx, object in enumerate(objects):
+"""for idx, object in enumerate(objects):
     if not object.is_triaxial:
         print(f"Processing object {idx + 1}/{len(objects)}: {object.packed_name}")
     elif object.is_triaxial:
@@ -33,9 +33,9 @@ for idx, object in enumerate(objects):
     #object.generate_SED_plot()
     object.generate_histograms()
     #object.generate_chi_scatterplots()
-    #object.generate_hexbins()
+    #object.generate_hexbins()"""
 
-"""pairings = {}
+pairings = {}
 for idx, object in enumerate(objects):
     if object.packed_name not in pairings:
         pairings[object.packed_name] = [object]
@@ -55,6 +55,7 @@ for code in pairings:
         curr_ob = DualPlotter(spherical_ob, triaxial_ob)
         dual_objects.append(curr_ob)
 
-for object in dual_objects:
-    object.generate_histograms()"""
+for idx, object in enumerate(dual_objects):
+    print(f"Processing object {idx + 1}/{len(objects)}: {object.packed_name}")
+    object.generate_hexbins()
     

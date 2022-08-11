@@ -46,5 +46,27 @@ class DualPlotter:
         comparison_histogram_template(self.packed_name, self.spherical_asteroid.diameters,
                                       self.triaxial_asteroid.diameters, "Diameter", "km")
 
+
+    def generate_hexbins(self):
+        comparison_hexbin_template(self.packed_name, self.spherical_asteroid.diameters, self.spherical_asteroid.albedos,
+                        self.triaxial_asteroid.diameters, self.triaxial_asteroid.albedos,
+                        "Diameter", "Albedo", unit_x="km")
+        comparison_hexbin_template(self.packed_name, self.spherical_asteroid.diameters, self.spherical_asteroid.gammas,
+                        self.triaxial_asteroid.diameters, self.triaxial_asteroid.albedos,
+                        "Diameter", "Thermal Inertia", unit_x="km", unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        comparison_hexbin_template(self.packed_name, self.spherical_asteroid.gammas, self.spherical_asteroid.albedos,
+                        self.triaxial_asteroid.diameters, self.triaxial_asteroid.albedos,
+                            "Thermal Inertia", "Albedo", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        if not self.spherical_asteroid.fixed and not self.triaxial_asteroid.fixed:
+            comparison_hexbin_template(self.packed_name, self.spherical_asteroid.diameters, self.spherical_asteroid.periods,
+                            self.triaxial_asteroid.diameters, self.triaxial_asteroid.albedos,
+                            "Diameter", "Period", unit_x="km", unit_y="hr")
+            comparison_hexbin_template(self.packed_name, self.spherical_asteroid.gammas, self.spherical_asteroid.periods,
+                            self.triaxial_asteroid.diameters, self.triaxial_asteroid.albedos,
+                            "Thermal Inertia", "Period", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
+            comparison_hexbin_template(self.packed_name, self.spherical_asteroid.albedos, self.spherical_asteroid.periods,
+                            self.triaxial_asteroid.diameters, self.triaxial_asteroid.albedos,
+                            "Albedo", "Period", unit_y="hr")
+
     
         
