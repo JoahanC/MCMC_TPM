@@ -1,5 +1,5 @@
 import os
-from tracemalloc import is_tracing
+import itertools
 import numpy as np
 from helpers import *
 
@@ -109,6 +109,9 @@ class Asteroid(object):
         self.gammas = MCMC_results[2]
         self.chis = MCMC_results[3]
         self.periods = MCMC_results[4] 
+        self.fixed = False
+        if self.periods[0] == self.periods[540] and self.periods[9] == self.periods[132]:
+            self.fixed = True
 
 
     def retrieve_SED_data(self):
@@ -220,9 +223,12 @@ class Asteroid(object):
         datelabels = []
         cshfile = os.popen(f"ls ../{self.directory}/run*.csh").readline().rstrip()
         cshlines = open(cshfile)
+        split_length = 12
+        if self.is_triaxial:
+            split_length = 16
         for line in cshlines.readlines():
             epoch_data = line.rstrip().split(',')
-            if len(epoch_data) != 12:
+            if len(epoch_data) != split_length:
                 continue
             mjd = float(epoch_data[0])
             year, month, day = julian_days_utc_converter(2400000.5 + mjd)
@@ -286,11 +292,81 @@ class Asteroid(object):
         physical_chars = [diameters, albedos, gammas, chis, periods]
         return physical_chars
 
+    
+    def generate_SED_plot(self):
+        colors = ["#3498db", "#229954", "#c0392b", "#8e44ad", "#f1c40f", "#ec7063", "#34495e", "#6e2c00"]
 
-    def clear_plot_directory(self):
-        
+        fig, ax = plt.subplots()
+        #plt.subplots_adjust(left=0.15, right=0.95, top=0.95, bottom=0.15)
+        #ax = plt.gca()
+        y_low = 1e99
+        y_high = 0
+
+        marker = itertools.cycle(('.', 'v', '^', 's', 'D')) 
+        lines = itertools.cycle(('-', ':', '--', '-.'))
+        for i in range(len(self.esed)):
+            # Self corrects x and y limits
+            if min(self.esed[i]) < y_low:
+                y_low = min(self.esed[i])
+            if max(self.esed[i]) > y_high:
+                y_high = max(self.esed[i])
+
+            # Plot flux for each wavelength
+            ax.plot(self.wavelengths, self.esed[i], label=self.datelabels[i], color=colors[i], lw=0.75, ls=next(lines))    
+
+            # Adjust y values and set up error ranges
+            lower_errors = []
+            higher_errors = []
+            data_y_adjusted=[]
+            for j in range(len(self.data_y[i])):
+                lower_errors.append(self.data_y[i][j] * (1 - 1 / (10 ** (self.data_y_error[i][j] / 2.5))))
+                higher_errors.append(self.data_y[i][j] * (10 ** (self.data_y_error[i][j] / 2.5) - 1))
+
+                if self.data_y_error[i][j] > 0:    
+                    data_y_adjusted.append(self.data_y[i][j])
+                else:
+                    # Measured flux is negative, so plot at an artifically
+                    # low point, and make error bars correct
+                    data_y_adjusted.append(1e-99)
+
+            # Set scale and include error bars
+            ax.set_xscale("log")
+            ax.set_yscale("log")
+            limtest = ax.get_ylim()
+            
+            if limtest[0] < 1e-99:
+                plt.ylim(y_low / 10., y_high * 10)
+
+            ax.errorbar(self.data_x[i], data_y_adjusted, 
+                        yerr=[lower_errors, higher_errors],
+                        ecolor=colors[i],
+                        fmt=next(marker),
+                        elinewidth=0.5,
+                        color=colors[i],
+                        ms=4,
+                        capsize=2)
+        ax.legend(loc=2)
+        ax.set_xlabel("Wavelength (microns)", fontsize=12)
+        ax.set_ylabel(r"$\nu$F$_\nu$", fontsize=12)
+        ax.set_title(f"{self.packed_name}", loc="left")
+        fig.savefig(f"../{self.directory}/general_plots/bestfit_SED.png")
+        fig.savefig(f"../{self.directory}/general_plots/bestfit_SED.pdf")
+        plt.close(fig)
+
+
+    def clear_plot_directories(self):
+        """
+        Clears all plots from this object's current directory.
+        """
         for file in os.listdir(f"../{self.directory}/general_plots/"):
-            os.remove(file)
+            os.remove(f"../{self.directory}/general_plots/" + file)
+        segment_dirs = ["diameter_albedo", "diameter_gamma", "diameter_period"]
+        for dir in segment_dirs:
+            try:
+                for file in os.listdir(f"../{self.directory}/{dir}_segments/"):
+                    os.remove(f"../{self.directory}/{dir}_segments/" + file)
+            except:
+                pass
 
     def generate_histograms(self):
         """
@@ -299,18 +375,40 @@ class Asteroid(object):
         histogram_template(self.directory, self.packed_name, self.diameters, "Diameter", "km")
         histogram_template(self.directory, self.packed_name, self.albedos, "Albedo")
         histogram_template(self.directory, self.packed_name, self.gammas, "Thermal Inertia", r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
-        histogram_template(self.directory, self.packed_name, self.periods, "Period", "hr")
+        if not self.fixed:
+            histogram_template(self.directory, self.packed_name, self.periods, "Period", "hr")
 
     
     def generate_chi_scatterplots(self):
         chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.albedos,
                                  self.chis, "Diameter", "Albedo", unit_x="km")
+        chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.gammas,
+                                 self.chis, "Diameter", "Thermal Inertia", unit_x="km", unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        chi_scatterplot_template(self.directory, self.packed_name, self.gammas, self.albedos,
+                                    self.chis, "Thermal Inertia", "Albedo", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        if not self.fixed:
+            chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.periods,
+                                    self.chis, "Diameter", "Period", unit_x="km", unit_y="hr")
+            chi_scatterplot_template(self.directory, self.packed_name, self.gammas, self.periods,
+                                    self.chis, "Thermal Inertia", "Period", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
+            chi_scatterplot_template(self.directory, self.packed_name, self.albedos, self.periods,
+                                    self.chis, "Albedo", "Period", unit_y="hr")
         
     
     def generate_hexbins(self):
         hexbin_template(self.directory, self.packed_name, self.diameters, self.albedos,
                         "Diameter", "Albedo", unit_x="km")
-        pass
+        hexbin_template(self.directory, self.packed_name, self.diameters, self.gammas,
+                        "Diameter", "Thermal Inertia", unit_x="km", unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        hexbin_template(self.directory, self.packed_name, self.gammas, self.albedos,
+                            "Thermal Inertia", "Albedo", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        if not self.fixed:
+            hexbin_template(self.directory, self.packed_name, self.diameters, self.periods,
+                            "Diameter", "Period", unit_x="km", unit_y="hr")
+            hexbin_template(self.directory, self.packed_name, self.gammas, self.periods,
+                            "Thermal Inertia", "Period", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
+            hexbin_template(self.directory, self.packed_name, self.albedos, self.periods,
+                            "Albedo", "Period", unit_y="hr")
 
 
 

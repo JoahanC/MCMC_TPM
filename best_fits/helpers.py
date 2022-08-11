@@ -1,9 +1,16 @@
 from math import modf, floor
 import numpy as np
 import os
+import itertools
 import matplotlib.pyplot as plt
 from matplotlib.ticker import ScalarFormatter, NullFormatter, LogFormatter
 
+
+def reject_outliers(data, m = 2.):
+    d = np.abs(data - np.median(data))
+    mdev = np.median(d)
+    s = d/mdev if mdev else 0.
+    return data[s<m]
 
 def julian_days_utc_converter(jd):
     """
@@ -312,6 +319,9 @@ def histogram_template(directory, packed_name, values, label, unit=None):
     
     """
     # Set up log scale plot arguments and standard deviation lines
+    values = reject_outliers(np.array(values), 5.5)
+    values = list(values)
+    print(type(values))
     log_values = [np.log10(value) for value in values]
     log_values_copy = log_values[:]
     values_count = len(log_values)
@@ -346,12 +356,12 @@ def histogram_template(directory, packed_name, values, label, unit=None):
     ax.axvline(sigma_2_low, color='#cc0000', ls='dotted')
     ax.axvline(sigma_2_high, color='#cc0000', ls='dotted')
 
-    sigma_text = "+84% = " + f"{str(round(sigma_2_high, 3)).ljust(6, '0')}\n"
-    sigma_text += "+16% = " + f"{str(round(sigma_1_high, 3)).ljust(6, '0')}\n"
-    sigma_text += r"med = " + f"{str(round(median, 3)).ljust(6, '0')}\n"
-    sigma_text += "-16% = " + f"{str(round(sigma_1_low, 3)).ljust(6, '0')}\n"
-    sigma_text += "-84% = " + f"{str(round(sigma_2_low, 3)).ljust(6, '0')}"
-    fig.text(0.82, 0.72, sigma_text, ha="center")
+    sigma_text = "+84% = " + f"{str(round(sigma_2_high, 3)).ljust(5, '0')}\n"
+    sigma_text += "+16% = " + f"{str(round(sigma_1_high, 3)).ljust(5, '0')}\n"
+    sigma_text += r"med = " + f"{str(round(median, 3)).ljust(5, '0')}\n"
+    sigma_text += "-16% = " + f"{str(round(sigma_1_low, 3)).ljust(5, '0')}\n"
+    sigma_text += "-84% = " + f"{str(round(sigma_2_low, 3)).ljust(5, '0')}"
+    fig.text(0.80, 0.72, sigma_text, ha="center")
 
     n_count = len(values)
     if label == "albedo":
@@ -370,7 +380,7 @@ def histogram_template(directory, packed_name, values, label, unit=None):
     plt.close(fig)
 
 
-def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, label_x, label_y, unit_x=None, unit_y=None, value_break=0.1):
+def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, label_x, label_y, unit_x=None, unit_y=None, value_break=0.3):
     """
     A template function for generating chi valued scatterplots.
 
@@ -408,58 +418,62 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
         The separation value needed to create a new 'segment'.
     
     """
-    pairings = []
-
-    for i in range(len(values_x)):
-        pairings.append([values_x[i], values_y[i], chis[i]])
-    pairings.sort()
-    sorted_values_x = []
-    sorted_values_y = []
-    sorted_chis = []
-    for pairing in pairings:
-        sorted_values_x.append(pairing[0])
-        sorted_values_y.append(pairing[1])
-        sorted_chis.append(pairing[2])
-
-    value_epochs = []
-    value_start = sorted_values_x[0]
-    for i in range(len(sorted_values_x) - 1):
-        if (sorted_values_x[i + 1] - sorted_values_x[i]) > value_break:
-            value_epochs.append((value_start, sorted_values_x[i]))
-            value_start = sorted_values_x[i + 1]
-        if i == len(sorted_values_x) - 2:
-            value_epochs.append((value_start, sorted_values_x[i]))
-    
-    for idx, epoch in enumerate(value_epochs):
-        segment_values_x = []
-        segment_values_y = []
-        segment_chis = []
-        for i in range(len(pairings)):
-            if pairings[i][0] >= epoch[0] and pairings[i][0] <= epoch[1]:
-                segment_values_x.append(pairings[i][0])
-                segment_values_y.append(pairings[i][1])
-                segment_chis.append(pairings[i][2])
-        
-        fig, ax = plt.subplots()
-        ax.set_xscale("log")
-        ax.set_yscale("log")
-        label_string_x = f"Log {label_x}"
-        if unit_x != None:
-            label_string_x = f"Log {label_x} ({unit_x})"
-        ax.set_xlabel(label_string_x)
-        label_string_y = f"Log {label_y}"
-        if unit_y != None:
-            label_string_y = f"Log {label_y} ({unit_y})"
-        
-        scatter_plot = ax.scatter(segment_values_x, segment_values_y, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
-        cbar = fig.colorbar(scatter_plot, ax=ax, label=r"fit $\chi^2$")
-        ax.set_title(f"{packed_name}", loc="left")
-        ax.set_title(f"n = {len(segment_values_x)}", loc="right")
-        title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
+    if label_x == "Diameter":
+        pairings = []
         title_directory_name = f"{label_x.replace(' ', '_').lower()}_{label_y.replace(' ', '_').lower()}"
-        fig.savefig(f"../{directory}/{title_directory_name}_segments/{idx}_{title_file_name}.png")
-        fig.savefig(f"../{directory}/{title_directory_name}_segments/{idx}_{title_file_name}.pdf")
-        plt.close(fig)
+        segment_directory_name = f"{title_directory_name}_segments"
+        if segment_directory_name not in os.listdir(f"../{directory}/"):
+            os.mkdir(f"../{directory}/{title_directory_name}_segments")
+
+        for i in range(len(values_x)):
+            pairings.append([values_x[i], values_y[i], chis[i]])
+        pairings.sort()
+        sorted_values_x = []
+        sorted_values_y = []
+        sorted_chis = []
+        for pairing in pairings:
+            sorted_values_x.append(pairing[0])
+            sorted_values_y.append(pairing[1])
+            sorted_chis.append(pairing[2])
+
+        value_epochs = []
+        value_start = sorted_values_x[0]
+        for i in range(len(sorted_values_x) - 1):
+            if (sorted_values_x[i + 1] - sorted_values_x[i]) > value_break:
+                value_epochs.append((value_start, sorted_values_x[i]))
+                value_start = sorted_values_x[i + 1]
+            if i == len(sorted_values_x) - 2:
+                value_epochs.append((value_start, sorted_values_x[i]))
+        
+        for idx, epoch in enumerate(value_epochs):
+            segment_values_x = []
+            segment_values_y = []
+            segment_chis = []
+            for i in range(len(pairings)):
+                if pairings[i][0] >= epoch[0] and pairings[i][0] <= epoch[1]:
+                    segment_values_x.append(pairings[i][0])
+                    segment_values_y.append(pairings[i][1])
+                    segment_chis.append(pairings[i][2])
+            
+            fig, ax = plt.subplots()
+            ax.set_xscale("log")
+            ax.set_yscale("log")
+            label_string_x = f"Log {label_x}"
+            if unit_x != None:
+                label_string_x = f"Log {label_x} ({unit_x})"
+            ax.set_xlabel(label_string_x)
+            label_string_y = f"Log {label_y}"
+            if unit_y != None:
+                label_string_y = f"Log {label_y} ({unit_y})"
+            ax.set_ylabel(label_string_y)
+            scatter_plot = ax.scatter(segment_values_x, segment_values_y, s=1,marker='o',c=segment_chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
+            cbar = fig.colorbar(scatter_plot, ax=ax, label=r"fit $\chi^2$")
+            ax.set_title(f"{packed_name}", loc="left")
+            ax.set_title(f"n = {len(segment_values_x)}", loc="right")
+            title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
+            fig.savefig(f"../{directory}/{title_directory_name}_segments/{idx}_{title_file_name}.png")
+            fig.savefig(f"../{directory}/{title_directory_name}_segments/{idx}_{title_file_name}.pdf")
+            plt.close(fig)
 
     # Generate base figure
     fig, ax = plt.subplots()
@@ -475,10 +489,14 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
     ax.set_ylabel(label_string_y)
     for axis in [ax.xaxis]:
         axis.set_major_formatter(LogFormatter())
-        axis.set_minor_formatter(LogFormatter(minor_thresholds=(15,0.4)))
+        axis.set_minor_formatter(LogFormatter())
+        if label_x != "Thermal Inertia":
+            axis.set_minor_formatter(LogFormatter(minor_thresholds=(15,0.4)))
     for axis in [ax.yaxis]:
         axis.set_major_formatter(LogFormatter())
-        axis.set_minor_formatter(LogFormatter(minor_thresholds=(15,0.4)))
+        axis.set_minor_formatter(LogFormatter())
+        if label_y != "Thermal Inertia":
+            axis.set_minor_formatter(LogFormatter(minor_thresholds=(15,0.4)))
     scatter_plot = ax.scatter(values_x, values_y, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
     cbar = fig.colorbar(scatter_plot, ax=ax, label=r"fit $\chi^2$")
     ax.set_title(f"{packed_name}", loc="left")
@@ -546,4 +564,93 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
     title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
     fig.savefig(f"../{directory}/general_plots/{title_file_name}_hex.png")
     fig.savefig(f"../{directory}/general_plots/{title_file_name}_hex.pdf")
+    plt.close(fig)
+
+
+def comparison_histogram_template(packed_name, values_1, values_2, label, unit=None):
+    """
+    A template function for overlaying histograms generated by the DualPlotter class.
+    Parameters
+    ----------
+
+    packed_name : str
+        The MPC designated name of the object.
+
+    values_1 : list
+        The values being plotted for the spherical object
+
+    values_2 : list
+        The values being plotted for the triaxial object
+    
+    label : str
+        The name of the values being plotted.
+
+    unit : str
+        The units of the values being plotted. OPTIONAL.
+    """
+    if packed_name == "85713":
+        print(len(values_1))
+        print(len(values_2))
+    values_1 = reject_outliers(np.array(values_1), 7)
+    values_2 = reject_outliers(np.array(values_2), 7)
+    if packed_name == "85713":
+        print(len(values_1))
+        print(len(values_2))
+    fig, ax = plt.subplots()
+    colors = itertools.cycle(("darkred", "darkblue")) 
+    for values in [values_1, values_2]:
+        curr_color = next(colors)
+        # Set up log scale plot arguments and standard deviation lines
+        log_values = [np.log10(value) for value in values]
+        log_values_copy = log_values[:]
+        values_count = len(log_values)
+        log_values_copy.sort()
+
+        sigma_1_low = log_values_copy[int(values_count * 0.16)]
+        sigma_1_high = log_values_copy[int(values_count * 0.84)]
+        median = log_values_copy[int(values_count * 0.5)]
+        sigma_2_low = log_values_copy[int(values_count * 0.025)]
+        sigma_2_high = log_values_copy[int(values_count * 0.975)]
+
+        # Adjust step size based on spacing
+        if sigma_2_high - sigma_2_low > 0.2:
+            hist_step = 0.01
+        elif sigma_2_high - sigma_2_low > 0.02:
+            hist_step = 0.001
+        else:
+            hist_step = 0.0001
+
+        hist_low_limit = int(min(log_values) * 1000) / 1000.
+        hist_high_limit = (int(max(log_values) * 1000) + 1) / 1000.
+        histo = ax.hist(log_values, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
+                histtype="step",
+                color=curr_color)
+
+        # Plotting standard deviation limits on plot
+        ax.axvline(median, color=curr_color)
+        ax.axvline(sigma_1_low, color=curr_color, ls='dashed')
+        ax.axvline(sigma_1_high, color=curr_color, ls='dashed')
+        ax.axvline(sigma_2_low, color=curr_color, ls='dotted')
+        ax.axvline(sigma_2_high, color=curr_color, ls='dotted')
+
+    #sigma_text = "+84% = " + f"{str(round(sigma_2_high, 3)).ljust(5, '0')}\n"
+    #sigma_text += "+16% = " + f"{str(round(sigma_1_high, 3)).ljust(5, '0')}\n"
+    #sigma_text += r"med = " + f"{str(round(median, 3)).ljust(5, '0')}\n"
+    #sigma_text += "-16% = " + f"{str(round(sigma_1_low, 3)).ljust(5, '0')}\n"
+    #sigma_text += "-84% = " + f"{str(round(sigma_2_low, 3)).ljust(5, '0')}"
+    #fig.text(0.82, 0.72, sigma_text, ha="center")
+
+    n_count = len(values)
+    if label == "albedo":
+        ax.set_xlim(right=-0.0001)
+
+    # Labeling plot
+    label_string = f"Log {label}"
+    if unit != None:
+        label_string = f"Log {label} ({unit})"
+    ax.set_xlabel(label_string)
+    ax.set_ylabel("Number of Monte Carlo Results")
+    ax.set_title(f"{packed_name}", loc="left")
+    fig.savefig(f"./comparison_plots/{packed_name}/{label.replace(' ', '_').lower()}_histogram.png")
+    fig.savefig(f"./comparison_plots/{packed_name}/{label.replace(' ', '_').lower()}_histogram.pdf")
     plt.close(fig)
