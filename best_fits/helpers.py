@@ -477,8 +477,8 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
 
     # Generate base figure
     fig, ax = plt.subplots()
-    ax.set_xscale("log")
-    ax.set_yscale("log")
+    #ax.set_xscale("log")
+    #ax.set_yscale("log")
     label_string_x = f"Log {label_x.capitalize()}"
     if unit_x != None:
         label_string_x = f"Log {label_x} ({unit_x})"
@@ -487,7 +487,7 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
     if unit_y != None:
         label_string_y = f"Log {label_y} ({unit_y})"
     ax.set_ylabel(label_string_y)
-    for axis in [ax.xaxis]:
+    """for axis in [ax.xaxis]:
         axis.set_major_formatter(LogFormatter())
         axis.set_minor_formatter(LogFormatter())
         if label_x != "Thermal Inertia":
@@ -496,7 +496,9 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
         axis.set_major_formatter(LogFormatter())
         axis.set_minor_formatter(LogFormatter())
         if label_y != "Thermal Inertia":
-            axis.set_minor_formatter(LogFormatter(minor_thresholds=(15,0.4)))
+            axis.set_minor_formatter(LogFormatter(minor_thresholds=(15,0.4)))"""
+    values_x = [np.log10(value) for value in values_x]
+    values_y = [np.log10(value) for value in values_y]
     scatter_plot = ax.scatter(values_x, values_y, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
     cbar = fig.colorbar(scatter_plot, ax=ax, label=r"fit $\chi^2$")
     ax.set_title(f"{packed_name}", loc="left")
@@ -541,10 +543,12 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
     log_scale : bool
         Whether the plot should be created in logspace 10.
     """
+    values_x = [np.log10(value) for value in values_x]
+    values_y = [np.log10(value) for value in values_y]
     fig, ax = plt.subplots()
     ax.set_facecolor("#0e0783")
     if log_scale:
-        binplot = ax.hexbin(values_x, values_y, gridsize=100, bins="log", cmap="plasma")
+        binplot = ax.hexbin(values_x, values_y, gridsize=100, cmap="plasma")
     elif not log_scale:
         binplot = ax.hexbin(values_x, values_y, gridsize=100, cmap="plasma")
     cbar = fig.colorbar(binplot, ax=ax, label="Number of Monte Carlo Results", pad=0.08)
