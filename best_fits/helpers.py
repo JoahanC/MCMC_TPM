@@ -3,6 +3,7 @@ import numpy as np
 import os
 import itertools
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 from matplotlib.ticker import ScalarFormatter, NullFormatter, LogFormatter
 
 
@@ -295,7 +296,7 @@ def determine_p_V_ratio(line):
     return outputs
 
 
-def histogram_template(directory, packed_name, values, label, unit=None):
+def histogram_template(directory, packed_name, values, label, is_triaxial, unit=None):
     """
     A template function for generating histograms.
 
@@ -356,12 +357,8 @@ def histogram_template(directory, packed_name, values, label, unit=None):
     ax.axvline(sigma_2_low, color='#cc0000', ls='dotted')
     ax.axvline(sigma_2_high, color='#cc0000', ls='dotted')
 
-    sigma_text = "+84% = " + f"{str(round(sigma_2_high, 3)).ljust(5, '0')}\n"
-    sigma_text += "+16% = " + f"{str(round(sigma_1_high, 3)).ljust(5, '0')}\n"
-    sigma_text += r"med = " + f"{str(round(median, 3)).ljust(5, '0')}\n"
-    sigma_text += "-16% = " + f"{str(round(sigma_1_low, 3)).ljust(5, '0')}\n"
-    sigma_text += "-84% = " + f"{str(round(sigma_2_low, 3)).ljust(5, '0')}"
-    fig.text(0.80, 0.72, sigma_text, ha="center")
+    median_text = "Median = " + f"{str(round(median, 3)).ljust(5, '0')}\n"
+    fig.text(0.22, 0.82, median_text, ha="center")
 
     n_count = len(values)
     if label == "albedo":
@@ -373,14 +370,17 @@ def histogram_template(directory, packed_name, values, label, unit=None):
         label_string = f"Log {label} ({unit})"
     ax.set_xlabel(label_string)
     ax.set_ylabel("Number of Monte Carlo Results")
-    ax.set_title(f"{packed_name}", loc="left")
+    title_string = f"{packed_name} (Spherical)"
+    if is_triaxial:
+        title_string = f"{packed_name} (Triaxial Ellipsoid)"
+    ax.set_title(title_string, loc="left")
     ax.set_title(f"n = {n_count}", loc="right")
     fig.savefig(f"../{directory}/general_plots/{label.replace(' ', '_').lower()}_histogram.png")
     fig.savefig(f"../{directory}/general_plots/{label.replace(' ', '_').lower()}_histogram.pdf")
     plt.close(fig)
 
 
-def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, label_x, label_y, unit_x=None, unit_y=None, value_break=0.3):
+def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, label_x, label_y, is_triaxial, unit_x=None, unit_y=None, value_break=0.3):
     """
     A template function for generating chi valued scatterplots.
 
@@ -501,7 +501,10 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
     values_y = [np.log10(value) for value in values_y]
     scatter_plot = ax.scatter(values_x, values_y, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
     cbar = fig.colorbar(scatter_plot, ax=ax, label=r"fit $\chi^2$")
-    ax.set_title(f"{packed_name}", loc="left")
+    title_string = f"{packed_name} (Spherical)"
+    if is_triaxial:
+        title_string = f"{packed_name} (Triaxial Ellipsoid)"
+    ax.set_title(title_string, loc="left")
     ax.set_title(f"n = {len(values_x)}", loc="right")
     title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
     fig.savefig(f"../{directory}/general_plots/{title_file_name}.png")
@@ -509,7 +512,7 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
     plt.close(fig)
 
 
-def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y, unit_x=None, unit_y=None, log_scale=True):
+def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y, is_triaxial, unit_x=None, unit_y=None, log_scale=True):
     """
     Template function for generating hexbin diagrams of two physical properties.
 
@@ -563,11 +566,51 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
     if unit_y != None:
         label_string_y = f"Log {label_y} ({unit_y})"
     ax.set_ylabel(label_string_y)
-    ax.set_title(f"{packed_name}", loc="left")
-    
+    title_string = f"{packed_name} (Spherical)"
+    if is_triaxial:
+        title_string = f"{packed_name} (Triaxial Ellipsoid)"
+    ax.set_title(title_string, loc="left")
+    ax.set_title(f"n = {len(values_x)}", loc="right")
     title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
     fig.savefig(f"../{directory}/general_plots/{title_file_name}_hex.png")
     fig.savefig(f"../{directory}/general_plots/{title_file_name}_hex.pdf")
+    plt.close(fig)
+
+
+def chi_plot_template(directory, packed_name, values_x, chis, label_x, is_triaxial, unit_x=None):
+    
+    fig, ax = plt.subplots()
+    label_string_x = f"Log {label_x.capitalize()}"
+    if unit_x != None:
+        label_string_x = f"Log {label_x} ({unit_x})"
+    ax.set_xlabel(label_string_x)
+    label_string_y = r"fit $\chi^2$"
+    ax.set_ylabel(label_string_y)
+    ax.minorticks_on()
+    values_x = [np.log10(value) for value in values_x]
+    log_values_copy = values_x[:]
+    values_count = len(values_x)
+    log_values_copy.sort()
+    sigma_1_low = log_values_copy[int(values_count * 0.16)]
+    sigma_1_high = log_values_copy[int(values_count * 0.84)]
+    median = log_values_copy[int(values_count * 0.5)]
+    sigma_2_low = log_values_copy[int(values_count * 0.025)]
+    sigma_2_high = log_values_copy[int(values_count * 0.975)]
+
+    scatter_plot = ax.scatter(values_x, chis, s=1, color="black", marker='o',linewidths=1)
+    ax.axvline(median, color='#cc0000')
+    ax.axvline(sigma_1_low, color='#cc0000', ls='dashed')
+    ax.axvline(sigma_1_high, color='#cc0000', ls='dashed')
+    ax.axvline(sigma_2_low, color='#cc0000', ls='dotted')
+    ax.axvline(sigma_2_high, color='#cc0000', ls='dotted')
+    title_string = f"{packed_name} (Spherical)"
+    if is_triaxial:
+        title_string = f"{packed_name} (Triaxial Ellipsoid)"
+    ax.set_title(title_string, loc="left")
+    ax.set_title(f"n = {len(values_x)}", loc="right")
+    title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_chis"
+    fig.savefig(f"../{directory}/general_plots/{title_file_name}.png")
+    fig.savefig(f"../{directory}/general_plots/{title_file_name}.pdf")
     plt.close(fig)
 
 
@@ -592,14 +635,8 @@ def comparison_histogram_template(packed_name, values_1, values_2, label, unit=N
     unit : str
         The units of the values being plotted. OPTIONAL.
     """
-    if packed_name == "85713":
-        print(len(values_1))
-        print(len(values_2))
     values_1 = reject_outliers(np.array(values_1), 7)
     values_2 = reject_outliers(np.array(values_2), 7)
-    if packed_name == "85713":
-        print(len(values_1))
-        print(len(values_2))
     fig, ax = plt.subplots()
     colors = itertools.cycle(("darkred", "darkblue")) 
     for values in [values_1, values_2]:
@@ -649,19 +686,115 @@ def comparison_histogram_template(packed_name, values_1, values_2, label, unit=N
         ax.set_xlim(right=-0.0001)
 
     # Labeling plot
+    red_patch = mpatches.Patch(color='darkred', label="Spherical")
+    blue_patch = mpatches.Patch(color='darkblue', label="Triaxial Ellipsoid")
+    ax.legend(handles=[red_patch, blue_patch])
     label_string = f"Log {label}"
     if unit != None:
         label_string = f"Log {label} ({unit})"
     ax.set_xlabel(label_string)
     ax.set_ylabel("Number of Monte Carlo Results")
     ax.set_title(f"{packed_name}", loc="left")
-    fig.savefig(f"./comparison_plots/{packed_name}/{label.replace(' ', '_').lower()}_histogram.png")
-    fig.savefig(f"./comparison_plots/{packed_name}/{label.replace(' ', '_').lower()}_histogram.pdf")
+    fig.savefig(f"./comparison_plots/{packed_name}/histograms/{label.replace(' ', '_').lower()}_histogram.png", dpi=1000)
+    fig.savefig(f"./comparison_plots/{packed_name}/histograms/{label.replace(' ', '_').lower()}_histogram.pdf", dpi=1000)
     plt.close(fig)
 
 
-def comparison_scatterplot_template():
-    pass
+def comparison_scatterplot_template(packed_name, values_x_s, values_y_s, chis_s, values_x_t, values_y_t, chis_t,
+                                    label_x, label_y, unit_x=None, unit_y=None):
+    """
+    Template function for generating hexbin diagrams of two physical properties.
+
+    Parameters
+    ----------
+
+    directory : str
+        The name of the folder this object's results are located in.
+
+    packed_name : str
+        The packed MPC designated name.
+
+    values_x : list
+        The list of plottable values to be on the x-axis.
+
+    values_y : list
+        The list of plottable values to be on the y-axis.
+
+    chis : list
+        The list of chi^2 fit values associated with each point.
+
+    label_x : str
+        The name of the values plotted on the x-axis.
+
+    label_y : str
+        The name of the values plotted on the y-axis.
+
+    unit_x : str
+        A unit of the quantity being plotted on the x-axis. OPTIONAL.
+    
+    unit_y : str
+        A unit of the quantity being plotted on the y-axis. OPTIONAL.
+
+    log_scale : bool
+        Whether the plot should be created in logspace 10.
+    """
+    values_x_s = [np.log10(value) for value in values_x_s]
+    values_y_s = [np.log10(value) for value in values_y_s]
+    values_x_t = [np.log10(value) for value in values_x_t]
+    values_y_t = [np.log10(value) for value in values_y_t]
+    
+    absolute_x_minima = min(values_x_s)
+    if min(values_x_t) < min(values_x_s):
+        absolute_x_minima = min(values_x_t)
+    
+    absolute_x_maxima = max(values_x_s)
+    if max(values_x_t) > max(values_x_s):
+        absolute_x_maxima = max(values_x_t)
+    
+    absolute_y_minima = min(values_y_s)
+    if min(values_y_t) < min(values_y_s):
+        absolute_y_minima = min(values_y_t)
+    
+    absolute_y_maxima = max(values_y_s)
+    if max(values_y_t) > max(values_y_s):
+        absolute_y_maxima = max(values_y_t)
+    
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    scatter_plot = ax1.scatter(values_x_s, values_y_s, s=1,marker='o',c=chis_s,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
+    cbar = fig.colorbar(scatter_plot, ax=ax1, label=r"fit $\chi^2$", location="top", pad=0.08)
+    cbar.set_label(r"fit $\chi^2$", labelpad=12)
+    cbar.ax.xaxis.set_ticks_position("bottom")
+    ax1.set_xlim(absolute_x_minima, absolute_x_maxima)
+    ax1.set_ylim(absolute_y_minima, absolute_y_maxima)
+    label_string_x = f"Log {label_x}"
+    if unit_x != None:
+        label_string_x = f"Log {label_x} ({unit_x})"
+    label_string_y = f"Log {label_y}"
+    if unit_y != None:
+        label_string_y = f"Log {label_y} ({unit_y})"
+    ax1.set_title(f"{packed_name} (Spherical)", loc="left", pad=60)
+
+    scatter_plot = ax2.scatter(values_x_t, values_y_t, s=1,marker='o',c=chis_t,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
+    cbar = fig.colorbar(scatter_plot, ax=ax2, label=r"fit $\chi^2$", location="top", pad=0.08)
+    cbar.set_label(r"fit $\chi^2$", labelpad=12)
+    cbar.ax.xaxis.set_ticks_position("bottom")
+    ax2.set_yticklabels([])
+    ax2.set_xlim(absolute_x_minima, absolute_x_maxima)
+    ax2.set_ylim(absolute_y_minima, absolute_y_maxima)
+    label_string_x = f"Log {label_x}"
+    if unit_x != None:
+        label_string_x = f"Log {label_x} ({unit_x})"
+    label_string_y = f"Log {label_y}"
+    if unit_y != None:
+        label_string_y = f"Log {label_y} ({unit_y})"
+    ax2.set_title(f"{packed_name} (Triaxial Ellipsoid)", loc="left", pad=60)
+    fig.text(0.5, 0.04, label_string_x, ha='center', va='center')
+    fig.text(0.04, 0.4, label_string_y, ha='center', va='center', rotation='vertical')
+    
+    title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
+    fig.savefig(f"./comparison_plots/{packed_name}/scatterplots/{title_file_name}.png", dpi=1000)
+    fig.savefig(f"./comparison_plots/{packed_name}/scatterplots/{title_file_name}.pdf", dpi=1000)
+    plt.close(fig)
 
 
 def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, values_y_t, 
@@ -703,26 +836,22 @@ def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, 
     values_y_s = [np.log10(value) for value in values_y_s]
     values_x_t = [np.log10(value) for value in values_x_t]
     values_y_t = [np.log10(value) for value in values_y_t]
-    #values_x_s = reject_outliers(np.array(values_x_s), 7)
-    #values_y_s = reject_outliers(np.array(values_y_s), 7)
-    #values_x_t = reject_outliers(np.array(values_x_t), 7)
-    #values_y_t = reject_outliers(np.array(values_y_t), 7)
     
     absolute_x_minima = min(values_x_s)
-    if min(values_x_t) < min(values_x_t):
+    if min(values_x_t) < min(values_x_s):
         absolute_x_minima = min(values_x_t)
     
     absolute_x_maxima = max(values_x_s)
-    if max(values_x_t) < max(values_x_t):
-        absolute_x_minima = max(values_x_t)
+    if max(values_x_t) > max(values_x_s):
+        absolute_x_maxima = max(values_x_t)
     
     absolute_y_minima = min(values_y_s)
-    if min(values_y_t) < min(values_y_t):
+    if min(values_y_t) < min(values_y_s):
         absolute_y_minima = min(values_y_t)
     
     absolute_y_maxima = max(values_y_s)
-    if max(values_y_t) < max(values_y_t):
-        absolute_y_minima = max(values_y_t)
+    if max(values_y_t) > max(values_y_s):
+        absolute_y_maxima = max(values_y_t)
     
     fig, (ax1, ax2) = plt.subplots(1, 2)
     ax1.set_facecolor("#0e0783")
@@ -735,11 +864,9 @@ def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, 
     label_string_x = f"Log {label_x}"
     if unit_x != None:
         label_string_x = f"Log {label_x} ({unit_x})"
-    ax1.set_xlabel(label_string_x)
     label_string_y = f"Log {label_y}"
     if unit_y != None:
         label_string_y = f"Log {label_y} ({unit_y})"
-    ax1.set_ylabel(label_string_y)
     ax1.set_title(f"{packed_name} (Spherical)", loc="left", pad=60)
 
     ax2.set_facecolor("#0e0783")
@@ -753,14 +880,97 @@ def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, 
     label_string_x = f"Log {label_x}"
     if unit_x != None:
         label_string_x = f"Log {label_x} ({unit_x})"
-    ax2.set_xlabel(label_string_x)
     label_string_y = f"Log {label_y}"
     if unit_y != None:
         label_string_y = f"Log {label_y} ({unit_y})"
-    #ax2.set_ylabel(label_string_y, rotation=270)
     ax2.set_title(f"{packed_name} (Triaxial Ellipsoid)", loc="left", pad=60)
+    fig.text(0.5, 0.04, label_string_x, ha='center', va='center')
+    fig.text(0.04, 0.4, label_string_y, ha='center', va='center', rotation='vertical')
     
     title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
-    fig.savefig(f"./comparison_plots/{packed_name}/{title_file_name}_hex.png")
-    fig.savefig(f"./comparison_plots/{packed_name}/{title_file_name}_hex.pdf")
+    fig.savefig(f"./comparison_plots/{packed_name}/hexbins/{title_file_name}_hex.png", dpi=1000)
+    fig.savefig(f"./comparison_plots/{packed_name}/hexbins/{title_file_name}_hex.pdf", dpi=1000)
+    plt.close(fig)
+
+
+def comparison_chi_template(packed_name, values_x_s, chis_s, values_x_t, chis_t,
+                                    label_x, unit_x=None):
+    
+    values_x_s = [np.log10(value) for value in values_x_s]
+    values_x_t = [np.log10(value) for value in values_x_t]
+    
+    absolute_x_minima = min(values_x_s)
+    if min(values_x_t) < min(values_x_s):
+        absolute_x_minima = min(values_x_t)
+    
+    absolute_x_maxima = max(values_x_s)
+    if max(values_x_t) > max(values_x_s):
+        absolute_x_maxima = max(values_x_t)
+    
+    absolute_y_minima = min(chis_s)
+    if min(chis_t) < min(chis_s):
+        absolute_y_minima = min(chis_t)
+    
+    absolute_y_maxima = max(chis_s)
+    if max(chis_t) > max(chis_s):
+        absolute_y_maxima = max(chis_t)
+    
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+    scatter_plot = ax1.scatter(values_x_s, chis_s, s=1, color="black", marker='o',linewidths=1)
+
+    log_values_copy = values_x_s[:]
+    values_count = len(values_x_s)
+    log_values_copy.sort()
+    sigma_1_low = log_values_copy[int(values_count * 0.16)]
+    sigma_1_high = log_values_copy[int(values_count * 0.84)]
+    median = log_values_copy[int(values_count * 0.5)]
+    sigma_2_low = log_values_copy[int(values_count * 0.025)]
+    sigma_2_high = log_values_copy[int(values_count * 0.975)]
+    ax1.axvline(median, color='#cc0000')
+    ax1.axvline(sigma_1_low, color='#cc0000', ls='dashed')
+    ax1.axvline(sigma_1_high, color='#cc0000', ls='dashed')
+    ax1.axvline(sigma_2_low, color='#cc0000', ls='dotted')
+    ax1.axvline(sigma_2_high, color='#cc0000', ls='dotted')
+
+    ax1.set_xlim(absolute_x_minima, absolute_x_maxima)
+    ax1.set_ylim(absolute_y_minima, absolute_y_maxima)
+    label_string_x = f"Log {label_x}"
+    if unit_x != None:
+        label_string_x = f"Log {label_x} ({unit_x})"
+    #ax1.set_xlabel(label_string_x)
+    label_string_y = r"fit $\chi^2$"
+    #ax1.set_ylabel(label_string_y)
+    ax1.set_title(f"{packed_name} (Spherical)", loc="left")
+
+    scatter_plot = ax2.scatter(values_x_t, chis_t, s=1, color="black", marker='o',linewidths=1)
+
+    log_values_copy = values_x_t[:]
+    values_count = len(values_x_t)
+    log_values_copy.sort()
+    sigma_1_low = log_values_copy[int(values_count * 0.16)]
+    sigma_1_high = log_values_copy[int(values_count * 0.84)]
+    median = log_values_copy[int(values_count * 0.5)]
+    sigma_2_low = log_values_copy[int(values_count * 0.025)]
+    sigma_2_high = log_values_copy[int(values_count * 0.975)]
+    ax2.axvline(median, color='#cc0000')
+    ax2.axvline(sigma_1_low, color='#cc0000', ls='dashed')
+    ax2.axvline(sigma_1_high, color='#cc0000', ls='dashed')
+    ax2.axvline(sigma_2_low, color='#cc0000', ls='dotted')
+    ax2.axvline(sigma_2_high, color='#cc0000', ls='dotted')
+
+    ax2.set_yticklabels([])
+    ax2.set_xlim(absolute_x_minima, absolute_x_maxima)
+    ax2.set_ylim(absolute_y_minima, absolute_y_maxima)
+    label_string_x = f"Log {label_x}"
+    if unit_x != None:
+        label_string_x = f"Log {label_x} ({unit_x})"
+    label_string_y = r"fit $\chi^2$"
+    ax2.set_title(f"{packed_name} (Triaxial Ellipsoid)", loc="left")
+
+    fig.text(0.5, 0.04, label_string_x, ha='center', va='center')
+    fig.text(0.04, 0.5, label_string_y, ha='center', va='center', rotation='vertical')
+    
+    title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_chis"
+    fig.savefig(f"./comparison_plots/{packed_name}/chiplots/{title_file_name}.png", dpi=1000)
+    fig.savefig(f"./comparison_plots/{packed_name}/chiplots/{title_file_name}.pdf", dpi=1000)
     plt.close(fig)

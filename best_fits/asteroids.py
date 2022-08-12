@@ -372,44 +372,51 @@ class Asteroid(object):
         """
         Generates histogram plots for diameter, albedo, gamma, and period solutions.
         """
-        histogram_template(self.directory, self.packed_name, self.diameters, "Diameter", "km")
-        histogram_template(self.directory, self.packed_name, self.albedos, "Albedo")
-        histogram_template(self.directory, self.packed_name, self.gammas, "Thermal Inertia", r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        histogram_template(self.directory, self.packed_name, self.diameters, "Diameter", self.is_triaxial, "km")
+        histogram_template(self.directory, self.packed_name, self.albedos, "Albedo", self.is_triaxial)
+        histogram_template(self.directory, self.packed_name, self.gammas, "Thermal Inertia", self.is_triaxial, r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         if not self.fixed:
-            histogram_template(self.directory, self.packed_name, self.periods, "Period", "hr")
+            histogram_template(self.directory, self.packed_name, self.periods, "Period", self.is_triaxial, "hr")
 
     
     def generate_chi_scatterplots(self):
         chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.albedos,
-                                 self.chis, "Diameter", "Albedo", unit_x="km")
+                                 self.chis, "Diameter", "Albedo", self.is_triaxial, unit_x="km")
         chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.gammas,
-                                 self.chis, "Diameter", "Thermal Inertia", unit_x="km", unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+                                 self.chis, "Diameter", "Thermal Inertia", self.is_triaxial, unit_x="km", unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         chi_scatterplot_template(self.directory, self.packed_name, self.gammas, self.albedos,
-                                    self.chis, "Thermal Inertia", "Albedo", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+                                    self.chis, "Thermal Inertia", "Albedo", self.is_triaxial, unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         if not self.fixed:
             chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.periods,
-                                    self.chis, "Diameter", "Period", unit_x="km", unit_y="hr")
+                                    self.chis, "Diameter", "Period", self.is_triaxial, unit_x="km", unit_y="hr")
             chi_scatterplot_template(self.directory, self.packed_name, self.gammas, self.periods,
-                                    self.chis, "Thermal Inertia", "Period", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
+                                    self.chis, "Thermal Inertia", "Period", self.is_triaxial, unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
             chi_scatterplot_template(self.directory, self.packed_name, self.albedos, self.periods,
-                                    self.chis, "Albedo", "Period", unit_y="hr")
+                                    self.chis, "Albedo", "Period", self.is_triaxial, unit_y="hr")
         
     
     def generate_hexbins(self):
         hexbin_template(self.directory, self.packed_name, self.diameters, self.albedos,
-                        "Diameter", "Albedo", unit_x="km")
+                        "Diameter", "Albedo", self.is_triaxial, unit_x="km")
         hexbin_template(self.directory, self.packed_name, self.diameters, self.gammas,
-                        "Diameter", "Thermal Inertia", unit_x="km", unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+                        "Diameter", "Thermal Inertia", self.is_triaxial, unit_x="km", unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         hexbin_template(self.directory, self.packed_name, self.gammas, self.albedos,
-                            "Thermal Inertia", "Albedo", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+                            "Thermal Inertia", "Albedo", self.is_triaxial, unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         if not self.fixed:
             hexbin_template(self.directory, self.packed_name, self.diameters, self.periods,
-                            "Diameter", "Period", unit_x="km", unit_y="hr")
+                            "Diameter", "Period", self.is_triaxial, unit_x="km", unit_y="hr")
             hexbin_template(self.directory, self.packed_name, self.gammas, self.periods,
-                            "Thermal Inertia", "Period", unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
+                            "Thermal Inertia", "Period", self.is_triaxial, unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
             hexbin_template(self.directory, self.packed_name, self.albedos, self.periods,
-                            "Albedo", "Period", unit_y="hr")
+                            "Albedo", "Period", self.is_triaxial, unit_y="hr")
 
+
+    def generate_chi_plots(self):
+        chi_plot_template(self.directory, self.packed_name, self.diameters, self.chis, "Diameter", self.is_triaxial, "km")
+        chi_plot_template(self.directory, self.packed_name, self.albedos, self.chis, "Visual Albedo", self.is_triaxial)
+        chi_plot_template(self.directory, self.packed_name, self.gammas, self.chis, "Thermal Inertia", self.is_triaxial, r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        if not self.fixed:
+            chi_plot_template(self.directory, self.packed_name, self.periods, self.chis, "Period", self.is_triaxial, "hr")
 
 
 

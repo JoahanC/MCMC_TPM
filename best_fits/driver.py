@@ -29,11 +29,12 @@ print("Finished generating Asteroid objects.\n")
         print(f"Processing object {idx + 1}/{len(objects)}: {object.packed_name}")
     elif object.is_triaxial:
         print(f"Processing object {idx + 1}/{len(objects)}: Triaxial {object.packed_name}")
-    #object.clear_plot_directories()
-    #object.generate_SED_plot()
+    object.clear_plot_directories()
+    object.generate_SED_plot()
     object.generate_histograms()
-    #object.generate_chi_scatterplots()
-    #object.generate_hexbins()"""
+    object.generate_chi_scatterplots()
+    object.generate_hexbins()
+    object.generate_chi_plots()"""
 
 pairings = {}
 for idx, object in enumerate(objects):
@@ -56,6 +57,10 @@ for code in pairings:
         dual_objects.append(curr_ob)
 
 for idx, object in enumerate(dual_objects):
-    print(f"Processing object {idx + 1}/{len(objects)}: {object.packed_name}")
+    print(f"Processing object {idx + 1}/{len(dual_objects)}: {object.packed_name}")
+    #object.clear_directory()
+    #object.generate_histograms()
+    object.generate_chi_scatterplots()
     object.generate_hexbins()
+    #object.generate_chiplots()
     
