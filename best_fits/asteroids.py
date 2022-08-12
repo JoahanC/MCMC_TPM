@@ -349,8 +349,8 @@ class Asteroid(object):
         ax.set_xlabel("Wavelength (microns)", fontsize=12)
         ax.set_ylabel(r"$\nu$F$_\nu$", fontsize=12)
         ax.set_title(f"{self.packed_name}", loc="left")
-        fig.savefig(f"../{self.directory}/general_plots/bestfit_SED.png")
-        fig.savefig(f"../{self.directory}/general_plots/bestfit_SED.pdf")
+        fig.savefig(f"../{self.directory}/general_plots/bestfit_SED.png", dpi=1000)
+        fig.savefig(f"../{self.directory}/general_plots/bestfit_SED.pdf", dpi=1000)
         plt.close(fig)
 
 

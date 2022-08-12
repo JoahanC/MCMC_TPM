@@ -24,19 +24,19 @@ for idx, dir in enumerate(dirs):
     objects.append(Asteroid(dir))
 print("Finished generating Asteroid objects.\n")
 
-"""for idx, object in enumerate(objects):
+for idx, object in enumerate(objects):
     if not object.is_triaxial:
         print(f"Processing object {idx + 1}/{len(objects)}: {object.packed_name}")
     elif object.is_triaxial:
         print(f"Processing object {idx + 1}/{len(objects)}: Triaxial {object.packed_name}")
-    object.clear_plot_directories()
+    #object.clear_plot_directories()
     object.generate_SED_plot()
     object.generate_histograms()
     object.generate_chi_scatterplots()
     object.generate_hexbins()
-    object.generate_chi_plots()"""
+    object.generate_chi_plots()
 
-pairings = {}
+"""pairings = {}
 for idx, object in enumerate(objects):
     if object.packed_name not in pairings:
         pairings[object.packed_name] = [object]
@@ -62,5 +62,5 @@ for idx, object in enumerate(dual_objects):
     #object.generate_histograms()
     object.generate_chi_scatterplots()
     object.generate_hexbins()
-    #object.generate_chiplots()
+    #object.generate_chiplots()"""
     

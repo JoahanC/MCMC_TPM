@@ -375,8 +375,8 @@ def histogram_template(directory, packed_name, values, label, is_triaxial, unit=
         title_string = f"{packed_name} (Triaxial Ellipsoid)"
     ax.set_title(title_string, loc="left")
     ax.set_title(f"n = {n_count}", loc="right")
-    fig.savefig(f"../{directory}/general_plots/{label.replace(' ', '_').lower()}_histogram.png")
-    fig.savefig(f"../{directory}/general_plots/{label.replace(' ', '_').lower()}_histogram.pdf")
+    fig.savefig(f"../{directory}/general_plots/{label.replace(' ', '_').lower()}_histogram.png", dpi=1000)
+    fig.savefig(f"../{directory}/general_plots/{label.replace(' ', '_').lower()}_histogram.pdf", dpi=1000)
     plt.close(fig)
 
 
@@ -507,8 +507,8 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
     ax.set_title(title_string, loc="left")
     ax.set_title(f"n = {len(values_x)}", loc="right")
     title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
-    fig.savefig(f"../{directory}/general_plots/{title_file_name}.png")
-    fig.savefig(f"../{directory}/general_plots/{title_file_name}.pdf")
+    fig.savefig(f"../{directory}/general_plots/{title_file_name}.png", dpi=1000)
+    fig.savefig(f"../{directory}/general_plots/{title_file_name}.pdf", dpi=1000)
     plt.close(fig)
 
 
@@ -572,8 +572,8 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
     ax.set_title(title_string, loc="left")
     ax.set_title(f"n = {len(values_x)}", loc="right")
     title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_{label_y.replace(' ', '_').lower()}"
-    fig.savefig(f"../{directory}/general_plots/{title_file_name}_hex.png")
-    fig.savefig(f"../{directory}/general_plots/{title_file_name}_hex.pdf")
+    fig.savefig(f"../{directory}/general_plots/{title_file_name}_hex.png", dpi=1000)
+    fig.savefig(f"../{directory}/general_plots/{title_file_name}_hex.pdf", dpi=1000)
     plt.close(fig)
 
 
@@ -609,8 +609,8 @@ def chi_plot_template(directory, packed_name, values_x, chis, label_x, is_triaxi
     ax.set_title(title_string, loc="left")
     ax.set_title(f"n = {len(values_x)}", loc="right")
     title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_chis"
-    fig.savefig(f"../{directory}/general_plots/{title_file_name}.png")
-    fig.savefig(f"../{directory}/general_plots/{title_file_name}.pdf")
+    fig.savefig(f"../{directory}/general_plots/{title_file_name}.png", dpi=1000)
+    fig.savefig(f"../{directory}/general_plots/{title_file_name}.pdf", dpi=1000)
     plt.close(fig)
 
 
