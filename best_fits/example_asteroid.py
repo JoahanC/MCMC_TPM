@@ -1,6 +1,6 @@
 """
 This file documents an example case of using the Asteroid class to perform analysis
-on a specific asteroid.
+on a specific asteroid. Feel free to comment lines out as necessary.
 """
 from asteroids import *
 
@@ -41,33 +41,33 @@ distribution plot can be generated with the following method. It performs a fit
 on each set of epoch flux values in however many wavelength bands were provided,
 as well as a set of individual median flux points and uncertainties.
 """
-print("Calling generate_SED_plot function.")
 asteroid_ex.generate_SED_plot()
 
 """
 Histograms of each output parameter: (Diameter, Visual Albedo, Thermal Inertia, 
 and Period if available) can be generated with corresponding uncertainty lines.
 """
-print("Calling generate_histograms function.")
 asteroid_ex.generate_histograms()
 
 """
 Fit chi squared labeled scatterplots of each output parameters can be generated
 in all possible axis configurations.
 """
-print("Calling generate_chi_scatterplots function.")
 asteroid_ex.generate_chi_scatterplots()
 
 """
 Density hexbin plots of each output parameters can be generated
 in all possible axis configurations.
 """
-print("Calling generate_hexbins function.")
 asteroid_ex.generate_hexbins()
 
 """
 Finally, chi vs output parameter plots can generated for all available output parameters.
 """
-print("Calling generate_chi_plots function.")
 asteroid_ex.generate_chi_plots()
 
+"""
+There is also a directory clearing method which will eliminate all current plots from 
+a folder.
+"""
+asteroid_ex.clear_plot_directories()
