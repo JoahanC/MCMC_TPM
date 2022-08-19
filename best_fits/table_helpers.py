@@ -3,54 +3,16 @@ This file takes the inputs for Ned's MCMC model and converts them into
 an astropy and LaTeX table format for use in publications.
 Must be run in the same directory with the run*.csh file 
 """
-import sys
 import os
-from matplotlib.pyplot import table
-import numpy as np
-from astropy.table import Table, Column
+from astropy.table import Table
 from asteroids import Asteroid
 from helpers import *
 
 
-def read_csh_inputs(csh_file, triaxial=True):
-    """
-    Reads in all the MCMC input information from the .csh file
-
-    Arguments: csh_file (str) -- the name of the file housing the 
-               direct MCMC inputs
-
-    Returns: (dict) -- contains all relevant information in the
-             the firle
-    """
-
-    csh_inputs = {}
-    with open(csh_file, 'r') as input_file:
-        
-        for i in range(3):
-            input_file.readline()
-        header_info = input_file.readline().split(',')
-        csh_inputs["h_mag"] = header_info[0]
-        csh_inputs["h_error"] = header_info[1]
-        csh_inputs["period"] = header_info[2]
-        csh_inputs["up_desig"] = header_info[3].replace('\n', '')
-        if triaxial:
-            input_file.readline()
-        current_line = input_file.readline()
-        index = 1
-        while True:
-            if "LAST" in current_line:
-                break
-            csh_inputs[f"epoch_{index}"] = [index]
-            for datum in current_line.split(','):
-                datum.replace('+', '').replace('\n', '')
-                csh_inputs[f"epoch_{index}"].append(float(datum))
-            current_line = input_file.readline()
-            index += 1
-
-        return csh_inputs
-
-
 def generate_objects():
+    """
+    Generates all Asteroid objects for legally set up MCMC folders.
+    """
     files = os.listdir("../")
     dirs = []
     for file in files:

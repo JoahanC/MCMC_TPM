@@ -1,17 +1,34 @@
-from math import modf, floor
-import numpy as np
 import os
 import itertools
+import numpy as np
+from math import modf, floor
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.ticker import ScalarFormatter, NullFormatter, LogFormatter
 
 
-def reject_outliers(data, m = 2.):
+def reject_outliers(data, m=2.):
+    """
+    Simple yet naive algorithm which trims out data within `m` standard deviations
+    from the median.
+
+    Parameters
+    ----------
+    data : list
+        A list or array-like structure containing numerical data.
+    
+    m : int
+        The number of standard deviations to trim out.
+
+    Returns
+    -------
+    The fully trimmed out data.
+    """
     d = np.abs(data - np.median(data))
     mdev = np.median(d)
     s = d/mdev if mdev else 0.
     return data[s<m]
+
 
 def julian_days_utc_converter(jd):
     """
@@ -42,8 +59,8 @@ def julian_days_utc_converter(jd):
     if month > 12:
         month = month - 12
         year = year + 1    
-    
     return year, month, day + decimal_day
+
 
 def determine_mean_median_vals(line, median_sigma_type):
     """
@@ -51,7 +68,6 @@ def determine_mean_median_vals(line, median_sigma_type):
 
     Parameters
     ----------
-    
     line : str
         The line containing information about mean and median values.
 
@@ -61,8 +77,8 @@ def determine_mean_median_vals(line, median_sigma_type):
 
     Returns
     -------
-    A four or five length tuple with mean, mean uncertainty, median, and 
-    median uncertainty values.
+    The mean[0], mean uncertainty[1], median[2], and median uncertainties
+    if available[3/4].
     """
     index = 0
     mean = ""
@@ -135,10 +151,13 @@ def determine_period(line):
 
     Parameters
     ----------
-
     line : str
         The line containing all the period information.
     
+    Returns
+    -------
+    The median[0], the 84th percentile uncertainty[1], and
+    16th percentile uncertainty[2].
     """
 
     period = ""
@@ -181,10 +200,13 @@ def determine_gamma_vals(line):
 
     Parameters
     ----------
-
     line : str
         The line containing all the gamma information.
     
+    Returns
+    -------
+    The median[0], the 84th percentile uncertainty[1], and
+    16th percentile uncertainty[2].
     """
     value = ""
     value_pos_sigma = ""
@@ -223,10 +245,13 @@ def determine_crater_fraction(line):
 
     Parameters
     ----------
-
     line : str
         The line containing all the crater fraction information.
     
+    Returns
+    -------
+    The median[0], the 84th percentile uncertainty[1], and
+    16th percentile uncertainty[2].
     """
     fraction = ""
     fraction_pos_sigma = ""
@@ -261,10 +286,13 @@ def determine_p_V_ratio(line):
 
     Parameters
     ----------
-
     line : str
         The line containing all the albedo information.
     
+    Returns
+    -------
+    The median[0], the 84th percentile uncertainty[1], and
+    16th percentile uncertainty[2].
     """
     ratio = ""
     ratio_pos_sigma = ""
@@ -297,6 +325,19 @@ def determine_p_V_ratio(line):
 
 
 def determine_face_ratios(line):
+    """
+    Returns all of the information regarding the best face ratio solutions.
+
+    Parameters
+    ----------
+    line : str
+        The line containing a given face ratio's information.
+    
+    Returns
+    -------
+    The median[0], the 84th percentile uncertainty[1], and
+    16th percentile uncertainty[2].
+    """
     ratio_pos_sigma = ""
     ratio_neg_sigma = ""
     ratio = float(line.split()[1].replace('+', ''))
@@ -312,7 +353,6 @@ def histogram_template(directory, packed_name, values, label, is_triaxial, unit=
 
     Parameters
     ----------
-
     directory : str
         The name of the folder this object's results are located in.
 
@@ -320,19 +360,19 @@ def histogram_template(directory, packed_name, values, label, is_triaxial, unit=
         The packed MPC designated name.
 
     values : list
-        The lost of plottable values.
+        The list of plottable values.
 
     label : str
-        The values being plotted.
+        A name for the plottable values provided to place on an axis.
+
+    is_triaxial : bool
+        Whether or not a triaxial model's results are being plotted.
 
     unit : str
-        A unit if the quantity being plotted has units.
-    
+        A unit for the quantity being plotted.
     """
-    # Set up log scale plot arguments and standard deviation lines
     values = reject_outliers(np.array(values), 5.5)
     values = list(values)
-    print(type(values))
     log_values = [np.log10(value) for value in values]
     log_values_copy = log_values[:]
     values_count = len(log_values)
@@ -353,7 +393,6 @@ def histogram_template(directory, packed_name, values, label, is_triaxial, unit=
         hist_step = 0.0001
 
     fig, ax = plt.subplots()
-
     hist_low_limit = int(min(log_values) * 1000) / 1000.
     hist_high_limit = (int(max(log_values) * 1000) + 1) / 1000.
     histo = ax.hist(log_values, bins=np.arange(hist_low_limit, hist_high_limit, hist_step),
@@ -369,7 +408,6 @@ def histogram_template(directory, packed_name, values, label, is_triaxial, unit=
 
     median_text = "Median = " + f"{str(round(median, 3)).ljust(5, '0')}\n"
     fig.text(0.22, 0.82, median_text, ha="center")
-
     n_count = len(values)
     if label == "albedo":
         ax.set_xlim(right=-0.0001)
@@ -390,13 +428,14 @@ def histogram_template(directory, packed_name, values, label, is_triaxial, unit=
     plt.close(fig)
 
 
-def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, label_x, label_y, is_triaxial, unit_x=None, unit_y=None, value_break=0.3):
+def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, label_x, 
+                             label_y, is_triaxial, unit_x=None, unit_y=None, 
+                             value_break=0.3):
     """
     A template function for generating chi valued scatterplots.
 
     Parameters
     ----------
-
     directory : str
         The name of the folder this object's results are located in.
 
@@ -410,13 +449,16 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
         The list of plottable values to be on the y-axis.
 
     chis : list
-        The list of chi^2 fit values associated with each point
+        The list of chi^2 fit values associated with each value pair.
 
     label_x : str
         The name of the values plotted on the x-axis.
 
     label_y : str
         The name of the values plotted on the y-axis.
+
+    is_triaxial : bool
+        Whether or not a triaxial model's results are being plotted.
 
     unit_x : str
         A unit of the quantity being plotted on the x-axis. OPTIONAL.
@@ -425,8 +467,7 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
         A unit of the quantity being plotted on the y-axis. OPTIONAL.
 
     value_break : float
-        The separation value needed to create a new 'segment'.
-    
+        The separation value needed to create a new 'segment'. OPTIONAL.
     """
     if label_x == "Diameter":
         pairings = []
@@ -487,8 +528,6 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
 
     # Generate base figure
     fig, ax = plt.subplots()
-    #ax.set_xscale("log")
-    #ax.set_yscale("log")
     label_string_x = f"Log {label_x.capitalize()}"
     if unit_x != None:
         label_string_x = f"Log {label_x} ({unit_x})"
@@ -497,16 +536,6 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
     if unit_y != None:
         label_string_y = f"Log {label_y} ({unit_y})"
     ax.set_ylabel(label_string_y)
-    """for axis in [ax.xaxis]:
-        axis.set_major_formatter(LogFormatter())
-        axis.set_minor_formatter(LogFormatter())
-        if label_x != "Thermal Inertia":
-            axis.set_minor_formatter(LogFormatter(minor_thresholds=(15,0.4)))
-    for axis in [ax.yaxis]:
-        axis.set_major_formatter(LogFormatter())
-        axis.set_minor_formatter(LogFormatter())
-        if label_y != "Thermal Inertia":
-            axis.set_minor_formatter(LogFormatter(minor_thresholds=(15,0.4)))"""
     values_x = [np.log10(value) for value in values_x]
     values_y = [np.log10(value) for value in values_y]
     scatter_plot = ax.scatter(values_x, values_y, s=1,marker='o',c=chis,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
@@ -522,13 +551,13 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
     plt.close(fig)
 
 
-def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y, is_triaxial, unit_x=None, unit_y=None, log_scale=True):
+def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y, 
+                    is_triaxial, unit_x=None, unit_y=None, log_scale=True):
     """
     Template function for generating hexbin diagrams of two physical properties.
 
     Parameters
     ----------
-
     directory : str
         The name of the folder this object's results are located in.
 
@@ -547,6 +576,9 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
     label_y : str
         The name of the values plotted on the y-axis.
 
+    is_triaxial : bool
+        Whether or not a triaxial model's results are being plotted.
+
     unit_x : str
         A unit of the quantity being plotted on the x-axis. OPTIONAL.
     
@@ -554,7 +586,7 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
         A unit of the quantity being plotted on the y-axis. OPTIONAL.
 
     log_scale : bool
-        Whether the plot should be created in logspace 10.
+        Whether the plot should be created in logspace 10. OPTIONAL.
     """
     values_x = [np.log10(value) for value in values_x]
     values_y = [np.log10(value) for value in values_y]
@@ -588,7 +620,32 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
 
 
 def chi_plot_template(directory, packed_name, values_x, chis, label_x, is_triaxial, unit_x=None):
-    
+    """
+    Template function for generating hexbin diagrams of two physical properties.
+
+    Parameters
+    ----------
+    directory : str
+        The name of the folder this object's results are located in.
+
+    packed_name : str
+        The packed MPC designated name.
+
+    values_x : list
+        The list of plottable values to be on the x-axis.
+
+    chis : list
+        The list of chi^2 fit values associated with each value pair.
+
+    label_x : str
+        The name of the values plotted on the x-axis.
+
+    is_triaxial : bool
+        Whether or not a triaxial model's results are being plotted.
+
+    unit_x : str
+        A unit of the quantity being plotted on the x-axis. OPTIONAL.
+    """
     fig, ax = plt.subplots()
     label_string_x = f"Log {label_x.capitalize()}"
     if unit_x != None:
@@ -627,17 +684,17 @@ def chi_plot_template(directory, packed_name, values_x, chis, label_x, is_triaxi
 def comparison_histogram_template(packed_name, values_1, values_2, label, unit=None):
     """
     A template function for overlaying histograms generated by the DualPlotter class.
+
     Parameters
     ----------
-
     packed_name : str
         The MPC designated name of the object.
 
     values_1 : list
-        The values being plotted for the spherical object
+        The values being plotted for the spherical object.
 
     values_2 : list
-        The values being plotted for the triaxial object
+        The values being plotted for the triaxial object.
     
     label : str
         The name of the values being plotted.
@@ -683,15 +740,6 @@ def comparison_histogram_template(packed_name, values_1, values_2, label, unit=N
         ax.axvline(sigma_1_high, color=curr_color, ls='dashed')
         ax.axvline(sigma_2_low, color=curr_color, ls='dotted')
         ax.axvline(sigma_2_high, color=curr_color, ls='dotted')
-
-    #sigma_text = "+84% = " + f"{str(round(sigma_2_high, 3)).ljust(5, '0')}\n"
-    #sigma_text += "+16% = " + f"{str(round(sigma_1_high, 3)).ljust(5, '0')}\n"
-    #sigma_text += r"med = " + f"{str(round(median, 3)).ljust(5, '0')}\n"
-    #sigma_text += "-16% = " + f"{str(round(sigma_1_low, 3)).ljust(5, '0')}\n"
-    #sigma_text += "-84% = " + f"{str(round(sigma_2_low, 3)).ljust(5, '0')}"
-    #fig.text(0.82, 0.72, sigma_text, ha="center")
-
-    n_count = len(values)
     if label == "albedo":
         ax.set_xlim(right=-0.0001)
 
@@ -717,21 +765,26 @@ def comparison_scatterplot_template(packed_name, values_x_s, values_y_s, chis_s,
 
     Parameters
     ----------
-
-    directory : str
-        The name of the folder this object's results are located in.
-
     packed_name : str
         The packed MPC designated name.
 
-    values_x : list
-        The list of plottable values to be on the x-axis.
+    values_x_s : list
+        The list of spherical model plottable values to be on the x-axis.
 
-    values_y : list
-        The list of plottable values to be on the y-axis.
+    values_y_s : list
+        The list of spherical model plottable values to be on the y-axis.
 
-    chis : list
-        The list of chi^2 fit values associated with each point.
+    chis_s : list
+        The list of spherical model chi^2 fit values associated with each point.
+
+    values_x_t : list
+        The list of triaxial model plottable values to be on the x-axis.
+
+    values_y_t : list
+        The list of triaxial model plottable values to be on the y-axis.
+
+    chis_t : list
+        The list of triaxial chi^2 fit values associated with each point.
 
     label_x : str
         The name of the values plotted on the x-axis.
@@ -744,9 +797,6 @@ def comparison_scatterplot_template(packed_name, values_x_s, values_y_s, chis_s,
     
     unit_y : str
         A unit of the quantity being plotted on the y-axis. OPTIONAL.
-
-    log_scale : bool
-        Whether the plot should be created in logspace 10.
     """
     values_x_s = [np.log10(value) for value in values_x_s]
     values_y_s = [np.log10(value) for value in values_y_s]
@@ -814,18 +864,20 @@ def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, 
 
     Parameters
     ----------
-
-    directory : str
-        The name of the folder this object's results are located in.
-
     packed_name : str
         The packed MPC designated name.
 
-    values_x : list
-        The list of plottable values to be on the x-axis.
+    values_x_s : list
+        The list of spherical model plottable values to be on the x-axis.
 
-    values_y : list
-        The list of plottable values to be on the y-axis.
+    values_y_s : list
+        The list of spherical model plottable values to be on the y-axis.
+
+    values_x_t : list
+        The list of triaxial model plottable values to be on the x-axis.
+
+    values_y_t : list
+        The list of triaxial model plottable values to be on the y-axis.
 
     label_x : str
         The name of the values plotted on the x-axis.
@@ -838,9 +890,6 @@ def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, 
     
     unit_y : str
         A unit of the quantity being plotted on the y-axis. OPTIONAL.
-
-    log_scale : bool
-        Whether the plot should be created in logspace 10.
     """
     values_x_s = [np.log10(value) for value in values_x_s]
     values_y_s = [np.log10(value) for value in values_y_s]
@@ -905,7 +954,32 @@ def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, 
 
 def comparison_chi_template(packed_name, values_x_s, chis_s, values_x_t, chis_t,
                                     label_x, unit_x=None):
-    
+    """
+    Template function for generating hexbin diagrams of two physical properties.
+
+    Parameters
+    ----------
+    packed_name : str
+        The packed MPC designated name.
+
+    values_x_s : list
+        The list of spherical model plottable values to be on the x-axis.
+
+    chis_s : list
+        The list of spherical model chi^2 fit values associated with each point.
+
+    values_x_t : list
+        The list of triaxial model plottable values to be on the x-axis.
+
+    chis_t : list
+        The list of triaxial model chi^2 fit values associated with each point.
+
+    label_x : str
+        The name of the values plotted on the x-axis.
+
+    unit_x : str
+        A unit of the quantity being plotted on the x-axis. OPTIONAL.
+    """
     values_x_s = [np.log10(value) for value in values_x_s]
     values_x_t = [np.log10(value) for value in values_x_t]
     
@@ -947,9 +1021,7 @@ def comparison_chi_template(packed_name, values_x_s, chis_s, values_x_t, chis_t,
     label_string_x = f"Log {label_x}"
     if unit_x != None:
         label_string_x = f"Log {label_x} ({unit_x})"
-    #ax1.set_xlabel(label_string_x)
     label_string_y = r"fit $\chi^2$"
-    #ax1.set_ylabel(label_string_y)
     ax1.set_title(f"{packed_name} (Spherical)", loc="left")
 
     scatter_plot = ax2.scatter(values_x_t, chis_t, s=1, color="black", marker='o',linewidths=1)
