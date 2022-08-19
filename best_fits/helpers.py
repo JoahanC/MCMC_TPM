@@ -296,6 +296,16 @@ def determine_p_V_ratio(line):
     return outputs
 
 
+def determine_face_ratios(line):
+    ratio_pos_sigma = ""
+    ratio_neg_sigma = ""
+    ratio = float(line.split()[1].replace('+', ''))
+    sigma_values = line.replace('-', ' ').split()
+    ratio_pos_sigma, ratio_neg_sigma = float(sigma_values[2]), float(sigma_values[3])
+    outputs = [ratio, ratio_pos_sigma, ratio_neg_sigma]
+    return outputs
+
+
 def histogram_template(directory, packed_name, values, label, is_triaxial, unit=None):
     """
     A template function for generating histograms.

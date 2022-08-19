@@ -17,8 +17,20 @@ dirs.remove("best_fits")
 dirs.remove("triaxial_02100")
 dirs.remove("02100")
 
-
+print(dirs)
+clusters = set()
+for dir in dirs:
+    name = dir.replace("triaxial_", '')
+    clusters.add(name)
+print(clusters)
 objects = []
+print("Generating Asteroid objects.")
+for idx, dir in enumerate(dirs):
+    object = Asteroid(dir)
+    objects.append(object)
+print("Finished generating Asteroid objects.\n")
+
+"""objects = []
 print("Generating Asteroid objects.")
 for idx, dir in enumerate(dirs):
     objects.append(Asteroid(dir))
@@ -36,7 +48,7 @@ for idx, object in enumerate(objects):
     object.generate_hexbins()
     object.generate_chi_plots()
 
-"""pairings = {}
+pairings = {}
 for idx, object in enumerate(objects):
     if object.packed_name not in pairings:
         pairings[object.packed_name] = [object]

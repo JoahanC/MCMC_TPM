@@ -4,7 +4,6 @@ import numpy as np
 from helpers import *
 
 
-
 class Asteroid(object):
     """
     The Asteroid object holds all of the spherical and triaxial
@@ -17,8 +16,8 @@ class Asteroid(object):
         Parameters
         ----------
 
-        packed_name : str
-            The packed MPC designation for the object.
+        directory : str
+            The folder name of the asteroid.
 
         """
         self.directory = directory
@@ -29,7 +28,24 @@ class Asteroid(object):
             self.packed_name = directory.replace("triaxial_", '')
             self.is_triaxial = True
 
-        best_fit_outputs = open(f"{self.packed_name}.txt", 'r')
+        self.csh_file = f"../{directory}/run_{self.packed_name}.csh"
+        with open(f"../{directory}/fort.21", 'r') as chain_file:
+            chain_lines = chain_file.readlines()
+        with open(f"../{directory}/fort.4", 'r') as albedo_file:
+            albedo_lines = albedo_file.readlines()
+        self.full_lines = False
+        if len(chain_lines) == len(albedo_lines) + 1:
+            self.full_lines = True
+
+        best_fit_outputs = open(f"{self.directory}.txt", 'r')
+        self.b_a_ratio = 0
+        self.b_a_pos_sig = 0
+        self.b_a_neg_sig = 0
+        self.c_b_ratio = 0
+        self.c_b_pos_sig = 0
+        self.c_b_neg_sig = 0
+        self.eigenvalues = {}
+        eig_idx = 1
         for line in best_fit_outputs:
             if "dia=" in line:
                 diameter_vals = determine_mean_median_vals(line, "multi")
@@ -43,11 +59,11 @@ class Asteroid(object):
             if "p_V = " in line:
                 p_V_vals = determine_mean_median_vals(line, "single")
                 self.albedo_mean = float(p_V_vals[0])
-                self.albedo_16th_percentile = float(p_V_vals[1])
-                self.albedo_84th_percentile = float(p_V_vals[1])
+                self.albedo_mean_16th_percentile = float(p_V_vals[1])
+                self.albedo_mean_84th_percentile = float(p_V_vals[1])
                 self.albedo_median = float(p_V_vals[2])
-                self.albedo_16th_percentile = float(p_V_vals[3])
-                self.albedo_84th_percentile = float(p_V_vals[3])
+                self.albedo_median_16th_percentile = float(p_V_vals[3])
+                self.albedo_median_84th_percentile = float(p_V_vals[3])
 
             if "theta1=" in line:
                 theta_vals = determine_mean_median_vals(line, "multi")
@@ -82,6 +98,18 @@ class Asteroid(object):
                 self.ir_fraction_16th_percentile = float(ratio_vals[1])
                 self.ir_fraction_84th_percentile = float(ratio_vals[2])
 
+            if "b/a" in line:
+                face_ratios = determine_face_ratios(line)
+                self.b_a_ratio = face_ratios[0]
+                self.b_a_pos_sig = face_ratios[1]
+                self.b_a_neg_sig = face_ratios[2]
+
+            if "c/b" in line:
+                face_ratios = determine_face_ratios(line)
+                self.c_b_ratio = face_ratios[0]
+                self.c_b_pos_sig = face_ratios[1]
+                self.c_b_neg_sig = face_ratios[2]
+
             if "pole peak at = " in line:
                 pole_peak_vals = line.split()
                 self.pole_peak_ra = float(pole_peak_vals[4])
@@ -92,13 +120,18 @@ class Asteroid(object):
                 self.pole_mean_ra = float(mean_pole_vals[4])
                 self.pole_mean_dec = float(mean_pole_vals[5])
                 self.pole_bar = float(mean_pole_vals[7])
+
+            if "Moment eigenvalue=" in line:
+                eig_vals = line.split()
+                self.eigenvalues[f"eigenvalue_{eig_idx}"] = [float(eig_vals[2]), float(eig_vals[5]), float(eig_vals[6])]
+                eig_idx += 1
+
         best_fit_outputs.close()
-
         SED_plotters = self.retrieve_SED_data()
-
         self.esed = SED_plotters[0]
         self.wavelengths = SED_plotters[1]
         self.datelabels = SED_plotters[2]
+        self.epoch_count = len(self.datelabels)
         self.data_x = SED_plotters[3]
         self.data_y = SED_plotters[4]
         self.data_y_error = SED_plotters[5]
@@ -113,8 +146,55 @@ class Asteroid(object):
         if self.periods[0] == self.periods[540] and self.periods[9] == self.periods[132]:
             self.fixed = True
 
+        csh_inputs = self.read_csh_inputs()
+        self.h_magnitude = csh_inputs["h_mag"]
+        self.h_error = csh_inputs["h_error"]
+        self.period = csh_inputs["period"]
+        self.epochs = {}
+        for key in csh_inputs:
+            if "epoch" in key:
+                self.epochs[key] = csh_inputs[key]
+
+        with open(f"../{directory}/fort.21", 'r') as chain_file:
+            chain_lines = chain_file.readlines()
+        with open(f"../{directory}/fort.4", 'r') as albedo_file:
+            albedo_lines = albedo_file.readlines()
+
+
+    def read_csh_inputs(self):
+        """
+        Reads in all the MCMC input information from the object's .csh file
+        """
+        csh_inputs = {}
+        with open(self.csh_file, 'r') as input_file:
+            while True:
+                header_info = input_file.readline().split(',')
+                if len(header_info) == 4:
+                    break
+            csh_inputs["h_mag"] = float(header_info[0])
+            csh_inputs["h_error"] = float(header_info[1])
+            csh_inputs["period"] = float(header_info[2])
+            
+            if self.is_triaxial:
+                input_file.readline()
+            current_line = input_file.readline()
+            index = 1
+            while True:
+                if "LAST" in current_line:
+                    break
+                csh_inputs[f"epoch_{index}"] = [index]
+                for datum in current_line.split(','):
+                    datum.replace('+', '').replace('\n', '')
+                    csh_inputs[f"epoch_{index}"].append(float(datum)) 
+                current_line = input_file.readline()
+                index += 1
+            return csh_inputs
+
 
     def retrieve_SED_data(self):
+        """
+        Reads in all the bestfit SED information from the object's fort.22 file
+        """
         SED_file = open(f"../{self.directory}/SED_data.out")
         datum_minor = SED_file.readline().rstrip().split()
         if self.is_triaxial:
@@ -172,7 +252,6 @@ class Asteroid(object):
         first_line = True
 
         while True:
-
             line = SED_file.readline()
             if "SRGB" not in line and first_line:
                 color.append("#444444")
@@ -242,21 +321,9 @@ class Asteroid(object):
     def retrieve_MCMC_results(self):
         """
         Generates the diameter and albedo values for an object based on the fort.21 file.
-
-        Parameters
-        ----------
-        object : str
-            The folder name of the object being analyzed.
-
-        Returns
-        -------
-        A tuple containing the diameters[0], albedos[1], gammas[2], 
-        chi^2 values[3], and period[4] values for each solution point. 
-        """
-        
+        """   
         output_file = open(f"../{self.directory}/PJDFC.out")
         output_file.readline()
-
         diameters = []
         chis = []
         gammas = []
@@ -289,16 +356,64 @@ class Asteroid(object):
                 gammas.append(gamma)
                 periods.append(period)
 
+        if not self.full_lines:
+            physical_chars = self.retrieve_unequal_data()
+            return physical_chars
+
         physical_chars = [diameters, albedos, gammas, chis, periods]
+        return physical_chars
+
+
+    def retrieve_unequal_data(self):
+        """
+        In the case that the fort.4, fort.3, or fort.21 files have missing information,
+        this code will run to recover as much common data between the files as possible.
+        NOTE: this is optimized for 02100 Ra-Shalom currently and needs more work to
+        be generalized to work for all MCMC results with this issue.
+        """
+        output_file = open(f"../{self.directory}/fort.21", 'r')
+        albedo_file = open(f"../{self.directory}/fort.4", 'r')
+        period_file = open(f"../{self.directory}/fort.3", 'r')
+        output_file.readline()
+        diameters = []
+        diameters_true = []
+        chis = []
+        gammas = []
+        periods = []
+        albedos = []
+        for line in albedo_file.readlines():
+            diameters.append(float(line.strip().split()[0]))
+            albedos.append(float(line.strip().split()[1]))
+        
+        count = 0
+        exempt = [6608, 25932, 41328]
+        for line in output_file.readlines():
+            if round(np.e ** float(line.strip()[44:52].strip()), len(str(diameters[count])) - 2) != diameters[count] and count not in exempt:
+                continue
+            diameter = np.e ** float(line.strip()[44:52].strip())
+            period = np.e ** float(line.strip()[25:34].strip())
+            gamma = np.e ** float(line.strip()[34:43].strip())
+            chi = float(line.strip()[90:106].strip())
+            chis.append(chi)
+            gammas.append(gamma)
+            diameters_true.append(diameter)
+            periods.append(period)
+            count += 1
+        
+        output_file.close()
+        period_file.close()
+        albedo_file.close()
+        physical_chars = [diameters_true, albedos, gammas, chis, periods]
         return physical_chars
 
     
     def generate_SED_plot(self):
+        """
+        Generates the bestfit SED plot for this asteroid.
+        """
         colors = ["#3498db", "#229954", "#c0392b", "#8e44ad", "#f1c40f", "#ec7063", "#34495e", "#6e2c00"]
 
         fig, ax = plt.subplots()
-        #plt.subplots_adjust(left=0.15, right=0.95, top=0.95, bottom=0.15)
-        #ax = plt.gca()
         y_low = 1e99
         y_high = 0
 
@@ -372,51 +487,85 @@ class Asteroid(object):
         """
         Generates histogram plots for diameter, albedo, gamma, and period solutions.
         """
-        histogram_template(self.directory, self.packed_name, self.diameters, "Diameter", self.is_triaxial, "km")
-        histogram_template(self.directory, self.packed_name, self.albedos, "Albedo", self.is_triaxial)
-        histogram_template(self.directory, self.packed_name, self.gammas, "Thermal Inertia", self.is_triaxial, r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        histogram_template(self.directory, self.packed_name, self.diameters, "Diameter", 
+                           self.is_triaxial, "km")
+        histogram_template(self.directory, self.packed_name, self.albedos, "Albedo", 
+                           self.is_triaxial)
+        histogram_template(self.directory, self.packed_name, self.gammas,
+                           "Thermal Inertia", self.is_triaxial, 
+                           r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         if not self.fixed:
-            histogram_template(self.directory, self.packed_name, self.periods, "Period", self.is_triaxial, "hr")
+            histogram_template(self.directory, self.packed_name, self.periods, "Period", 
+                               self.is_triaxial, "hr")
 
     
     def generate_chi_scatterplots(self):
-        chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.albedos,
-                                 self.chis, "Diameter", "Albedo", self.is_triaxial, unit_x="km")
-        chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.gammas,
-                                 self.chis, "Diameter", "Thermal Inertia", self.is_triaxial, unit_x="km", unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
-        chi_scatterplot_template(self.directory, self.packed_name, self.gammas, self.albedos,
-                                    self.chis, "Thermal Inertia", "Albedo", self.is_triaxial, unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        """
+        Generates fit chi squared labeled scatterplots of all output parameters 
+        in all axes configurations.
+        """
+        chi_scatterplot_template(self.directory, self.packed_name, self.diameters, 
+                                 self.albedos, self.chis, "Diameter", "Albedo", 
+                                 self.is_triaxial, unit_x="km")
+        chi_scatterplot_template(self.directory, self.packed_name, self.diameters, 
+                                 self.gammas, self.chis, "Diameter", "Thermal Inertia", 
+                                 self.is_triaxial, unit_x="km", 
+                                 unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        chi_scatterplot_template(self.directory, self.packed_name, self.gammas, 
+                                 self.albedos, self.chis, "Thermal Inertia", "Albedo", 
+                                 self.is_triaxial, unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         if not self.fixed:
-            chi_scatterplot_template(self.directory, self.packed_name, self.diameters, self.periods,
-                                    self.chis, "Diameter", "Period", self.is_triaxial, unit_x="km", unit_y="hr")
-            chi_scatterplot_template(self.directory, self.packed_name, self.gammas, self.periods,
-                                    self.chis, "Thermal Inertia", "Period", self.is_triaxial, unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
-            chi_scatterplot_template(self.directory, self.packed_name, self.albedos, self.periods,
-                                    self.chis, "Albedo", "Period", self.is_triaxial, unit_y="hr")
+            chi_scatterplot_template(self.directory, self.packed_name, self.diameters, 
+                                     self.periods, self.chis, "Diameter", "Period", 
+                                     self.is_triaxial, unit_x="km", unit_y="hr")
+            chi_scatterplot_template(self.directory, self.packed_name, self.gammas, 
+                                     self.periods, self.chis, "Thermal Inertia", 
+                                     "Period", self.is_triaxial, 
+                                     unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
+            chi_scatterplot_template(self.directory, self.packed_name, self.albedos, 
+                                     self.periods, self.chis, "Albedo", "Period", 
+                                     self.is_triaxial, unit_y="hr")
         
     
     def generate_hexbins(self):
+        """
+        Generates hexbin density plots for all output parameters in all axes 
+        configurations.
+        """
         hexbin_template(self.directory, self.packed_name, self.diameters, self.albedos,
                         "Diameter", "Albedo", self.is_triaxial, unit_x="km")
         hexbin_template(self.directory, self.packed_name, self.diameters, self.gammas,
-                        "Diameter", "Thermal Inertia", self.is_triaxial, unit_x="km", unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+                        "Diameter", "Thermal Inertia", self.is_triaxial, unit_x="km", 
+                        unit_y=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         hexbin_template(self.directory, self.packed_name, self.gammas, self.albedos,
-                            "Thermal Inertia", "Albedo", self.is_triaxial, unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+                            "Thermal Inertia", "Albedo", self.is_triaxial, 
+                            unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         if not self.fixed:
-            hexbin_template(self.directory, self.packed_name, self.diameters, self.periods,
-                            "Diameter", "Period", self.is_triaxial, unit_x="km", unit_y="hr")
+            hexbin_template(self.directory, self.packed_name, self.diameters, 
+                            self.periods, "Diameter", "Period", self.is_triaxial, 
+                            unit_x="km", unit_y="hr")
             hexbin_template(self.directory, self.packed_name, self.gammas, self.periods,
-                            "Thermal Inertia", "Period", self.is_triaxial, unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
+                            "Thermal Inertia", "Period", self.is_triaxial, 
+                            unit_x=r"$J~m^{-2}~s^{-0.5}~K^{-1})$", unit_y="hr")
             hexbin_template(self.directory, self.packed_name, self.albedos, self.periods,
                             "Albedo", "Period", self.is_triaxial, unit_y="hr")
 
 
     def generate_chi_plots(self):
-        chi_plot_template(self.directory, self.packed_name, self.diameters, self.chis, "Diameter", self.is_triaxial, "km")
-        chi_plot_template(self.directory, self.packed_name, self.albedos, self.chis, "Visual Albedo", self.is_triaxial)
-        chi_plot_template(self.directory, self.packed_name, self.gammas, self.chis, "Thermal Inertia", self.is_triaxial, r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
+        """
+        Generates scatterplots of all output parameters versus the fit chi squared 
+        values for each invididual MCMC solution.
+        """
+        chi_plot_template(self.directory, self.packed_name, self.diameters, self.chis, 
+                          "Diameter", self.is_triaxial, "km")
+        chi_plot_template(self.directory, self.packed_name, self.albedos, self.chis, 
+                          "Visual Albedo", self.is_triaxial)
+        chi_plot_template(self.directory, self.packed_name, self.gammas, self.chis, 
+                          "Thermal Inertia", self.is_triaxial, 
+                          r"$J~m^{-2}~s^{-0.5}~K^{-1})$")
         if not self.fixed:
-            chi_plot_template(self.directory, self.packed_name, self.periods, self.chis, "Period", self.is_triaxial, "hr")
+            chi_plot_template(self.directory, self.packed_name, self.periods, self.chis, 
+                              "Period", self.is_triaxial, "hr")
 
 
 

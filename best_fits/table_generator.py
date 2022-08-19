@@ -644,12 +644,12 @@ def generate_MCMC_results():
         tex_file.write(line)
     tex_file.write(' ' * 4 + "\enddata\n")
     tex_file.write("\end{deluxetable*}\n\n")
-    plot_paths = return_all_image_files()
+    """plot_paths = return_all_image_files()
 
     for neo in plot_paths:
         tex_file.write("\\section*{\LARGE " + neo + "}\n")
         for path in plot_paths[neo]:
-            plot_image(tex_file, path)
+            plot_image(tex_file, path)"""
     tex_file.write("\end{document}\n")
     tex_file.close()
 
