@@ -90,6 +90,7 @@ def determine_mean_median_vals(line, median_sigma_type):
             break
         mean += line[index]
         index += 1
+    
     mean_sigma = ""
     while True:
         if mean_sigma == "+/-":
@@ -99,6 +100,7 @@ def determine_mean_median_vals(line, median_sigma_type):
             break
         mean_sigma += line[index]
         index += 1
+    
     median = ""
     while True:
         if median == "median":
@@ -164,6 +166,7 @@ def determine_period(line):
     period_pos_sigma = ""
     period_neg_sigma = ""
     index = 0
+    
     while True:
         if period == "Period [h] =":
             period = ""
@@ -172,6 +175,7 @@ def determine_period(line):
             break
         period += line[index]
         index += 1
+    
     while True:
         if period_pos_sigma.strip() == "0.0   0.0%":
             outputs = [period, "0.0", "0.0"]
@@ -183,6 +187,7 @@ def determine_period(line):
             break
         period_pos_sigma += line[index]
         index += 1
+    
     while True:
         if period_neg_sigma == "-":
             period_neg_sigma = ""
@@ -212,6 +217,7 @@ def determine_gamma_vals(line):
     value_pos_sigma = ""
     value_neg_sigma = ""
     index = 0
+    
     while True:
         if value == "sqrt(kappa*rho*C)=":
             value = ""
@@ -220,6 +226,7 @@ def determine_gamma_vals(line):
             break
         value += line[index]
         index += 1
+    
     while True:
         if value_pos_sigma == '+':
             value_pos_sigma = ""
@@ -228,6 +235,7 @@ def determine_gamma_vals(line):
             break
         value_pos_sigma += line[index]
         index += 1
+    
     while True:
         if value_neg_sigma == "-":
             value_neg_sigma = ""
@@ -257,12 +265,14 @@ def determine_crater_fraction(line):
     fraction_pos_sigma = ""
     fraction_neg_sigma = ""
     index = 0
+    
     while True:
         if line[index] == '+':
             fraction = fraction.strip()[17:]
             break
         fraction += line[index]
         index += 1
+    
     while True:
         if fraction_pos_sigma == '+':
             fraction_pos_sigma = ""
@@ -271,6 +281,7 @@ def determine_crater_fraction(line):
             break
         fraction_pos_sigma += line[index]
         index += 1
+    
     while index < len(line):
         if fraction_neg_sigma == '-':
             fraction_neg_sigma = ""
@@ -298,12 +309,14 @@ def determine_p_V_ratio(line):
     ratio_pos_sigma = ""
     ratio_neg_sigma = ""
     index = 0
+    
     while True:
         if line[index] == '+':
             ratio = ratio.strip()[9:]
             break
         ratio += line[index]
         index += 1
+    
     while True:
         if ratio_pos_sigma == '+':
             ratio_pos_sigma = ""
@@ -312,6 +325,7 @@ def determine_p_V_ratio(line):
             break
         ratio_pos_sigma += line[index]
         index += 1
+    
     while True:
         if ratio_neg_sigma == '-':
             ratio_neg_sigma = ""
@@ -371,6 +385,7 @@ def histogram_template(directory, packed_name, values, label, is_triaxial, unit=
     unit : str
         A unit for the quantity being plotted.
     """
+    # Generate uncertainty percentile values and place into logscale
     values = reject_outliers(np.array(values), 5.5)
     values = list(values)
     log_values = [np.log10(value) for value in values]
@@ -469,6 +484,7 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
     value_break : float
         The separation value needed to create a new 'segment'. OPTIONAL.
     """
+    # Generate diameter clustering subplots
     if label_x == "Diameter":
         pairings = []
         title_directory_name = f"{label_x.replace(' ', '_').lower()}_{label_y.replace(' ', '_').lower()}"
@@ -526,7 +542,7 @@ def chi_scatterplot_template(directory, packed_name, values_x, values_y, chis, l
             fig.savefig(f"../{directory}/{title_directory_name}_segments/{idx}_{title_file_name}.pdf")
             plt.close(fig)
 
-    # Generate base figure
+    # Generate base figure and colorbar
     fig, ax = plt.subplots()
     label_string_x = f"Log {label_x.capitalize()}"
     if unit_x != None:
@@ -588,8 +604,11 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
     log_scale : bool
         Whether the plot should be created in logspace 10. OPTIONAL.
     """
+    # Place values into logscale
     values_x = [np.log10(value) for value in values_x]
     values_y = [np.log10(value) for value in values_y]
+    
+    # Generate base figure
     fig, ax = plt.subplots()
     ax.set_facecolor("#0e0783")
     if log_scale:
@@ -600,6 +619,8 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
     cbar.set_label("Number of Monte Carlo Results", rotation=270, labelpad=12)
     cbar.ax.yaxis.set_ticks_position("left")
     ax.set(xlim=min(values_x), ylim=min(values_y))
+    
+    # Format axes labels
     label_string_x = f"Log {label_x}"
     if unit_x != None:
         label_string_x = f"Log {label_x} ({unit_x})"
@@ -609,6 +630,7 @@ def hexbin_template(directory, packed_name, values_x, values_y, label_x, label_y
         label_string_y = f"Log {label_y} ({unit_y})"
     ax.set_ylabel(label_string_y)
     title_string = f"{packed_name} (Spherical)"
+    
     if is_triaxial:
         title_string = f"{packed_name} (Triaxial Ellipsoid)"
     ax.set_title(title_string, loc="left")
@@ -646,14 +668,7 @@ def chi_plot_template(directory, packed_name, values_x, chis, label_x, is_triaxi
     unit_x : str
         A unit of the quantity being plotted on the x-axis. OPTIONAL.
     """
-    fig, ax = plt.subplots()
-    label_string_x = f"Log {label_x.capitalize()}"
-    if unit_x != None:
-        label_string_x = f"Log {label_x} ({unit_x})"
-    ax.set_xlabel(label_string_x)
-    label_string_y = r"fit $\chi^2$"
-    ax.set_ylabel(label_string_y)
-    ax.minorticks_on()
+    # Place values into log scale
     values_x = [np.log10(value) for value in values_x]
     log_values_copy = values_x[:]
     values_count = len(values_x)
@@ -664,6 +679,17 @@ def chi_plot_template(directory, packed_name, values_x, chis, label_x, is_triaxi
     sigma_2_low = log_values_copy[int(values_count * 0.025)]
     sigma_2_high = log_values_copy[int(values_count * 0.975)]
 
+    # Generate base figure
+    fig, ax = plt.subplots()
+    label_string_x = f"Log {label_x.capitalize()}"
+    if unit_x != None:
+        label_string_x = f"Log {label_x} ({unit_x})"
+    ax.set_xlabel(label_string_x)
+    label_string_y = r"fit $\chi^2$"
+    ax.set_ylabel(label_string_y)
+    ax.minorticks_on()
+    
+    # Plot values and uncertainty lines on plot
     scatter_plot = ax.scatter(values_x, chis, s=1, color="black", marker='o',linewidths=1)
     ax.axvline(median, color='#cc0000')
     ax.axvline(sigma_1_low, color='#cc0000', ls='dashed')
@@ -706,6 +732,8 @@ def comparison_histogram_template(packed_name, values_1, values_2, label, unit=N
     values_2 = reject_outliers(np.array(values_2), 7)
     fig, ax = plt.subplots()
     colors = itertools.cycle(("darkred", "darkblue")) 
+
+    # Cycle through both value sets and plot onto same axis
     for values in [values_1, values_2]:
         curr_color = next(colors)
         # Set up log scale plot arguments and standard deviation lines
@@ -740,6 +768,7 @@ def comparison_histogram_template(packed_name, values_1, values_2, label, unit=N
         ax.axvline(sigma_1_high, color=curr_color, ls='dashed')
         ax.axvline(sigma_2_low, color=curr_color, ls='dotted')
         ax.axvline(sigma_2_high, color=curr_color, ls='dotted')
+    
     if label == "albedo":
         ax.set_xlim(right=-0.0001)
 
@@ -798,6 +827,7 @@ def comparison_scatterplot_template(packed_name, values_x_s, values_y_s, chis_s,
     unit_y : str
         A unit of the quantity being plotted on the y-axis. OPTIONAL.
     """
+    # Place values into logscale and define limits for ease of comparison.
     values_x_s = [np.log10(value) for value in values_x_s]
     values_y_s = [np.log10(value) for value in values_y_s]
     values_x_t = [np.log10(value) for value in values_x_t]
@@ -819,6 +849,7 @@ def comparison_scatterplot_template(packed_name, values_x_s, values_y_s, chis_s,
     if max(values_y_t) > max(values_y_s):
         absolute_y_maxima = max(values_y_t)
     
+    # Generate spherical subplot
     fig, (ax1, ax2) = plt.subplots(1, 2)
     scatter_plot = ax1.scatter(values_x_s, values_y_s, s=1,marker='o',c=chis_s,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
     cbar = fig.colorbar(scatter_plot, ax=ax1, label=r"fit $\chi^2$", location="top", pad=0.08)
@@ -834,6 +865,7 @@ def comparison_scatterplot_template(packed_name, values_x_s, values_y_s, chis_s,
         label_string_y = f"Log {label_y} ({unit_y})"
     ax1.set_title(f"{packed_name} (Spherical)", loc="left", pad=60)
 
+    # Generate triaxial subplot
     scatter_plot = ax2.scatter(values_x_t, values_y_t, s=1,marker='o',c=chis_t,linewidths=1, cmap=plt.cm.get_cmap('plasma'))
     cbar = fig.colorbar(scatter_plot, ax=ax2, label=r"fit $\chi^2$", location="top", pad=0.08)
     cbar.set_label(r"fit $\chi^2$", labelpad=12)
@@ -891,6 +923,7 @@ def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, 
     unit_y : str
         A unit of the quantity being plotted on the y-axis. OPTIONAL.
     """
+    # Place values into logscale
     values_x_s = [np.log10(value) for value in values_x_s]
     values_y_s = [np.log10(value) for value in values_y_s]
     values_x_t = [np.log10(value) for value in values_x_t]
@@ -912,6 +945,7 @@ def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, 
     if max(values_y_t) > max(values_y_s):
         absolute_y_maxima = max(values_y_t)
     
+    # Generate spherical subplot
     fig, (ax1, ax2) = plt.subplots(1, 2)
     ax1.set_facecolor("#0e0783")
     binplot = ax1.hexbin(values_x_s, values_y_s, gridsize=100, cmap="plasma")
@@ -928,6 +962,7 @@ def comparison_hexbin_template(packed_name, values_x_s, values_y_s, values_x_t, 
         label_string_y = f"Log {label_y} ({unit_y})"
     ax1.set_title(f"{packed_name} (Spherical)", loc="left", pad=60)
 
+    # Generate triaxial subplot
     ax2.set_facecolor("#0e0783")
     binplot = ax2.hexbin(values_x_t, values_y_t, gridsize=100, cmap="plasma")
     cbar = fig.colorbar(binplot, ax=ax2, label="Number of Monte Carlo Results", location="top", pad=0.08)
@@ -980,6 +1015,7 @@ def comparison_chi_template(packed_name, values_x_s, chis_s, values_x_t, chis_t,
     unit_x : str
         A unit of the quantity being plotted on the x-axis. OPTIONAL.
     """
+    # Place values into logscale
     values_x_s = [np.log10(value) for value in values_x_s]
     values_x_t = [np.log10(value) for value in values_x_t]
     
@@ -999,9 +1035,9 @@ def comparison_chi_template(packed_name, values_x_s, chis_s, values_x_t, chis_t,
     if max(chis_t) > max(chis_s):
         absolute_y_maxima = max(chis_t)
     
+    # Generate spherical subplot
     fig, (ax1, ax2) = plt.subplots(1, 2)
     scatter_plot = ax1.scatter(values_x_s, chis_s, s=1, color="black", marker='o',linewidths=1)
-
     log_values_copy = values_x_s[:]
     values_count = len(values_x_s)
     log_values_copy.sort()
@@ -1024,8 +1060,8 @@ def comparison_chi_template(packed_name, values_x_s, chis_s, values_x_t, chis_t,
     label_string_y = r"fit $\chi^2$"
     ax1.set_title(f"{packed_name} (Spherical)", loc="left")
 
+    # Generate triaxial subplot
     scatter_plot = ax2.scatter(values_x_t, chis_t, s=1, color="black", marker='o',linewidths=1)
-
     log_values_copy = values_x_t[:]
     values_count = len(values_x_t)
     log_values_copy.sort()
@@ -1049,10 +1085,25 @@ def comparison_chi_template(packed_name, values_x_s, chis_s, values_x_t, chis_t,
     label_string_y = r"fit $\chi^2$"
     ax2.set_title(f"{packed_name} (Triaxial Ellipsoid)", loc="left")
 
+    # Properly format axes labels
     fig.text(0.5, 0.04, label_string_x, ha='center', va='center')
     fig.text(0.04, 0.5, label_string_y, ha='center', va='center', rotation='vertical')
-    
     title_file_name = f"{label_x.replace(' ', '_').lower()}_vs_chis"
     fig.savefig(f"./comparison_plots/{packed_name}/chiplots/{title_file_name}.png", dpi=1000)
     fig.savefig(f"./comparison_plots/{packed_name}/chiplots/{title_file_name}.pdf", dpi=1000)
     plt.close(fig)
+
+
+def clear_output_files():
+    """
+    Cleans out the /best_fits/ directory of all miscellaneous output files
+    generated.
+    """
+    best_fit_files = os.listdir('.')
+    omissions = ["albedo-WISE-rc-MCMC.map", "big-WISE-rc-MCMC.map", 
+                 "diameter-WISE-rc-MCMC.map", "fort.2", "fort.3", "fort.4",
+                 "fort.32", "pole-WISE-rc-MCMC.map"]
+    for file in best_fit_files:
+        print(file)
+        if file in omissions:
+            os.remove(file)

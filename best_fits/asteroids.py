@@ -1,3 +1,7 @@
+"""
+This file declares the Asteroid class which serves as a representation of the
+thermophysical modeling outputs and inputs for each object in this repository.
+"""
 import os
 import itertools
 import numpy as np
@@ -15,10 +19,8 @@ class Asteroid(object):
 
         Parameters
         ----------
-
         directory : str
             The folder name of the asteroid.
-
         """
         self.directory = directory
         self.is_triaxial = False
@@ -159,6 +161,15 @@ class Asteroid(object):
             chain_lines = chain_file.readlines()
         with open(f"../{directory}/fort.4", 'r') as albedo_file:
             albedo_lines = albedo_file.readlines()
+
+        if "general_plots" not in os.listdir(f"../{self.directory}/"):
+            os.mkdir(f"../{self.directory}/general_plots")
+        if "diameter_albedo_segments" not in os.listdir(f"../{self.directory}/"):
+            os.mkdir(f"../{self.directory}/diameter_albedo_segments")
+        if "diameter_period_segments" not in os.listdir(f"../{self.directory}/"):
+            os.mkdir(f"../{self.directory}/diameter_period_segments")
+        if "diameter_thermal_inertia_segments" not in os.listdir(f"../{self.directory}/"):
+            os.mkdir(f"../{self.directory}/diameter_thermal_inertia_segments")
 
 
     def read_csh_inputs(self):
@@ -473,6 +484,7 @@ class Asteroid(object):
         """
         Clears all plots from this object's current directory.
         """
+        print("Clearing all plotting directories.")
         for file in os.listdir(f"../{self.directory}/general_plots/"):
             os.remove(f"../{self.directory}/general_plots/" + file)
         segment_dirs = ["diameter_albedo", "diameter_gamma", "diameter_period"]
@@ -487,6 +499,8 @@ class Asteroid(object):
         """
         Generates histogram plots for diameter, albedo, gamma, and period solutions.
         """
+        
+        print("Generating histograms.")
         histogram_template(self.directory, self.packed_name, self.diameters, "Diameter", 
                            self.is_triaxial, "km")
         histogram_template(self.directory, self.packed_name, self.albedos, "Albedo", 
@@ -504,6 +518,7 @@ class Asteroid(object):
         Generates fit chi squared labeled scatterplots of all output parameters 
         in all axes configurations.
         """
+        print("Generating chi^2 labeled scatterplots.")
         chi_scatterplot_template(self.directory, self.packed_name, self.diameters, 
                                  self.albedos, self.chis, "Diameter", "Albedo", 
                                  self.is_triaxial, unit_x="km")
@@ -532,6 +547,7 @@ class Asteroid(object):
         Generates hexbin density plots for all output parameters in all axes 
         configurations.
         """
+        print("Generating hexbin plots.")
         hexbin_template(self.directory, self.packed_name, self.diameters, self.albedos,
                         "Diameter", "Albedo", self.is_triaxial, unit_x="km")
         hexbin_template(self.directory, self.packed_name, self.diameters, self.gammas,
@@ -556,6 +572,7 @@ class Asteroid(object):
         Generates scatterplots of all output parameters versus the fit chi squared 
         values for each invididual MCMC solution.
         """
+        print("Generating chi^2 plots.")
         chi_plot_template(self.directory, self.packed_name, self.diameters, self.chis, 
                           "Diameter", self.is_triaxial, "km")
         chi_plot_template(self.directory, self.packed_name, self.albedos, self.chis, 

@@ -1,27 +1,73 @@
+"""
+This file documents an example case of using the Asteroid class to perform analysis
+on a specific asteroid.
+"""
 from asteroids import *
 
-#Create object
+
+"""
+To initialize the Asteroid class, the directory containing the asteroid to model will
+be used as the constructor argument.
+"""
 asteroid_ex = Asteroid("asteroid_ex")
 
-#Call functions from asteroids.py
-print("Calling read_csh_inputs function. The function has the C shell script serve as an input for the MCMC model, containing information such as H mag, H mag error, and period.")
+"""
+The Asteroid class contains a set of call functions which can interface with the direct
+output files of the TPM model. These are automatically run in the initializer of the
+Asteroid class but can be run individually as shown below.
+"""
+print("Calling read_csh_inputs function.")
 asteroid_ex.read_csh_inputs()
-print("Calling retrieve_SED_data function. The function extracts data from the fort.22 file, to set up the SED plot.")
+print("Calling retrieve_SED_data function.")
 asteroid_ex.retrieve_SED_data()
-print("Calling retrieve_MCMC_results function. The function extracts data from the fort.21 file and obtains diameter, albedo, gamma, chi squared, and period values for the asteroid.")
+print("Calling retrieve_MCMC_results function.")
 asteroid_ex.retrieve_MCMC_results()
-print("Calling retrieve_unequal_data function. The function attempts to recover data missing from fort.4, fort.3, or fort.21 files if they have missing information.")
-asteroid_ex.retrieve_unequal_data()
-print("Calling generate_SED_plot function. The function constructs a best fit SED plot, depicting the average flux density during the epochs.")
+
+"""
+The calling functions make use of the fort.21 and fort.4 files for retrieving albedo
+outputs. However, in some rare cases, information can be missed and there may be
+a mismatch between the two files. A method is designed to handle this specific
+case: `retrieve_unequal_data` however it is currently optimized for being used for
+02100 Ra-Shalom and targets specific skip cases when doing a line by line comparison
+of the diameter values of both files. This is an experimental method and needs more
+work.
+"""
+#print("Calling retrieve_unequal_data function.")
+#asteroid_ex.retrieve_unequal_data()
+
+"""
+Next are the plotting capablities of the Asteroid class. A spectral density flux
+distribution plot can be generated with the following method. It performs a fit
+on each set of epoch flux values in however many wavelength bands were provided,
+as well as a set of individual median flux points and uncertainties.
+"""
+print("Calling generate_SED_plot function.")
 asteroid_ex.generate_SED_plot()
-#print("Calling clear_plot_directories function. The function clears out all plots from the current directory.")
-#asteroid_ex.clear_plot_directories()
-print("Calling generate_histograms function. This function constructs a histogram for the diameter, albedo, gamma, and period results ")
+
+"""
+Histograms of each output parameter: (Diameter, Visual Albedo, Thermal Inertia, 
+and Period if available) can be generated with corresponding uncertainty lines.
+"""
+print("Calling generate_histograms function.")
 asteroid_ex.generate_histograms()
-print("Calling generate_chi_scatterplots function. This function constructs scatterplots for all characterization solutions.")
+
+"""
+Fit chi squared labeled scatterplots of each output parameters can be generated
+in all possible axis configurations.
+"""
+print("Calling generate_chi_scatterplots function.")
 asteroid_ex.generate_chi_scatterplots()
-print("Calling generate_hexbins function. This function constructs hexbins for all characterization solutions")
+
+"""
+Density hexbin plots of each output parameters can be generated
+in all possible axis configurations.
+"""
+print("Calling generate_hexbins function.")
 asteroid_ex.generate_hexbins()
-print("Calling generate_chi_plots function. This function constructs scatterplots demonstrating the relationship between the characterization solutions vs the chi squared values from the MCMC model.")
+
+"""
+Finally, chi vs output parameter plots can generated for all available output parameters.
+"""
+print("Calling generate_chi_plots function.")
 asteroid_ex.generate_chi_plots()
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.27)  19 AUG 2022 10:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.27)  19 AUG 2022 12:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -463,16 +463,16 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@floatcapt=\box88
 )
 Class revtex4-2 Info: Unrecognized array package. Please update this document c
-lass! (Proceeding with fingers crossed.) on input line 10.
+lass! (Proceeding with fingers crossed.) on input line 9.
 
 
 Class revtex4-2 Warning: Repair the float package.
 
 Class revtex4-2 Info: Patching unrecognized longtable package. (Proceeding with
- fingers crossed) on input line 10.
-Class revtex4-2 Info: cite was not loaded (OK!) on input line 10.
-Class revtex4-2 Info: mcite was not loaded (OK!) on input line 10.
-Class revtex4-2 Info: multicol was not loaded (OK!) on input line 10.
+ fingers crossed) on input line 9.
+Class revtex4-2 Info: cite was not loaded (OK!) on input line 9.
+Class revtex4-2 Info: mcite was not loaded (OK!) on input line 9.
+Class revtex4-2 Info: multicol was not loaded (OK!) on input line 9.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count338
@@ -481,24 +481,24 @@ File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 (./thermophysical_outputs.aux)
 \openout1 = `thermophysical_outputs.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
 
 (/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -522,7 +522,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 10.
+Package hyperref Info: Link coloring ON on input line 9.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -536,39 +536,36 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count345
 )
-LaTeX Info: Redefining \ref on input line 10.
-LaTeX Info: Redefining \pageref on input line 10.
-LaTeX Info: Redefining \nameref on input line 10.
+LaTeX Info: Redefining \ref on input line 9.
+LaTeX Info: Redefining \pageref on input line 9.
+LaTeX Info: Redefining \nameref on input line 9.
  (./thermophysical_outputs.out) (./thermophysical_outputs.out)
 \@outlinefile=\write4
 \openout4 = `thermophysical_outputs.out'.
 
 Class revtex4-2 Info: Overriding lineo.sty, restoring output routine, on input 
-line 10.
-Class revtex4-2 Info: Reinvoke \linenumbers on input line 10.
-Class revtex4-2 Info: Overriding \@LN@LLerror on input line 10.
-
-
-Class revtex4-2 Warning: Assuming \noaffiliation for authors.
-
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 14
+line 9.
+Class revtex4-2 Info: Reinvoke \linenumbers on input line 9.
+Class revtex4-2 Info: Overriding \@LN@LLerror on input line 9.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 12
 .
+
 (/usr/local/texlive/2022/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 14.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 14.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (14.75804pt too wide) in paragraph at lines 14--14
+Overfull \hbox (14.75804pt too wide) in paragraph at lines 12--12
 [][]| $[]$ [][][]| 
  []
 
@@ -577,32 +574,32 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.0}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.50 \begin
-           {deluxetable*}{cccc}[h]]
+l.47 \begin
+           {deluxetable*}{ccccc}[h]]
 pdfTeX warning (ext4): destination with the same identifier (name{table.0}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.78     \enddata
+l.74     \enddata
                  
 pdfTeX warning (ext4): destination with the same identifier (name{table.0}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.78     \enddata
+l.74     \enddata
                   [2] (./thermophysical_outputs.aux)
 Package rerunfilecheck Info: File `thermophysical_outputs.out' has not changed.
 
 (rerunfilecheck)             Checksum: 9814C2D956916ADB9290ECA4E25C967A;103.
  ) 
 Here is how much of TeX's memory you used:
- 12528 strings out of 478268
- 187105 string characters out of 5846347
- 556945 words of memory out of 5000000
- 30577 multiletter control sequences out of 15000+600000
+ 12498 strings out of 478268
+ 186964 string characters out of 5846347
+ 557922 words of memory out of 5000000
+ 30547 multiletter control sequences out of 15000+600000
  478660 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,77p,225b,508s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,77p,225b,504s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><
 /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
@@ -615,7 +612,7 @@ exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texl
 ive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texliv
 e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/
 2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on thermophysical_outputs.pdf (2 pages, 139916 bytes).
+Output written on thermophysical_outputs.pdf (2 pages, 138664 bytes).
 PDF statistics:
  85 PDF objects out of 1000 (max. 8388607)
  56 compressed objects within 1 object stream

@@ -10,14 +10,12 @@ class DualPlotter:
     objects that share the same packed_name but were run with spherical and 
     triaxial models seperately.
     """
-
     def __init__(self, spherical_asteroid, triaxial_asteroid):
         """
         Constructor for the DualPlotter class.
 
         Parameters
         ----------
-
         spherical_asteroid : Asteroid
             An Asteroid object run with the spherical variation of the MCMC code.
 
@@ -30,10 +28,8 @@ class DualPlotter:
                              f"{spherical_asteroid.packed_name} and " +
                              f"{triaxial_asteroid.packed_name} do not match!")
         if spherical_asteroid.is_triaxial:
-            #print(spherical_asteroid.is_triaxial)
             raise ValueError("Spherical Asteroid is not spherical!")
         if not triaxial_asteroid.is_triaxial:
-            #print(triaxial_asteroid.is_triaxial)
             raise ValueError("Triaxial Asteroid is not triaxial!")
         
         self.spherical_asteroid = spherical_asteroid
@@ -49,6 +45,9 @@ class DualPlotter:
 
 
     def generate_histograms(self):
+        """
+        Generates comparison histograms for all output parameters.
+        """
         print("Generating histograms.")
         if "histograms" not in os.listdir(f"./comparison_plots/{self.packed_name}/"):
             os.mkdir(f"./comparison_plots/{self.packed_name}/histograms/")
@@ -61,6 +60,10 @@ class DualPlotter:
 
 
     def generate_chi_scatterplots(self):
+        """
+        Generates fit chi squared labeled comparison scatterplots for all output 
+        parameters in all possible configurations.
+        """
         print("Generating chi labeled scatterplots.")
         if "scatterplots" not in os.listdir(f"./comparison_plots/{self.packed_name}/"):
             os.mkdir(f"./comparison_plots/{self.packed_name}/scatterplots/")
@@ -103,7 +106,12 @@ class DualPlotter:
                             self.triaxial_asteroid.periods, self.triaxial_asteroid.albedos, self.triaxial_asteroid.chis,
                             "Period", "Visible Albedo", unit_x="hr")
 
+
     def generate_hexbins(self):
+        """
+        Generates comparison hexbin plots for all output parameters in all possible
+        configurations.
+        """
         print("Generating hexbin plots.")
         if "hexbins" not in os.listdir(f"./comparison_plots/{self.packed_name}/"):
             os.mkdir(f"./comparison_plots/{self.packed_name}/hexbins/")
@@ -146,7 +154,11 @@ class DualPlotter:
                             self.triaxial_asteroid.periods, self.triaxial_asteroid.albedos,
                             "Period", "Visible Albedo", unit_x="hr")
 
+
     def generate_chiplots(self):
+        """
+        Generates comparison fit chi squared scatterplots for all output parameters.
+        """
         print("Generating chi^2 fit plots.")
         if "chiplots" not in os.listdir(f"./comparison_plots/{self.packed_name}/"):
             os.mkdir(f"./comparison_plots/{self.packed_name}/chiplots/")
