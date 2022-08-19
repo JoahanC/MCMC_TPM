@@ -36,10 +36,16 @@ work.
 #asteroid_ex.retrieve_unequal_data()
 
 """
-Next are the plotting capablities of the Asteroid class. A spectral density flux
-distribution plot can be generated with the following method. It performs a fit
-on each set of epoch flux values in however many wavelength bands were provided,
-as well as a set of individual median flux points and uncertainties.
+Now we can look at the plotting capabilities of the Asteroid class. Most plots will
+be located in the /general_plots/ folder in each asteroid's respective input folder,
+with diameter cluster segment plots being contained in their appropriately named
+folders in each asteroid's input folder.
+"""
+
+"""
+A spectral density flux distribution plot can be generated with the following method.
+It performs a fit on each set of epoch flux values in however many wavelength bands 
+were provided, as well as a set of individual median flux points and uncertainties.
 """
 asteroid_ex.generate_SED_plot()
 

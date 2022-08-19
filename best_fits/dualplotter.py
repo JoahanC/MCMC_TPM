@@ -1,4 +1,3 @@
-from random import triangular
 from asteroids import Asteroid
 from helpers import *
 import os
