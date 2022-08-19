@@ -189,3 +189,23 @@ The data fitting uses a "robust" chi^2.  For each datapoint,
 the contribution to chi^2 is given by f[(model-obs)/sigma]
 with f(x) = x^2 if |x|<2 or 4*|x|-4 if |x|>2.  This essentially
 Winsorizes the data.  
+
+
+### Explanation of Asteroid Folders
+
+The NEAs are sorted as folders within the directory, labeled with their 
+packed MPC 5-digit name. these folders were constructed to organize the 
+outputs of the thermophysical model. In order to run the program in the 
+asteroid folder, the run file and shell script for the run file are both 
+needed. Once running the MCMC program, the output will include both the 
+fort 21 and 22 files, which will be needed for running the visualizations
+of the MCMC model. Fort 11 can also be used to run the MCMC model faster, 
+but will take up more space in the repository. Other important files that 
+are needed within the asteroid folders are the IRSA files containing the 
+table with band data, lc_summary.tab, and mpcorb.s3m. Within the current 
+folders, there are also plots already constructed using the MCMC data 
+outputs, where the majority of the visualizations are located in the 
+general_plots subfolder. Segment folders for both diameter vs albedo and 
+diameter vs thermal inertia are also present in this folder to further focus
+on specific solution clusters found within the diagram. 
+
